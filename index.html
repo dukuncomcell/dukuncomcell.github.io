@@ -33,7 +33,7 @@
             --accent: #0067c0;
             --accent-hover: #005fb8;
             --desktop-text: #ffffff;
-            --desktop-shadow: 0 1px 3px rgba(0,0,0,0.85);
+            --desktop-shadow: 0 1px 4px rgba(15, 23, 42, 0.9), 0 0 2px rgba(15, 23, 42, 0.95);
         }
 
         html.dark {
@@ -60,12 +60,12 @@
             overflow: hidden;
             color: var(--text-primary);
             margin: 0;
-            background-color: #050d21;
+            background-color: #dbeafe;
         }
 
-        /* Wallpaper Default Windows 11 27H1 Bloom */
+        /* Wallpaper Default Windows 11 27H1 Bloom (Tema Terang) */
         .bg-win11-bloom {
-            background: radial-gradient(circle at 52% 48%, #1d4ed8 0%, #0f2966 46%, #050d21 100%);
+            background: radial-gradient(circle at 50% 48%, #ffffff 0%, #e0efff 48%, #bdd9fc 100%);
         }
 
         .mica {
@@ -131,40 +131,45 @@
 <body class="h-screen w-screen relative overflow-hidden">
 
     <!-- ======================================================================
-         WELCOME & LOGIN SCREEN (Wallpaper Windows 11 27H1 + Tamu & Admin)
+         WELCOME & LOGIN SCREEN (Wallpaper Windows 11 27H1 Terang + Tamu & Admin)
          ====================================================================== -->
     <div id="welcome-login-screen" class="fixed inset-0 z-[9500] bg-win11-bloom overflow-y-auto flex flex-col items-center justify-between px-4 py-4 sm:py-6 text-white transition-opacity duration-500">
-        <!-- SVG Wallpaper Windows 11 27H1 Bloom -->
+        <!-- SVG Wallpaper Windows 11 27H1 Bloom (Tema Terang) -->
         <svg class="fixed inset-0 w-full h-full pointer-events-none" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <radialGradient id="w27-bg-login" cx="52%" cy="48%" r="68%">
-                    <stop offset="0%" stop-color="#1e40af"/>
-                    <stop offset="50%" stop-color="#0d2252"/>
-                    <stop offset="100%" stop-color="#040b1c"/>
-                </radialGradient>
+                <radialGradient id="w27-bg-login" cx="50%" cy="48%" r="72%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="48%" stop-color="#e0efff"/>
+                    <stop offset="100%" stop-color="#bdd9fc"/>
+                </linearGradient>
                 <linearGradient id="w27-petal-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.95"/>
-                    <stop offset="45%" stop-color="#2563eb" stop-opacity="0.9"/>
-                    <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.85"/>
+                    <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.95"/>
+                    <stop offset="48%" stop-color="#3b82f6" stop-opacity="0.92"/>
+                    <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.95"/>
                 </linearGradient>
                 <linearGradient id="w27-petal-2" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.92"/>
-                    <stop offset="55%" stop-color="#1d4ed8" stop-opacity="0.88"/>
-                    <stop offset="100%" stop-color="#091536" stop-opacity="0.9"/>
+                    <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.95"/>
+                    <stop offset="52%" stop-color="#2563eb" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#1e40af" stop-opacity="0.92"/>
                 </linearGradient>
                 <linearGradient id="w27-petal-3" x1="20%" y1="100%" x2="80%" y2="0%">
-                    <stop offset="0%" stop-color="#0284c7" stop-opacity="0.85"/>
-                    <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.95"/>
-                    <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.9"/>
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"/>
+                    <stop offset="52%" stop-color="#93c5fd" stop-opacity="0.95"/>
+                    <stop offset="100%" stop-color="#f0f9ff" stop-opacity="0.96"/>
+                </linearGradient>
+                <linearGradient id="w27-petal-4" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.88"/>
+                    <stop offset="60%" stop-color="#e0f2fe" stop-opacity="0.95"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95"/>
                 </linearGradient>
             </defs>
             <rect width="1920" height="1080" fill="url(#w27-bg-login)"/>
             <path d="M960,540 C740,220 1160,110 1330,360 C1450,530 1180,690 960,540 Z" fill="url(#w27-petal-1)"/>
             <path d="M960,540 C1260,310 1480,620 1230,830 C1050,980 860,740 960,540 Z" fill="url(#w27-petal-2)"/>
-            <path d="M960,540 C1120,860 720,970 590,710 C490,510 760,390 960,540 Z" fill="url(#w27-petal-1)"/>
-            <path d="M960,540 C660,720 490,390 740,240 C930,130 1070,370 960,540 Z" fill="url(#w27-petal-3)"/>
+            <path d="M960,540 C1120,860 720,970 590,710 C490,510 760,390 960,540 Z" fill="url(#w27-petal-3)"/>
+            <path d="M960,540 C660,720 490,390 740,240 C930,130 1070,370 960,540 Z" fill="url(#w27-petal-4)"/>
         </svg>
-        <div class="fixed inset-0 bg-black/30 backdrop-blur-[2px] pointer-events-none"></div>
+        <div class="fixed inset-0 bg-slate-900/25 backdrop-blur-[2px] pointer-events-none"></div>
 
         <!-- Atas: Jam & Tanggal Indonesia -->
         <div class="relative z-10 text-center mt-2 drop-shadow-lg shrink-0">
@@ -223,37 +228,42 @@
     </div>
 
     <!-- ======================================================================
-         DESKTOP WALLPAPER (Windows 11 27H1 Bloom)
+         DESKTOP WALLPAPER (Windows 11 27H1 Bloom - Tema Terang)
          ====================================================================== -->
     <div id="desktop-wallpaper" class="fixed inset-0 w-full h-full bg-win11-bloom overflow-hidden">
         <svg class="w-full h-full object-cover" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <radialGradient id="w27-bg-desk" cx="52%" cy="48%" r="68%">
-                    <stop offset="0%" stop-color="#1e40af"/>
-                    <stop offset="50%" stop-color="#0d2252"/>
-                    <stop offset="100%" stop-color="#040b1c"/>
+                <radialGradient id="w27-bg-desk" cx="50%" cy="48%" r="72%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="48%" stop-color="#e0efff"/>
+                    <stop offset="100%" stop-color="#bdd9fc"/>
                 </radialGradient>
                 <linearGradient id="w27-d-p1" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.96"/>
-                    <stop offset="48%" stop-color="#2563eb" stop-opacity="0.92"/>
-                    <stop offset="100%" stop-color="#172554" stop-opacity="0.88"/>
+                    <stop offset="0%" stop-color="#bae6fd" stop-opacity="0.96"/>
+                    <stop offset="48%" stop-color="#3b82f6" stop-opacity="0.92"/>
+                    <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.95"/>
                 </linearGradient>
                 <linearGradient id="w27-d-p2" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.94"/>
-                    <stop offset="55%" stop-color="#1d4ed8" stop-opacity="0.9"/>
-                    <stop offset="100%" stop-color="#091536" stop-opacity="0.92"/>
+                    <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.95"/>
+                    <stop offset="52%" stop-color="#2563eb" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#1e40af" stop-opacity="0.92"/>
                 </linearGradient>
                 <linearGradient id="w27-d-p3" x1="20%" y1="100%" x2="80%" y2="0%">
-                    <stop offset="0%" stop-color="#0284c7" stop-opacity="0.88"/>
-                    <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.95"/>
-                    <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.92"/>
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"/>
+                    <stop offset="52%" stop-color="#93c5fd" stop-opacity="0.95"/>
+                    <stop offset="100%" stop-color="#f0f9ff" stop-opacity="0.96"/>
+                </linearGradient>
+                <linearGradient id="w27-d-p4" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.88"/>
+                    <stop offset="60%" stop-color="#e0f2fe" stop-opacity="0.95"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95"/>
                 </linearGradient>
             </defs>
             <rect width="1920" height="1080" fill="url(#w27-bg-desk)"/>
             <path d="M960,540 C720,190 1180,90 1350,350 C1470,540 1190,710 960,540 Z" fill="url(#w27-d-p1)"/>
             <path d="M960,540 C1280,300 1500,630 1240,850 C1050,1000 850,750 960,540 Z" fill="url(#w27-d-p2)"/>
-            <path d="M960,540 C1140,880 700,990 570,720 C470,510 750,380 960,540 Z" fill="url(#w27-d-p1)"/>
-            <path d="M960,540 C640,730 470,380 730,220 C930,110 1080,360 960,540 Z" fill="url(#w27-d-p3)"/>
+            <path d="M960,540 C1140,880 700,990 570,720 C470,510 750,380 960,540 Z" fill="url(#w27-d-p3)"/>
+            <path d="M960,540 C640,730 470,380 730,220 C930,110 1080,360 960,540 Z" fill="url(#w27-d-p4)"/>
         </svg>
     </div>
 
