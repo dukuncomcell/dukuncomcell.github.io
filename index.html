@@ -6,7 +6,7 @@
     <title>Official Website Dukun ComCell — Windows 11 WebOS</title>
     <link rel="icon" type="image/png" href="winlogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tone.js untuk Suara Startup -->
+    <!-- Tone.js untuk Suara Startup Windows 11 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <script>
         tailwind.config = {
@@ -22,27 +22,27 @@
     </script>
     <style>
         :root {
-            --mica-bg: rgba(243, 243, 243, 0.84);
+            --mica-bg: rgba(243, 243, 243, 0.85);
             --mica-solid: #f3f3f3;
-            --mica-card: rgba(255, 255, 255, 0.65);
-            --mica-hover: rgba(255, 255, 255, 0.9);
+            --mica-card: rgba(255, 255, 255, 0.72);
+            --mica-hover: rgba(255, 255, 255, 0.95);
             --mica-sub: rgba(0, 0, 0, 0.04);
-            --mica-border: rgba(0, 0, 0, 0.08);
+            --mica-border: rgba(0, 0, 0, 0.09);
             --text-primary: #1e1e1e;
             --text-secondary: #5c5c5c;
             --accent: #0067c0;
             --accent-hover: #005fb8;
             --desktop-text: #ffffff;
-            --desktop-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            --desktop-shadow: 0 1px 3px rgba(0,0,0,0.85);
         }
 
         html.dark {
-            --mica-bg: rgba(32, 32, 32, 0.86);
+            --mica-bg: rgba(32, 32, 32, 0.88);
             --mica-solid: #202020;
-            --mica-card: rgba(45, 45, 45, 0.75);
-            --mica-hover: rgba(60, 60, 60, 0.9);
+            --mica-card: rgba(45, 45, 45, 0.78);
+            --mica-hover: rgba(62, 62, 62, 0.95);
             --mica-sub: rgba(255, 255, 255, 0.05);
-            --mica-border: rgba(255, 255, 255, 0.1);
+            --mica-border: rgba(255, 255, 255, 0.11);
             --text-primary: #f3f3f3;
             --text-secondary: #a0a0a0;
             --accent: #4cc2ff;
@@ -164,7 +164,7 @@
             <path d="M960,540 C1120,860 720,970 590,710 C490,510 760,390 960,540 Z" fill="url(#w27-petal-1)"/>
             <path d="M960,540 C660,720 490,390 740,240 C930,130 1070,370 960,540 Z" fill="url(#w27-petal-3)"/>
         </svg>
-        <div class="fixed inset-0 bg-black/35 backdrop-blur-[2px] pointer-events-none"></div>
+        <div class="fixed inset-0 bg-black/30 backdrop-blur-[2px] pointer-events-none"></div>
 
         <!-- Atas: Jam & Tanggal Indonesia -->
         <div class="relative z-10 text-center mt-2 drop-shadow-lg shrink-0">
@@ -180,7 +180,7 @@
             </div>
 
             <h1 class="text-lg sm:text-2xl font-bold tracking-tight drop-shadow-md mb-0.5">
-                Selamat datang di Official Website<br>Dukun ComCell</br>
+                Selamat datang di Official Website Dukun ComCell
             </h1>
             <p class="text-xs text-white/85 mb-3.5">Pilih akun untuk masuk ke sistem desktop</p>
 
@@ -206,11 +206,11 @@
                 </button>
             </div>
 
-            <!-- Panel Admin (Password 4x Spasi) -->
-            <form id="login-panel-admin" onsubmit="handleAdminLogin(event)" class="hidden w-full bg-slate-900/75 backdrop-blur-md border border-amber-400/40 rounded-xl p-3.5 space-y-2.5 shadow-xl">
+            <!-- Panel Admin (Password 4x Spasi tanpa password hint) -->
+            <form id="login-panel-admin" onsubmit="handleAdminLogin(event)" class="hidden w-full bg-slate-900/80 backdrop-blur-md border border-amber-400/40 rounded-xl p-3.5 space-y-2.5 shadow-xl">
                 <div class="text-xs font-semibold text-amber-300">Login Administrator Dukun ComCell</div>
-                <input type="password" id="admin-password-input" autocomplete="off" placeholder="Masukkan password (spasi 4x)..." class="w-full px-3.5 py-2 rounded-lg bg-black/50 border border-white/30 text-white placeholder-white/50 text-xs focus:outline-none focus:border-amber-400">
-                <div id="admin-login-error" class="hidden text-[11px] text-rose-300 font-medium">Password salah!</div>
+                <input type="password" id="admin-password-input" autocomplete="off" placeholder="Masukkan kata sandi..." class="w-full px-3.5 py-2 rounded-lg bg-black/50 border border-white/30 text-white placeholder-white/50 text-xs focus:outline-none focus:border-amber-400">
+                <div id="admin-login-error" class="hidden text-[11px] text-rose-300 font-medium">Kata sandi salah!</div>
                 <button type="submit" class="w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-98 text-slate-950 text-xs font-bold shadow-lg transition-all cursor-pointer">
                     Masuk sebagai Admin &rarr;
                 </button>
@@ -243,10 +243,17 @@
                     <stop offset="55%" stop-color="#1d4ed8" stop-opacity="0.9"/>
                     <stop offset="100%" stop-color="#091536" stop-opacity="0.92"/>
                 </linearGradient>
+                <linearGradient id="w27-d-p3" x1="20%" y1="100%" x2="80%" y2="0%">
+                    <stop offset="0%" stop-color="#0284c7" stop-opacity="0.88"/>
+                    <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.95"/>
+                    <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.92"/>
+                </linearGradient>
             </defs>
             <rect width="1920" height="1080" fill="url(#w27-bg-desk)"/>
             <path d="M960,540 C720,190 1180,90 1350,350 C1470,540 1190,710 960,540 Z" fill="url(#w27-d-p1)"/>
             <path d="M960,540 C1280,300 1500,630 1240,850 C1050,1000 850,750 960,540 Z" fill="url(#w27-d-p2)"/>
+            <path d="M960,540 C1140,880 700,990 570,720 C470,510 750,380 960,540 Z" fill="url(#w27-d-p1)"/>
+            <path d="M960,540 C640,730 470,380 730,220 C930,110 1080,360 960,540 Z" fill="url(#w27-d-p3)"/>
         </svg>
     </div>
 
@@ -254,9 +261,7 @@
          DESKTOP ICONS AREA
          ====================================================================== -->
     <main id="desktop-area" class="relative z-10 w-full h-[calc(100vh-48px)] p-3" onclick="closeAllFlyouts()">
-        <div id="desktop-icons" class="h-full inline-grid grid-flow-col grid-rows-[repeat(auto-fill,88px)] gap-1.5 content-start items-start">
-            <!-- Ikon Desktop di-render JS -->
-        </div>
+        <div id="desktop-icons" class="h-full inline-grid grid-flow-col grid-rows-[repeat(auto-fill,88px)] gap-1.5 content-start items-start"></div>
     </main>
 
     <!-- WINDOWS CONTAINER -->
@@ -266,38 +271,39 @@
     <div id="task-view-overlay" class="hidden fixed inset-0 bottom-12 z-40 bg-slate-950/65 backdrop-blur-xl p-6 flex flex-col justify-between anim-flyout text-white">
         <div class="flex items-center justify-between">
             <div>
-                <h2 class="text-base font-semibold">Task View — Jendela Aktif</h2>
-                <p class="text-xs text-white/70">Pilih jendela untuk beralih</p>
+                <h2 class="text-base font-semibold">Task View — Jendela Aktif &amp; Diminimize</h2>
+                <p class="text-xs text-white/70">Klik kartu jendela untuk beralih atau tutup jendela</p>
             </div>
             <button onclick="closeTaskView()" class="px-3 py-1.5 rounded-lg bg-rose-500/80 hover:bg-rose-500 text-xs font-medium cursor-pointer">Tutup ✕</button>
         </div>
         <div id="task-view-grid" class="flex-1 my-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 overflow-y-auto content-start"></div>
-        <div class="text-center text-xs text-white/70">Desktop 1 (Dukun ComCell)</div>
+        <div class="text-center text-xs text-white/70">Desktop 1 (Official Website Dukun ComCell)</div>
     </div>
 
     <!-- TASKBAR SEARCH FLYOUT -->
-    <div id="taskbar-search-flyout" class="hidden fixed bottom-14 left-16 z-40 w-[92vw] max-w-[420px] mica rounded-xl p-4 win-shadow anim-flyout">
+    <div id="taskbar-search-flyout" class="hidden fixed bottom-14 left-16 z-40 w-[92vw] max-w-[440px] mica rounded-xl p-4 win-shadow anim-flyout">
         <div class="flex items-center justify-between pb-2 mb-2 border-b" style="border-color: var(--mica-border);">
             <span class="text-xs font-semibold">Hasil Pencarian Posting</span>
             <span id="search-count-badge" class="text-[11px] opacity-70">0 posting</span>
         </div>
-        <div id="taskbar-search-results" class="space-y-1.5 max-h-[280px] overflow-y-auto"></div>
+        <div id="taskbar-search-results" class="space-y-2 max-h-[300px] overflow-y-auto"></div>
     </div>
 
-    <!-- START MENU (Daftar Posting Thumbnail + Menu Admin) -->
-    <div id="start-menu" class="hidden fixed bottom-14 left-3 z-40 w-[94vw] max-w-[560px] mica rounded-xl win-shadow anim-flyout overflow-hidden flex flex-col">
+    <!-- START MENU (Daftar Posting Gaya Thumbnail + Menu Admin) -->
+    <div id="start-menu" class="hidden fixed bottom-14 left-3 z-40 w-[94vw] max-w-[580px] mica rounded-xl win-shadow anim-flyout overflow-hidden flex flex-col">
         <div class="p-5 pb-4 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                    <div class="text-sm font-bold">Dukun ComCell</div>
-                    <div class="text-[11px] opacity-70">Daftar Posting &amp; Artikel</div>
+                    <div class="text-sm font-bold">Official Website Dukun ComCell</div>
+                    <div class="text-[11px] opacity-70">Daftar Posting &amp; Manajemen Konten</div>
                 </div>
                 <input type="text" id="start-post-filter" oninput="renderStartMenuPosts(this.value)" placeholder="Cari posting..." class="mica-card rounded-full px-3 py-1 text-xs focus:outline-none w-44">
             </div>
 
+            <!-- Menu Khusus Admin -->
             <div id="start-admin-section" class="hidden rounded-xl p-3 border space-y-2" style="background: var(--mica-sub); border-color: var(--mica-border);">
                 <div class="flex items-center justify-between">
-                    <span class="text-[11px] font-bold uppercase" style="color: var(--accent);">Menu Khusus Admin</span>
+                    <span class="text-[11px] font-bold uppercase tracking-wider" style="color: var(--accent);">Menu Khusus Admin</span>
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-300 font-semibold">Admin Aktif</span>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -316,12 +322,13 @@
                 </div>
             </div>
 
+            <!-- Daftar Posting Gaya Thumbnail -->
             <div>
                 <div class="flex items-center justify-between mb-2">
-                    <span class="text-xs font-semibold">Postingan Terbaru (Thumbnail)</span>
-                    <button onclick="openApp('blog'); closeAllFlyouts();" class="text-[11px] font-medium hover:underline cursor-pointer" style="color: var(--accent);">Buka Semua &rsaquo;</button>
+                    <span class="text-xs font-semibold">Daftar Posting</span>
+                    <button onclick="openApp('blog'); closeAllFlyouts();" class="text-[11px] font-medium hover:underline cursor-pointer" style="color: var(--accent);">Buka Halaman Artikel &rsaquo;</button>
                 </div>
-                <div id="start-posts-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[260px] overflow-y-auto pr-1"></div>
+                <div id="start-posts-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[270px] overflow-y-auto pr-1"></div>
             </div>
         </div>
 
@@ -330,7 +337,7 @@
                 <div id="start-user-badge" class="w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-xs font-bold">T</div>
                 <div>
                     <div id="start-user-name" class="text-xs font-semibold">Tamu</div>
-                    <div id="start-user-role-desc" class="text-[10px] opacity-70">Mode Baca</div>
+                    <div id="start-user-role-desc" class="text-[10px] opacity-70">Mode Baca Saja</div>
                 </div>
             </div>
             <div class="flex items-center gap-1.5">
@@ -340,21 +347,26 @@
         </div>
     </div>
 
-    <!-- SYSTEM TRAY FLYOUTS -->
-    <div id="network-flyout" class="hidden fixed bottom-14 right-36 z-40 w-72 mica rounded-xl p-4 win-shadow anim-flyout text-xs">
-        <div class="flex items-center justify-between pb-2 mb-2 border-b" style="border-color: var(--mica-border);">
-            <span class="font-bold">Monitor Jaringan Realtime</span>
-            <span id="net-status-badge" class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 text-[10px] font-semibold">Online</span>
+    <!-- SYSTEM TRAY FLYOUTS (Tanpa Widget Cuaca) -->
+    <div id="network-flyout" class="hidden fixed bottom-14 right-36 z-40 w-80 mica rounded-xl p-4 win-shadow anim-flyout text-xs">
+        <div class="flex items-center justify-between pb-2 mb-2.5 border-b" style="border-color: var(--mica-border);">
+            <span class="font-bold">Status Jaringan Realtime</span>
+            <span id="net-status-badge" class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-semibold">Online</span>
         </div>
         <div class="space-y-2 text-[11px]">
-            <div class="flex justify-between"><span class="opacity-70">Trafik Unduh:</span><span id="net-detail-rate" class="font-mono font-bold">0.0 KB/s</span></div>
-            <div class="flex justify-between"><span class="opacity-70">Ping Latensi:</span><span id="net-detail-ping" class="font-mono font-semibold">-- ms</span></div>
+            <div class="flex justify-between"><span class="opacity-70">Kecepatan Transfer Aktif:</span><span id="net-detail-rate" class="font-mono font-bold">0.0 KB/s</span></div>
+            <div class="flex justify-between"><span class="opacity-70">Ping Server (Realtime):</span><span id="net-detail-ping" class="font-mono font-semibold">-- ms</span></div>
+            <div class="flex justify-between"><span class="opacity-70">Estimasi Bandwidth Browser:</span><span id="net-detail-downlink" class="font-mono font-semibold">-- Mbps</span></div>
+            <div class="flex justify-between"><span class="opacity-70">Tipe Koneksi:</span><span id="net-detail-type" class="font-semibold uppercase">--</span></div>
         </div>
+        <button onclick="runRealSpeedTest()" id="btn-run-speedtest" class="mt-3 w-full py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-[11px] font-semibold cursor-pointer transition-all">
+            ⚡ Uji Kecepatan Unduh Nyata Sekarang
+        </button>
     </div>
 
     <div id="volume-flyout" class="hidden fixed bottom-14 right-28 z-40 w-64 mica rounded-xl p-4 win-shadow anim-flyout">
         <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-semibold">Volume</span>
+            <span class="text-xs font-semibold">Volume Sistem</span>
             <span id="volume-percent-label" class="text-xs font-bold" style="color: var(--accent);">80%</span>
         </div>
         <div class="flex items-center gap-3">
@@ -384,7 +396,8 @@
     <!-- CONTEXT MENU -->
     <div id="desktop-context-menu" class="hidden fixed z-[9000] w-52 mica rounded-xl p-1.5 win-shadow text-xs">
         <button onclick="openApp('explorer'); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>📁</span> Windows Explorer</button>
-        <button onclick="toggleDarkMode(); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>🌓</span> Tema Terang/Gelap</button>
+        <button onclick="openApp('blog'); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>📰</span> Buka Artikel &amp; Posting</button>
+        <button onclick="toggleDarkMode(); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>🌓</span> Tema Terang / Gelap</button>
         <div class="my-1 border-t" style="border-color: var(--mica-border);"></div>
         <button onclick="refreshDesktop()" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>↻</span> Refresh Desktop</button>
     </div>
@@ -392,7 +405,7 @@
     <!-- TASKBAR -->
     <footer id="taskbar" class="fixed bottom-0 left-0 right-0 h-12 mica z-50 px-2.5 flex items-center justify-between border-t" style="border-color: var(--mica-border);">
         <div class="flex items-center gap-1.5 min-w-0 flex-1">
-            <!-- Ikon Start Windows 11 Berwarna -->
+            <!-- Ikon Start Menu Windows 11 Berwarna -->
             <button onclick="toggleFlyout('start-menu')" class="w-9 h-9 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center transition-all shrink-0 cursor-pointer" title="Start Menu">
                 <svg class="w-5 h-5" viewBox="0 0 88 88">
                     <rect x="2" y="2" width="40" height="40" rx="3" fill="#38bdf8"/>
@@ -407,32 +420,33 @@
                 <input type="text" id="taskbar-search-input" oninput="handleTaskbarSearch(this.value)" placeholder="Cari posting..." class="w-full mica-card rounded-full pl-3 pr-3 py-1 text-xs focus:outline-none border focus:border-sky-500">
             </div>
 
-            <!-- Windows Explorer -->
+            <!-- Ikon Windows Explorer -->
             <button onclick="openApp('explorer')" class="w-9 h-9 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center shrink-0 cursor-pointer" title="Windows Explorer">
                 <div class="w-5 h-5" id="tb-explorer-icon"></div>
             </button>
 
-            <!-- Task View -->
+            <!-- Ikon Task View -->
             <button onclick="toggleTaskView()" class="w-9 h-9 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center shrink-0 cursor-pointer" title="Task View">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="12" height="11" rx="2"/><path d="M9 19h10a2 2 0 0 0 2-2V8"/></svg>
             </button>
 
             <div class="h-5 w-[1px] bg-black/15 dark:bg-white/15 mx-0.5 shrink-0"></div>
 
+            <!-- Window yang dibuka / diminimize -->
             <div id="taskbar-running-apps" class="flex items-center gap-1 overflow-x-auto py-1"></div>
         </div>
 
-        <!-- System Tray -->
+        <!-- System Tray (Volume, Internet Speed Realtime, Jam & Tanggal Indonesia) -->
         <div class="flex items-center gap-1 shrink-0 ml-2">
-            <button onclick="toggleFlyout('network-flyout')" id="tray-net-speed" class="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-md mica-card text-[10px] font-mono cursor-pointer" title="Internet Realtime">
+            <button onclick="toggleFlyout('network-flyout')" id="tray-net-speed" class="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-md mica-card text-[10px] font-mono cursor-pointer" title="Kecepatan Internet Realtime">
                 <span class="text-emerald-500 font-semibold" id="net-down-speed">&darr; 0.0 KB/s</span>
-                <span class="text-sky-400 font-semibold" id="net-ping-speed">-- ms</span>
+                <span class="text-sky-500 dark:text-sky-400 font-semibold" id="net-ping-speed">-- ms</span>
             </button>
-            <button onclick="toggleFlyout('volume-flyout')" class="px-2 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-1 cursor-pointer">
+            <button onclick="toggleFlyout('volume-flyout')" class="px-2 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-1 cursor-pointer" title="Volume">
                 <span id="tray-vol-icon" class="text-xs">🔊</span>
                 <span id="tray-vol-text" class="text-[10px] font-medium hidden sm:inline">80%</span>
             </button>
-            <button onclick="toggleFlyout('calendar-flyout')" class="px-2.5 py-1 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-right leading-tight cursor-pointer">
+            <button onclick="toggleFlyout('calendar-flyout')" class="px-2.5 py-1 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-right leading-tight cursor-pointer" title="Jam & Kalender Indonesia">
                 <div id="tray-clock-time" class="text-[11px] font-semibold">00:00:00</div>
                 <div id="tray-clock-date" class="text-[10px] opacity-85">Jumat, 13 Nov 2026</div>
             </button>
@@ -440,48 +454,68 @@
         </div>
     </footer>
 
-    <!-- TOAST & CONFIRM MODALS -->
+    <!-- TOAST & CUSTOM CONFIRM DIALOG -->
     <div id="win-toast" class="hidden fixed bottom-16 right-4 z-[9800] mica px-4 py-2.5 rounded-xl win-shadow text-xs flex items-center gap-2 anim-flyout">
         <span class="w-2 h-2 rounded-full" style="background: var(--accent);"></span>
         <span id="win-toast-text">Notifikasi</span>
     </div>
 
+    <div id="win-confirm-modal" class="hidden fixed inset-0 z-[9900] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="mica rounded-xl p-5 max-w-sm w-full win-shadow space-y-4">
+            <div class="text-sm font-bold" id="win-confirm-title">Konfirmasi</div>
+            <div class="text-xs opacity-85 leading-relaxed" id="win-confirm-msg">Apakah Anda yakin?</div>
+            <div class="flex justify-end gap-2">
+                <button onclick="closeConfirmModal(false)" class="px-3.5 py-1.5 rounded-lg mica-card text-xs font-semibold cursor-pointer">Batal</button>
+                <button onclick="closeConfirmModal(true)" class="px-3.5 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-semibold cursor-pointer">Ya, Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        /* ======================================================================
+           KONFIGURASI REPOSITORY GITHUB DUKUN COMCELL
+           ====================================================================== */
         const GITHUB_CONFIG = {
             owner: 'dukuncomcell',
             repo: 'dukuncomcell.github.io',
             defaultToken: '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'
         };
 
+        /* ======================================================================
+           IKON SVG APLIKASI DESKTOP (Tajam & Berwarna)
+           ====================================================================== */
         const ICONS = {
-            mycomputer: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="8" width="36" height="24" rx="3" fill="#0284c7"/><rect x="9" y="11" width="30" height="18" rx="1.5" fill="#38bdf8"/><path fill="#94a3b8" d="M18 32h12l2 5H16z"/><rect x="12" y="37" width="24" height="3" rx="1.5" fill="#64748b"/></svg>`,
-            explorer: `<svg viewBox="0 0 48 48" class="w-full h-full"><path fill="#FFA000" d="M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4z"/><rect x="13" y="25" width="22" height="15" rx="2" fill="#0288D1"/></svg>`,
-            word: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#1d4ed8"/><text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">W</text></svg>`,
-            excel: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#15803d"/><text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">X</text></svg>`,
-            powerpoint: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#c2410c"/><text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">P</text></svg>`,
-            pdfreader: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#dc2626"/><text x="24" y="31" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">PDF</text></svg>`,
-            camera: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="12" width="36" height="26" rx="5" fill="#334155"/><circle cx="24" cy="25" r="8" fill="#0ea5e9"/></svg>`,
-            calculator: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#0284c7"/><rect x="10" y="10" width="28" height="8" rx="2" fill="#ffffff"/><circle cx="16" cy="24" r="2" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#fff"/><circle cx="32" cy="24" r="2" fill="#fff"/><circle cx="16" cy="32" r="2" fill="#fff"/><circle cx="24" cy="32" r="2" fill="#fff"/><circle cx="32" cy="32" r="2" fill="#fff"/></svg>`,
-            blog: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#0284c7"/><path fill="#fff" d="M14 16h20v4H14zm0 8h20v4H14zm0 8h12v4H14z"/></svg>`,
-            postmgr: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#d97706"/></svg>`
+            mycomputer: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="7" width="36" height="25" rx="3" fill="#0284c7"/><rect x="9" y="10" width="30" height="19" rx="1.5" fill="#38bdf8"/><path fill="#94a3b8" d="M18 32h12l2 6H16z"/><rect x="12" y="38" width="24" height="3" rx="1.5" fill="#64748b"/></svg>`,
+            explorer: `<svg viewBox="0 0 48 48" class="w-full h-full"><path fill="#FFA000" d="M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4z"/><path fill="#FFCA28" d="M40 12H8c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4z"/><rect x="13" y="25" width="22" height="15" rx="2" fill="#0288D1"/><rect x="18" y="23" width="12" height="3" rx="1" fill="#01579B"/></svg>`,
+            word: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="10" y="6" width="30" height="36" rx="4" fill="#2563eb"/><rect x="18" y="13" width="16" height="2.5" rx="1" fill="#93c5fd"/><rect x="18" y="19" width="16" height="2.5" rx="1" fill="#93c5fd"/><rect x="18" y="25" width="16" height="2.5" rx="1" fill="#93c5fd"/><rect x="18" y="31" width="12" height="2.5" rx="1" fill="#93c5fd"/><rect x="5" y="13" width="20" height="22" rx="4" fill="#1d4ed8"/><text x="15" y="29" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">W</text></svg>`,
+            excel: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="10" y="6" width="30" height="36" rx="4" fill="#16a34a"/><rect x="19" y="12" width="7" height="5" rx="1" fill="#86efac"/><rect x="28" y="12" width="7" height="5" rx="1" fill="#86efac"/><rect x="19" y="19" width="7" height="5" rx="1" fill="#86efac"/><rect x="28" y="19" width="7" height="5" rx="1" fill="#86efac"/><rect x="19" y="26" width="7" height="5" rx="1" fill="#86efac"/><rect x="28" y="26" width="7" height="5" rx="1" fill="#86efac"/><rect x="5" y="13" width="20" height="22" rx="4" fill="#15803d"/><text x="15" y="29" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">X</text></svg>`,
+            powerpoint: `<svg viewBox="0 0 48 48" class="w-full h-full"><circle cx="26" cy="24" r="16" fill="#ea580c"/><path d="M26 8a16 16 0 0 1 16 16H26V8z" fill="#fdba74"/><rect x="5" y="13" width="20" height="22" rx="4" fill="#c2410c"/><text x="15" y="29" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">P</text></svg>`,
+            pdfreader: `<svg viewBox="0 0 48 48" class="w-full h-full"><path d="M12 6h18l8 8v28a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" fill="#dc2626"/><path d="M30 6v8h8" fill="#fca5a5"/><rect x="8" y="22" width="32" height="14" rx="3" fill="#991b1b"/><text x="24" y="32" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">PDF</text></svg>`,
+            camera: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="12" width="36" height="26" rx="5" fill="#334155"/><path d="M16 12l3-4h10l3 4H16z" fill="#475569"/><circle cx="24" cy="25" r="9" fill="#0f172a"/><circle cx="24" cy="25" r="6.5" fill="#0284c7"/><circle cx="22" cy="23" r="2" fill="#bae6fd"/><circle cx="37" cy="17" r="1.8" fill="#ef4444"/></svg>`,
+            calculator: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="4" width="32" height="40" rx="6" fill="#0f172a"/><rect x="12" y="8" width="24" height="9" rx="2" fill="#38bdf8"/><rect x="12" y="20" width="5" height="4.5" rx="1" fill="#475569"/><rect x="18.5" y="20" width="5" height="4.5" rx="1" fill="#475569"/><rect x="25" y="20" width="5" height="4.5" rx="1" fill="#475569"/><rect x="31.5" y="20" width="4.5" height="4.5" rx="1" fill="#f59e0b"/><rect x="12" y="26.5" width="5" height="4.5" rx="1" fill="#475569"/><rect x="18.5" y="26.5" width="5" height="4.5" rx="1" fill="#475569"/><rect x="25" y="26.5" width="5" height="4.5" rx="1" fill="#475569"/><rect x="31.5" y="26.5" width="4.5" height="4.5" rx="1" fill="#f59e0b"/><rect x="12" y="33" width="11.5" height="6" rx="1" fill="#475569"/><rect x="25" y="33" width="5" height="6" rx="1" fill="#475569"/><rect x="31.5" y="33" width="4.5" height="6" rx="1" fill="#0ea5e9"/></svg>`,
+            blog: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#0284c7"/><rect x="12" y="13" width="24" height="5" rx="1.5" fill="#fff"/><rect x="12" y="21" width="24" height="3" rx="1" fill="#bae6fd"/><rect x="12" y="27" width="24" height="3" rx="1" fill="#bae6fd"/><rect x="12" y="33" width="15" height="3" rx="1" fill="#bae6fd"/></svg>`,
+            postmgr: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#d97706"/><path d="M15 31l14-14 4 4-14 14H15v-4z" fill="#fff"/></svg>`
         };
 
+        /* ======================================================================
+           DAFTAR APLIKASI DESKTOP (Tanpa YouTube, FB, IG, TikTok & Custom Link)
+           ====================================================================== */
         const BUILTIN_DESKTOP_APPS = [
-            { id: 'mycomputer', title: 'My Computer', icon: 'mycomputer', w: 800, h: 500 },
-            { id: 'word', title: 'Word', icon: 'word', w: 820, h: 540 },
-            { id: 'excel', title: 'Excel', icon: 'excel', w: 860, h: 540 },
-            { id: 'powerpoint', title: 'PowerPoint', icon: 'powerpoint', w: 860, h: 540 },
-            { id: 'pdfreader', title: 'PDF Reader', icon: 'pdfreader', w: 820, h: 550 },
-            { id: 'camera', title: 'Camera', icon: 'camera', w: 660, h: 510 },
-            { id: 'calculator', title: 'Calculator', icon: 'calculator', w: 320, h: 480 },
-            { id: 'blog', title: 'Artikel & Posting', icon: 'blog', w: 860, h: 540 }
+            { id: 'mycomputer', title: 'My Computer', icon: 'mycomputer', w: 820, h: 520 },
+            { id: 'word', title: 'Word', icon: 'word', w: 860, h: 560 },
+            { id: 'excel', title: 'Excel', icon: 'excel', w: 880, h: 550 },
+            { id: 'powerpoint', title: 'PowerPoint', icon: 'powerpoint', w: 880, h: 560 },
+            { id: 'pdfreader', title: 'PDF Reader', icon: 'pdfreader', w: 860, h: 570 },
+            { id: 'camera', title: 'Camera', icon: 'camera', w: 680, h: 520 },
+            { id: 'calculator', title: 'Calculator', icon: 'calculator', w: 330, h: 490 },
+            { id: 'blog', title: 'Artikel & Posting', icon: 'blog', w: 880, h: 550 }
         ];
 
         const EXTRA_APPS = {
-            explorer: { id: 'explorer', title: 'Windows Explorer', icon: 'explorer', w: 800, h: 500 },
-            blog: { id: 'blog', title: 'Artikel & Posting Dukun ComCell', icon: 'blog', w: 860, h: 540 },
-            posteditor: { id: 'posteditor', title: 'Editor Posting (Admin)', icon: 'postmgr', w: 820, h: 560 },
-            postmanager: { id: 'postmanager', title: 'Kelola Posting (Admin)', icon: 'postmgr', w: 760, h: 500 }
+            explorer: { id: 'explorer', title: 'Windows Explorer', icon: 'explorer', w: 820, h: 520 },
+            blog: { id: 'blog', title: 'Artikel & Posting Dukun ComCell', icon: 'blog', w: 880, h: 550 },
+            posteditor: { id: 'posteditor', title: 'Editor Posting (Admin)', icon: 'postmgr', w: 840, h: 580 },
+            postmanager: { id: 'postmanager', title: 'Kelola Posting (Admin)', icon: 'postmgr', w: 780, h: 520 }
         };
 
         const DEFAULT_POSTS = [
@@ -489,12 +523,15 @@
                 id: 101,
                 title: "Selamat Datang di Official Website Dukun ComCell",
                 category: "Pengumuman",
-                content: "Halo! Selamat datang di portal resmi **Dukun ComCell** (`dukuncomcell.github.io`).\n\nWebsite ini dilengkapi antarmuka desktop Windows 11. Anda dapat membaca berita, menggunakan aplikasi Word, Excel, PowerPoint, PDF Reader, Camera, dan Calculator langsung di browser.",
+                content: "Halo! Selamat datang di portal resmi **Dukun ComCell** (`dukuncomcell.github.io`).\n\nWebsite ini dilengkapi antarmuka desktop Windows 11. Anda dapat membaca informasi terbaru, menggunakan aplikasi Word, Excel, PowerPoint, PDF Reader, Camera, dan Calculator langsung di browser.",
                 date: "2026-11-13T08:00:00.000Z",
                 author: "Admin Dukun ComCell"
             }
         ];
 
+        /* ======================================================================
+           STATE GLOBAL SISTEM
+           ====================================================================== */
         let userRole = null;
         let darkMode = false;
         let systemVolume = 80;
@@ -507,9 +544,39 @@
         let zCounter = 100;
         let activeBlogPostId = null;
         let editingPostId = null;
-        let calcVal = '0';
-        let calcExpr = '';
+        let confirmCallback = null;
 
+        // Virtual File System untuk Word, Excel, PowerPoint, PDF Reader & My Computer
+        let virtualFiles = [
+            { id: 'vf-1', name: 'Profil_Dukun_ComCell.doc', app: 'word', content: '<h2>Official Website Dukun ComCell</h2><p>Layanan servis smartphone, komputer, dan solusi teknologi terpercaya.</p>', updated: '13 Nov 2026' },
+            { id: 'vf-2', name: 'Daftar_Harga_Layanan.csv', app: 'excel', rows: [['No','Layanan','Estimasi Biaya','Status'],['1','Install Ulang Windows 11','100000','Ready'],['2','Ganti LCD Smartphone','350000','Ready'],['3','Servis Hardware PC','150000','Ready']], updated: '13 Nov 2026' },
+            { id: 'vf-3', name: 'Presentasi_Dukun_ComCell.ppt', app: 'powerpoint', slides: [{ title: 'Official Website Dukun ComCell', subtitle: 'Solusi Teknologi & Servis Terpercaya', body: 'Melayani perbaikan perangkat keras, perangkat lunak, dan pengembangan web.', bg: '#1e3a8a' }], updated: '13 Nov 2026' },
+            { id: 'vf-4', name: 'Panduan_Penggunaan_WebOS.pdf', app: 'pdfreader', docTitle: 'Panduan Penggunaan WebOS Dukun ComCell', docBody: 'Gunakan ikon desktop untuk membuka Word, Excel, PowerPoint, PDF Reader, Camera, dan Calculator. Login sebagai Admin untuk mengelola postingan.', updated: '13 Nov 2026' }
+        ];
+
+        // State Aplikasi Produktivitas
+        let wordState = { filename: 'Dokumen_Baru.doc', html: '<p>Mulai mengetik dokumen Anda di sini...</p>' };
+        let excelState = { filename: 'Spreadsheet_Baru.csv', rows: Array.from({ length: 12 }, (_, r) => Array.from({ length: 6 }, (_, c) => r === 0 ? `Kolom ${String.fromCharCode(65 + c)}` : '')) };
+        let pptState = { filename: 'Presentasi_Baru.ppt', activeSlide: 0, slides: [{ title: 'Judul Presentasi', subtitle: 'Subjudul Presentasi Dukun ComCell', body: 'Klik pada area teks untuk mengedit isi slide ini.', bg: '#1e3a8a' }] };
+        let pdfState = { filename: 'Dokumen_PDF_Baru.pdf', mode: 'editor', blobUrl: '', docTitle: 'Dokumen PDF Dukun ComCell', docBody: 'Tulis isi dokumen PDF Anda di sini, atau klik tombol Open File untuk membuka file .PDF dari komputer Anda.' };
+        let cameraStream = null;
+        let capturedPhotos = [];
+
+        // State Calculator
+        let calcCurrent = '0';
+        let calcPrevious = '';
+        let calcOperator = null;
+        let calcResetNext = false;
+
+        // State Network Monitor Realtime
+        let realtimePingMs = null;
+        let realtimeRateKBs = 0;
+        let realtimeDownlinkMbps = null;
+        let realtimeConnType = 'wifi';
+
+        /* ======================================================================
+           INISIALISASI SAAT HALAMAN DIMUAT
+           ====================================================================== */
         window.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('tb-explorer-icon').innerHTML = ICONS.explorer;
             loadLocalStorageData();
@@ -529,19 +596,51 @@
             try {
                 const savedPosts = JSON.parse(localStorage.getItem('dc_posts') || 'null');
                 if (Array.isArray(savedPosts) && savedPosts.length) posts = savedPosts;
-            } catch(e) {}
+                const savedVf = JSON.parse(localStorage.getItem('dc_virtual_files') || 'null');
+                if (Array.isArray(savedVf) && savedVf.length) virtualFiles = savedVf;
+            } catch (e) {}
             ghToken = localStorage.getItem('dc_gh_token') || GITHUB_CONFIG.defaultToken;
+        }
+
+        function saveVirtualFilesLocal() {
+            try { localStorage.setItem('dc_virtual_files', JSON.stringify(virtualFiles)); } catch (e) {}
+            if (openWindows['mycomputer']) renderAppBody('mycomputer');
+            if (openWindows['explorer']) renderAppBody('explorer');
         }
 
         function savePostsToLocal() {
             localStorage.setItem('dc_posts', JSON.stringify(posts));
             renderStartMenuPosts(document.getElementById('start-post-filter')?.value || '');
             if (openWindows['blog']) renderAppBody('blog');
+            if (openWindows['postmanager']) renderAppBody('postmanager');
         }
 
+        /* ======================================================================
+           SINKRONISASI OTOMATIS POSTING DARI GITHUB REPO (ANTI HILANG SAAT REFRESH)
+           ====================================================================== */
         async function syncPostsFromGitHubSources() {
+            // 1. Coba tarik langsung dari GitHub API agar update langsung terbaca tanpa menunggu build Pages
             try {
-                const resJson = await fetch('./posts.json?t=' + Date.now());
+                const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/posts.json?t=${Date.now()}`;
+                const headers = ghToken ? { 'Authorization': `token ${ghToken}` } : {};
+                const apiRes = await fetch(apiUrl, { headers, cache: 'no-store' });
+                if (apiRes.ok) {
+                    const fileObj = await apiRes.json();
+                    if (fileObj && fileObj.content) {
+                        const decodedStr = decodeURIComponent(escape(atob(fileObj.content.replace(/\n/g, ''))));
+                        const parsed = JSON.parse(decodedStr);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            posts = parsed;
+                            savePostsToLocal();
+                            return;
+                        }
+                    }
+                }
+            } catch (e) {}
+
+            // 2. Fallback ke file statis ./posts.json di GitHub Pages
+            try {
+                const resJson = await fetch('./posts.json?t=' + Date.now(), { cache: 'no-store' });
                 if (resJson.ok) {
                     const jsonData = await resJson.json();
                     if (Array.isArray(jsonData) && jsonData.length > 0) {
@@ -552,6 +651,9 @@
             } catch (e) {}
         }
 
+        /* ======================================================================
+           LOGIN TAMU & ADMIN (Password 4x Spasi) + SUARA STARTUP WINDOWS 11
+           ====================================================================== */
         function selectLoginRole(role) {
             const btnTamu = document.getElementById('btn-role-tamu');
             const btnAdmin = document.getElementById('btn-role-admin');
@@ -584,10 +686,12 @@
             if (val === '    ') {
                 userRole = 'admin';
                 document.getElementById('admin-login-error').classList.add('hidden');
+                document.getElementById('admin-password-input').value = '';
                 completeLoginTransition();
             } else {
                 document.getElementById('admin-login-error').classList.remove('hidden');
                 document.getElementById('admin-password-input').value = '';
+                document.getElementById('admin-password-input').focus();
             }
         }
 
@@ -607,39 +711,54 @@
                 badge.innerText = 'A';
                 badge.className = 'w-7 h-7 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-bold';
                 uname.innerText = 'Admin Dukun ComCell';
-                udesc.innerText = 'Akses Penuh';
-                showToast('Selamat datang, Admin!');
+                udesc.innerText = 'Akses Penuh (Buat, Edit, Hapus)';
+                showToast('Selamat datang, Admin Dukun ComCell!');
             } else {
                 adminSec.classList.add('hidden');
                 badge.innerText = 'T';
+                badge.className = 'w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-xs font-bold';
                 uname.innerText = 'Tamu';
                 udesc.innerText = 'Mode Baca Saja';
-                showToast('Selamat datang!');
+                showToast('Selamat datang di Official Website Dukun ComCell!');
             }
         }
 
         function logoutToWelcome() {
             closeAllFlyouts();
             selectLoginRole('tamu');
-            document.getElementById('welcome-login-screen').classList.remove('hidden');
-            document.getElementById('welcome-login-screen').style.opacity = '1';
+            const screen = document.getElementById('welcome-login-screen');
+            screen.classList.remove('hidden');
+            requestAnimationFrame(() => screen.style.opacity = '1');
         }
 
         async function playStartupSound() {
             try {
                 if (typeof Tone !== 'undefined') {
                     await Tone.start();
-                    if (isMuted) return;
-                    const synth = new Tone.Synth().toDestination();
-                    synth.triggerAttackRelease('C4', '0.5');
+                    if (isMuted || systemVolume <= 0) return;
+                    const db = (systemVolume / 100) * 24 - 24;
+                    Tone.Destination.volume.value = db;
+                    const synth = new Tone.PolySynth(Tone.Synth, {
+                        oscillator: { type: 'sine' },
+                        envelope: { attack: 0.15, decay: 0.5, sustain: 0.3, release: 1.4 }
+                    }).toDestination();
+                    const now = Tone.now();
+                    synth.triggerAttackRelease(['Eb4', 'Bb4'], '0.55', now);
+                    synth.triggerAttackRelease(['F4', 'C5'], '0.55', now + 0.32);
+                    synth.triggerAttackRelease(['G4', 'D5', 'Bb5'], '1.3', now + 0.65);
                 }
             } catch (e) {}
         }
 
+        /* ======================================================================
+           RENDER IKON DESKTOP & MANAJEMEN JENDELA (Minimize, Maximize, Close, Drag)
+           ====================================================================== */
         function renderDesktopIcons() {
             const container = document.getElementById('desktop-icons');
             container.innerHTML = BUILTIN_DESKTOP_APPS.map(item => `
-                <div class="relative group w-20 h-22 p-1.5 rounded-lg hover:bg-white/20 flex flex-col items-center justify-center gap-1 text-center cursor-pointer" ondblclick="openApp('${item.id}')" onclick="if(window.innerWidth<768) openApp('${item.id}')">
+                <div class="relative group w-20 h-22 p-1.5 rounded-lg hover:bg-white/20 flex flex-col items-center justify-center gap-1 text-center cursor-pointer select-none transition-colors"
+                     ondblclick="openApp('${item.id}')"
+                     onclick="if(window.innerWidth < 768) openApp('${item.id}')">
                     <div class="w-9 h-9 drop-shadow-md">${ICONS[item.icon] || ICONS.blog}</div>
                     <span class="text-[11px] font-medium desktop-label leading-tight line-clamp-2">${escapeHtml(item.title)}</span>
                 </div>
@@ -662,10 +781,13 @@
             }
 
             const vw = window.innerWidth, vh = window.innerHeight - 48;
-            const w = Math.min(app.w || 760, vw - 20), h = Math.min(app.h || 500, vh - 20);
-            const left = Math.max(10, Math.floor((vw - w) / 2)), top = Math.max(10, Math.floor((vh - h) / 2));
+            const offset = (Object.keys(openWindows).length % 5) * 20;
+            const w = Math.min(app.w || 780, vw - 20);
+            const h = Math.min(app.h || 520, vh - 20);
+            const left = Math.max(10, Math.floor((vw - w) / 2) + offset);
+            const top = Math.max(10, Math.floor((vh - h) / 2) + offset);
 
-            openWindows[id] = { id, title: app.title, icon: app.icon || 'blog', minimized: false, rect: { left, top, w, h }, meta: app };
+            openWindows[id] = { id, title: app.title, icon: app.icon || 'blog', minimized: false, maximized: false, rect: { left, top, w, h } };
 
             const winEl = document.createElement('div');
             winEl.id = `win-${id}`;
@@ -674,11 +796,15 @@
             winEl.onmousedown = () => focusWindow(id);
 
             winEl.innerHTML = `
-                <div onmousedown="startDragWindow(event, '${id}')" class="h-9 px-3 flex items-center justify-between shrink-0 border-b select-none" style="border-color: var(--mica-border);">
-                    <div class="flex items-center gap-2 min-w-0"><div class="w-4 h-4">${ICONS[app.icon] || ICONS.blog}</div><span class="text-xs font-semibold truncate">${escapeHtml(app.title)}</span></div>
+                <div onmousedown="startDragWindow(event, '${id}')" ondblclick="toggleMaximizeWindow('${id}')" class="h-9 px-3 flex items-center justify-between shrink-0 border-b select-none" style="border-color: var(--mica-border);">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <div class="w-4 h-4 shrink-0">${ICONS[app.icon] || ICONS.blog}</div>
+                        <span class="text-xs font-semibold truncate">${escapeHtml(app.title)}</span>
+                    </div>
                     <div class="flex items-center -mr-2">
-                        <button onclick="minimizeWindow('${id}')" class="w-10 h-8 flex items-center justify-center hover:bg-black/10 text-xs cursor-pointer">&#8211;</button>
-                        <button onclick="closeWindow('${id}')" class="w-10 h-8 flex items-center justify-center hover:bg-red-500 hover:text-white text-xs cursor-pointer">&#10005;</button>
+                        <button onclick="minimizeWindow('${id}')" class="w-10 h-8 flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 text-xs cursor-pointer" title="Minimize">&#8211;</button>
+                        <button onclick="toggleMaximizeWindow('${id}')" class="w-10 h-8 flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 text-xs cursor-pointer" title="Maximize">&#9633;</button>
+                        <button onclick="closeWindow('${id}')" class="w-10 h-8 flex items-center justify-center hover:bg-red-500 hover:text-white text-xs cursor-pointer" title="Close">&#10005;</button>
                     </div>
                 </div>
                 <div id="win-body-${id}" class="flex-1 overflow-auto relative" style="background: var(--mica-solid);"></div>
@@ -697,104 +823,215 @@
         }
 
         function minimizeWindow(id) {
+            if (!openWindows[id]) return;
             openWindows[id].minimized = true;
             document.getElementById(`win-${id}`).classList.add('hidden');
             renderTaskbarRunningApps();
         }
 
-        function minimizeAllWindows() { Object.keys(openWindows).forEach(id => minimizeWindow(id)); }
+        function minimizeAllWindows() {
+            Object.keys(openWindows).forEach(id => minimizeWindow(id));
+        }
+
+        function toggleMaximizeWindow(id) {
+            const win = openWindows[id];
+            const el = document.getElementById(`win-${id}`);
+            if (!win || !el) return;
+            win.maximized = !win.maximized;
+            if (win.maximized) {
+                el.style.left = '0px';
+                el.style.top = '0px';
+                el.style.width = '100%';
+                el.style.height = '100%';
+                el.classList.remove('rounded-xl');
+            } else {
+                el.style.left = win.rect.left + 'px';
+                el.style.top = win.rect.top + 'px';
+                el.style.width = win.rect.w + 'px';
+                el.style.height = win.rect.h + 'px';
+                el.classList.add('rounded-xl');
+            }
+            focusWindow(id);
+        }
 
         function closeWindow(id) {
+            if (id === 'camera' && cameraStream) {
+                cameraStream.getTracks().forEach(t => t.stop());
+                cameraStream = null;
+            }
             document.getElementById(`win-${id}`)?.remove();
             delete openWindows[id];
             renderTaskbarRunningApps();
         }
 
         function startDragWindow(e, id) {
+            if (e.target.tagName === 'BUTTON') return;
+            const win = openWindows[id];
+            if (!win || win.maximized) return;
             const el = document.getElementById(`win-${id}`);
             const startX = e.clientX, startY = e.clientY;
             const origLeft = parseInt(el.style.left), origTop = parseInt(el.style.top);
             const onMove = (ev) => {
-                el.style.left = (origLeft + ev.clientX - startX) + 'px';
-                el.style.top = Math.max(0, origTop + ev.clientY - startY) + 'px';
+                const nl = origLeft + (ev.clientX - startX);
+                const nt = Math.max(0, origTop + (ev.clientY - startY));
+                el.style.left = nl + 'px';
+                el.style.top = nt + 'px';
+                win.rect.left = nl;
+                win.rect.top = nt;
             };
-            const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); };
-            document.addEventListener('mousemove', onMove); document.addEventListener('mouseup', onUp);
+            const onUp = () => {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+            };
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
         }
 
         function renderTaskbarRunningApps() {
             const bar = document.getElementById('taskbar-running-apps');
-            bar.innerHTML = Object.values(openWindows).map(win => `
-                <button onclick="toggleTaskbarWindow('${win.id}')" class="h-9 px-2.5 rounded-md flex items-center gap-1.5 mica-card text-[11px] font-medium cursor-pointer">
-                    <div class="w-4 h-4">${ICONS[win.icon] || ICONS.blog}</div>
-                    <span class="truncate hidden sm:inline">${escapeHtml(win.title)}</span>
-                </button>
-            `).join('');
+            bar.innerHTML = Object.values(openWindows).map(win => {
+                const isActive = !win.minimized && focusedWinId === win.id;
+                return `
+                    <button onclick="toggleTaskbarWindow('${win.id}')" class="relative h-9 px-2.5 rounded-md flex items-center gap-1.5 text-[11px] font-medium cursor-pointer transition-all ${isActive ? 'mica-card shadow-sm' : 'hover:bg-black/5 dark:hover:bg-white/10 opacity-85'}">
+                        <div class="w-4 h-4 shrink-0">${ICONS[win.icon] || ICONS.blog}</div>
+                        <span class="truncate max-w-[110px] hidden sm:inline">${escapeHtml(win.title)}</span>
+                        <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all ${isActive ? 'w-4 bg-sky-500' : 'w-1.5 bg-gray-400'}"></span>
+                    </button>
+                `;
+            }).join('');
         }
 
         function toggleTaskbarWindow(id) {
             const win = openWindows[id], el = document.getElementById(`win-${id}`);
-            if (win.minimized) { win.minimized = false; el.classList.remove('hidden'); focusWindow(id); }
-            else if (focusedWinId === id) minimizeWindow(id);
-            else focusWindow(id);
-        }
-
-        function toggleTaskView() {
-            const tv = document.getElementById('task-view-overlay');
-            tv.classList.toggle('hidden');
-            if (!tv.classList.contains('hidden')) {
-                document.getElementById('task-view-grid').innerHTML = Object.values(openWindows).map(w => `
-                    <div onclick="selectFromTaskView('${w.id}')" class="p-4 rounded-xl bg-white/10 hover:bg-white/20 cursor-pointer flex flex-col items-center justify-center gap-2">
-                        <div class="w-8 h-8">${ICONS[w.icon]}</div>
-                        <span class="text-xs font-semibold">${escapeHtml(w.title)}</span>
-                    </div>
-                `).join('');
+            if (!win || !el) return;
+            if (win.minimized) {
+                win.minimized = false;
+                el.classList.remove('hidden');
+                focusWindow(id);
+            } else if (focusedWinId === id) {
+                minimizeWindow(id);
+            } else {
+                focusWindow(id);
             }
         }
-        function selectFromTaskView(id) { toggleTaskView(); openWindows[id].minimized = false; document.getElementById(`win-${id}`).classList.remove('hidden'); focusWindow(id); }
+
+        /* ======================================================================
+           TASK VIEW OVERLAY
+           ====================================================================== */
+        function toggleTaskView() {
+            closeAllFlyouts();
+            const tv = document.getElementById('task-view-overlay');
+            tv.classList.toggle('hidden');
+            if (!tv.classList.contains('hidden')) renderTaskViewGrid();
+        }
+
+        function closeTaskView() {
+            document.getElementById('task-view-overlay').classList.add('hidden');
+        }
+
+        function renderTaskViewGrid() {
+            const list = Object.values(openWindows);
+            const grid = document.getElementById('task-view-grid');
+            if (!list.length) {
+                grid.innerHTML = `<div class="col-span-full text-center text-sm text-white/70 py-16">Belum ada jendela aplikasi yang dibuka.</div>`;
+                return;
+            }
+            grid.innerHTML = list.map(w => `
+                <div class="p-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex flex-col justify-between gap-3 transition-all">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <div class="w-5 h-5 shrink-0">${ICONS[w.icon] || ICONS.blog}</div>
+                            <span class="text-xs font-semibold truncate">${escapeHtml(w.title)}</span>
+                        </div>
+                        <button onclick="closeWindow('${w.id}'); renderTaskViewGrid();" class="px-2 py-0.5 rounded bg-rose-500/80 hover:bg-rose-500 text-[10px] cursor-pointer">✕</button>
+                    </div>
+                    <div onclick="selectFromTaskView('${w.id}')" class="h-24 rounded-lg bg-slate-900/60 flex flex-col items-center justify-center gap-1 cursor-pointer">
+                        <div class="w-8 h-8">${ICONS[w.icon] || ICONS.blog}</div>
+                        <span class="text-[11px] text-white/80">${w.minimized ? 'Diminimize — Klik untuk buka' : 'Aktif — Klik untuk fokus'}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectFromTaskView(id) {
+            closeTaskView();
+            if (!openWindows[id]) return;
+            openWindows[id].minimized = false;
+            document.getElementById(`win-${id}`).classList.remove('hidden');
+            focusWindow(id);
+        }
+
+        /* ======================================================================
+           PENCARIAN TASKBAR & DAFTAR POSTING THUMBNAIL DI START MENU
+           ====================================================================== */
+        function extractPostThumbnail(content) {
+            if (!content) return null;
+            const imgMatch = content.match(/!\[.*?\]\((.*?)\)/);
+            if (imgMatch && imgMatch[1]) return { type: 'image', url: imgMatch[1] };
+            const htmlImg = content.match(/<img[^>]+src="([^">]+)"/);
+            if (htmlImg && htmlImg[1]) return { type: 'image', url: htmlImg[1] };
+            const vidMatch = content.match(/<video[^>]+src="([^">]+)"/);
+            if (vidMatch && vidMatch[1]) return { type: 'video', url: vidMatch[1] };
+            return null;
+        }
 
         function handleTaskbarSearch(q) {
             const fly = document.getElementById('taskbar-search-flyout');
             const query = q.trim().toLowerCase();
             if (!query) { fly.classList.add('hidden'); return; }
             fly.classList.remove('hidden');
-            const matches = posts.filter(p => p.title.toLowerCase().includes(query));
+            const matches = posts.filter(p =>
+                p.title.toLowerCase().includes(query) ||
+                (p.content || '').toLowerCase().includes(query) ||
+                (p.category || '').toLowerCase().includes(query)
+            );
             document.getElementById('search-count-badge').innerText = `${matches.length} posting`;
-            document.getElementById('taskbar-search-results').innerHTML = matches.map(p => `
-                <div onclick="openSinglePost(${p.id}); closeAllFlyouts();" class="p-2 rounded mica-card cursor-pointer">
-                    <div class="text-xs font-semibold">${escapeHtml(p.title)}</div>
-                </div>
-            `).join('') || `<div class="text-xs opacity-60 p-2">Tidak ditemukan</div>`;
-        }
-
-        function extractPostThumbnail(content) {
-            if (!content) return null;
-            const imgMatch = content.match(/!\[.*?\]\((.*?)\)/);
-            if (imgMatch) return imgMatch[1];
-            const htmlImg = content.match(/<img[^>]+src="([^">]+)"/);
-            if (htmlImg) return htmlImg[1];
-            return null;
+            document.getElementById('taskbar-search-results').innerHTML = matches.map(p => {
+                const media = extractPostThumbnail(p.content);
+                return `
+                    <div onclick="openSinglePost(${p.id}); closeAllFlyouts();" class="p-2 rounded-lg mica-card cursor-pointer flex items-center gap-2.5">
+                        <div class="w-11 h-11 rounded-md bg-sky-500/20 shrink-0 overflow-hidden flex items-center justify-center">
+                            ${media?.type === 'image' ? `<img src="${media.url}" class="w-full h-full object-cover">` : media?.type === 'video' ? `<span class="text-base">🎬</span>` : `<span class="text-base">📰</span>`}
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <div class="text-xs font-semibold truncate">${escapeHtml(p.title)}</div>
+                            <div class="text-[10px] opacity-65">${escapeHtml(p.category || 'Artikel')} &bull; ${formatIndoDateShort(p.date)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('') || `<div class="text-xs opacity-60 p-3 text-center">Tidak ada posting yang cocok.</div>`;
         }
 
         function renderStartMenuPosts(q) {
             const query = (q || '').toLowerCase().trim();
-            const list = posts.filter(p => p.title.toLowerCase().includes(query));
+            const list = posts.filter(p =>
+                p.title.toLowerCase().includes(query) ||
+                (p.category || '').toLowerCase().includes(query)
+            );
             document.getElementById('start-posts-list').innerHTML = list.map(p => {
-                const thumb = extractPostThumbnail(p.content);
+                const media = extractPostThumbnail(p.content);
                 return `
-                    <div onclick="openSinglePost(${p.id}); closeAllFlyouts();" class="p-2 rounded-xl mica-card cursor-pointer flex gap-2.5 items-center">
-                        <div class="w-12 h-12 rounded-lg bg-sky-500/20 shrink-0 overflow-hidden flex items-center justify-center">
-                            ${thumb ? `<img src="${thumb}" class="w-full h-full object-cover">` : `<span class="text-base">📰</span>`}
+                    <div onclick="openSinglePost(${p.id}); closeAllFlyouts();" class="rounded-xl mica-card overflow-hidden cursor-pointer flex flex-col border transition-transform hover:-translate-y-0.5" style="border-color: var(--mica-border);">
+                        <div class="h-24 w-full bg-gradient-to-br from-sky-600/30 via-blue-700/30 to-indigo-900/40 relative overflow-hidden flex items-center justify-center">
+                            ${media?.type === 'image'
+                                ? `<img src="${media.url}" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover">`
+                                : media?.type === 'video'
+                                ? `<video src="${media.url}" class="w-full h-full object-cover" muted></video><span class="absolute inset-0 flex items-center justify-center bg-black/35 text-white text-xl">▶</span>`
+                                : `<span class="text-3xl opacity-85">📰</span>`}
+                            <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/60 text-white text-[9px] font-semibold backdrop-blur-sm">${escapeHtml(p.category || 'Berita')}</span>
                         </div>
-                        <div class="min-w-0 flex-1">
-                            <div class="text-xs font-semibold line-clamp-1">${escapeHtml(p.title)}</div>
-                            <div class="text-[10px] opacity-60 mt-0.5">${formatIndoDateShort(p.date)}</div>
+                        <div class="p-2.5 flex-1 flex flex-col justify-between">
+                            <div class="text-xs font-semibold line-clamp-2 leading-snug">${escapeHtml(p.title)}</div>
+                            <div class="text-[10px] opacity-65 mt-1.5">${formatIndoDateShort(p.date)}</div>
                         </div>
                     </div>
                 `;
-            }).join('') || `<div class="text-xs opacity-60 p-4">Tidak ada posting.</div>`;
+            }).join('') || `<div class="col-span-full text-xs opacity-60 p-4 text-center">Tidak ada posting ditemukan.</div>`;
         }
 
+        /* ======================================================================
+           RENDER BODY MASING-MASING APLIKASI
+           ====================================================================== */
         function renderAppBody(id) {
             const container = document.getElementById(`win-body-${id}`);
             if (!container) return;
@@ -802,22 +1039,22 @@
             switch (id) {
                 case 'mycomputer':
                 case 'explorer':
-                    container.innerHTML = `<div class="p-4 text-xs font-semibold">📁 Windows Explorer / My Computer (C: &amp; D:) aktif.</div>`;
+                    renderExplorerApp(container, id);
                     break;
                 case 'word':
-                    container.innerHTML = `<div class="h-full flex flex-col text-xs"><div class="p-2 border-b flex gap-2"><button onclick="showToast('Dokumen baru')" class="px-2 py-1 mica-card rounded">New</button><button onclick="showToast('Disimpan')" class="px-2 py-1 bg-blue-600 text-white rounded">Save</button></div><textarea class="flex-1 p-4 focus:outline-none" placeholder="Ketik dokumen Word..."></textarea></div>`;
+                    renderWordApp(container);
                     break;
                 case 'excel':
-                    container.innerHTML = `<div class="p-4 text-xs">Spreadsheet Excel siap digunakan.</div>`;
+                    renderExcelApp(container);
                     break;
                 case 'powerpoint':
-                    container.innerHTML = `<div class="p-6 text-center text-sm font-bold">PowerPoint Presentation View</div>`;
+                    renderPowerPointApp(container);
                     break;
                 case 'pdfreader':
-                    container.innerHTML = `<div class="p-4 text-xs">PDF Reader Viewer aktif.</div>`;
+                    renderPdfReaderApp(container);
                     break;
                 case 'camera':
-                    container.innerHTML = `<div class="h-full bg-black flex items-center justify-center text-white text-xs">Kamera WebOS Aktif</div>`;
+                    renderCameraApp(container);
                     break;
                 case 'calculator':
                     renderCalculatorApp(container);
@@ -834,71 +1071,588 @@
             }
         }
 
-        function renderCalculatorApp(container) {
+        /* --- 1. MY COMPUTER & WINDOWS EXPLORER --- */
+        function renderExplorerApp(container, appId) {
             container.innerHTML = `
-                <div class="h-full flex flex-col bg-slate-900 text-white p-3 select-none">
-                    <div id="calc-display" class="bg-black/60 rounded-xl p-3 text-right text-2xl font-mono font-bold tracking-wider mb-3 h-16 flex items-center justify-end overflow-x-auto">0</div>
-                    <div class="grid grid-cols-4 gap-2 flex-1">
-                        <button onclick="calcClear()" class="bg-rose-600/80 hover:bg-rose-600 rounded-xl font-bold">C</button>
-                        <button onclick="calcPress('/')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold">&divide;</button>
-                        <button onclick="calcPress('*')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold">&times;</button>
-                        <button onclick="calcPress('-')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold">-</button>
-                        <button onclick="calcPress('7')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">7</button>
-                        <button onclick="calcPress('8')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">8</button>
-                        <button onclick="calcPress('9')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">9</button>
-                        <button onclick="calcPress('+')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold row-span-2">+</button>
-                        <button onclick="calcPress('4')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">4</button>
-                        <button onclick="calcPress('5')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">5</button>
-                        <button onclick="calcPress('6')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">6</button>
-                        <button onclick="calcPress('1')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">1</button>
-                        <button onclick="calcPress('2')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">2</button>
-                        <button onclick="calcPress('3')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">3</button>
-                        <button onclick="calcEqual()" class="bg-sky-600 hover:bg-sky-500 rounded-xl font-bold row-span-2">=</button>
-                        <button onclick="calcPress('0')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold col-span-2">0</button>
-                        <button onclick="calcPress('.')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">.</button>
+                <div class="h-full flex flex-col text-xs">
+                    <div class="px-3 py-2 border-b flex items-center justify-between gap-2" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold">💻 This PC (Dukun ComCell)</span>
+                            <span class="opacity-50">&rsaquo;</span>
+                            <span class="opacity-80">Penyimpanan &amp; Dokumen</span>
+                        </div>
+                        <span class="text-[11px] opacity-70">${virtualFiles.length} file tersimpan</span>
+                    </div>
+                    <div class="flex-1 flex overflow-hidden">
+                        <div class="w-44 border-r p-2.5 space-y-1 shrink-0 hidden sm:block" style="border-color: var(--mica-border);">
+                            <div class="text-[10px] font-bold uppercase opacity-60 px-2 py-1">Quick Access</div>
+                            <button onclick="openApp('word')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📘 Dokumen Word</button>
+                            <button onclick="openApp('excel')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📗 Data Excel</button>
+                            <button onclick="openApp('powerpoint')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📙 Slide PowerPoint</button>
+                            <button onclick="openApp('pdfreader')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📕 File PDF</button>
+                        </div>
+                        <div class="flex-1 p-4 overflow-y-auto space-y-5">
+                            <div>
+                                <div class="text-xs font-bold mb-2">Devices and drives (2)</div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div class="p-3 rounded-xl mica-card flex items-center gap-3">
+                                        <span class="text-2xl">💽</span>
+                                        <div class="flex-1">
+                                            <div class="font-semibold">Local Disk (C:)</div>
+                                            <div class="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full my-1 overflow-hidden"><div class="h-full bg-sky-500 w-[45%]"></div></div>
+                                            <div class="text-[10px] opacity-70">138 GB free of 250 GB</div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 rounded-xl mica-card flex items-center gap-3">
+                                        <span class="text-2xl">💾</span>
+                                        <div class="flex-1">
+                                            <div class="font-semibold">PROJECT Data (D:)</div>
+                                            <div class="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full my-1 overflow-hidden"><div class="h-full bg-emerald-500 w-[28%]"></div></div>
+                                            <div class="text-[10px] opacity-70">360 GB free of 500 GB</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="text-xs font-bold mb-2">File Tersimpan di WebOS (Klik 2x untuk Membuka di Aplikasi)</div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                                    ${virtualFiles.map(f => `
+                                        <div ondblclick="openVirtualFile('${f.id}')" onclick="if(window.innerWidth<768) openVirtualFile('${f.id}')" class="p-2.5 rounded-xl mica-card cursor-pointer flex items-center gap-2.5">
+                                            <div class="w-7 h-7 shrink-0">${ICONS[f.app] || ICONS.word}</div>
+                                            <div class="min-w-0 flex-1">
+                                                <div class="font-semibold truncate">${escapeHtml(f.name)}</div>
+                                                <div class="text-[10px] opacity-65">${escapeHtml(f.updated)}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
         }
 
-        function calcPress(val) {
-            if (calcVal === '0' && val !== '.') calcVal = val;
-            else calcVal += val;
-            document.getElementById('calc-display').innerText = calcVal;
+        function openVirtualFile(vfId) {
+            const f = virtualFiles.find(x => x.id === vfId);
+            if (!f) return;
+            if (f.app === 'word') {
+                wordState = { filename: f.name, html: f.content || '' };
+                openApp('word');
+                renderAppBody('word');
+            } else if (f.app === 'excel') {
+                excelState = { filename: f.name, rows: JSON.parse(JSON.stringify(f.rows || [])) };
+                openApp('excel');
+                renderAppBody('excel');
+            } else if (f.app === 'powerpoint') {
+                pptState = { filename: f.name, activeSlide: 0, slides: JSON.parse(JSON.stringify(f.slides || [])) };
+                openApp('powerpoint');
+                renderAppBody('powerpoint');
+            } else if (f.app === 'pdfreader') {
+                pdfState = { filename: f.name, mode: 'editor', blobUrl: '', docTitle: f.docTitle || f.name, docBody: f.docBody || '' };
+                openApp('pdfreader');
+                renderAppBody('pdfreader');
+            }
+            showToast(`Membuka ${f.name}`);
         }
 
-        function calcClear() {
-            calcVal = '0';
-            document.getElementById('calc-display').innerText = calcVal;
+        /* --- 2. MICROSOFT WORD (New, Edit, Save, Open File) --- */
+        function renderWordApp(container) {
+            container.innerHTML = `
+                <div class="h-full flex flex-col text-xs">
+                    <div class="p-2 border-b flex flex-wrap items-center gap-1.5" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                        <button onclick="wordNewFile()" class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">📄 New File</button>
+                        <label class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">
+                            📂 Open File <input type="file" accept=".txt,.html,.htm,.doc,.md" class="hidden" onchange="wordOpenFile(event)">
+                        </label>
+                        <button onclick="wordSaveFile()" class="px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white font-semibold cursor-pointer">💾 Save File</button>
+                        <div class="h-4 w-[1px] bg-gray-400/40 mx-1"></div>
+                        <button onclick="document.execCommand('bold')" class="px-2 py-1 rounded mica-card font-bold cursor-pointer">B</button>
+                        <button onclick="document.execCommand('italic')" class="px-2 py-1 rounded mica-card italic cursor-pointer">I</button>
+                        <button onclick="document.execCommand('underline')" class="px-2 py-1 rounded mica-card underline cursor-pointer">U</button>
+                        <button onclick="document.execCommand('justifyLeft')" class="px-2 py-1 rounded mica-card cursor-pointer">Kiri</button>
+                        <button onclick="document.execCommand('justifyCenter')" class="px-2 py-1 rounded mica-card cursor-pointer">Tengah</button>
+                        <input type="text" id="word-filename-input" value="${escapeHtml(wordState.filename)}" onchange="wordState.filename=this.value" class="ml-auto mica-card px-2.5 py-1 rounded w-44 font-semibold">
+                    </div>
+                    <div class="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-200/60 dark:bg-slate-900/60 flex justify-center">
+                        <div id="word-editor-page" contenteditable="true" oninput="wordState.html=this.innerHTML" class="w-full max-w-[680px] min-h-[420px] bg-white text-slate-900 p-8 rounded shadow-lg focus:outline-none leading-relaxed text-sm">
+                            ${wordState.html}
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
-        function calcEqual() {
-            try {
-                calcVal = String(eval(calcVal));
-                document.getElementById('calc-display').innerText = calcVal;
-            } catch(e) {
-                calcVal = 'Error';
-                document.getElementById('calc-display').innerText = calcVal;
-                setTimeout(calcClear, 1200);
+        function wordNewFile() {
+            wordState = { filename: 'Dokumen_Baru.doc', html: '<p>Dokumen baru siap diedit...</p>' };
+            renderAppBody('word');
+            showToast('Dokumen Word baru dibuat.');
+        }
+
+        function wordOpenFile(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const raw = ev.target.result;
+                wordState.filename = file.name;
+                wordState.html = file.name.endsWith('.html') || file.name.endsWith('.htm') ? raw : `<pre style="white-space:pre-wrap;font-family:inherit;">${escapeHtml(raw)}</pre>`;
+                renderAppBody('word');
+                showToast(`File "${file.name}" berhasil dibuka.`);
+            };
+            reader.readAsText(file);
+        }
+
+        function wordSaveFile() {
+            const el = document.getElementById('word-editor-page');
+            if (el) wordState.html = el.innerHTML;
+            const fname = document.getElementById('word-filename-input')?.value.trim() || 'Dokumen.doc';
+            wordState.filename = fname;
+
+            // Simpan ke Virtual Storage My Computer
+            const idx = virtualFiles.findIndex(x => x.name === fname && x.app === 'word');
+            if (idx >= 0) virtualFiles[idx] = { ...virtualFiles[idx], content: wordState.html, updated: 'Baru saja' };
+            else virtualFiles.unshift({ id: 'vf-' + Date.now(), name: fname, app: 'word', content: wordState.html, updated: 'Baru saja' });
+            saveVirtualFilesLocal();
+
+            // Unduh file ke komputer pengguna
+            const docBlob = new Blob([`<html><head><meta charset="utf-8"></head><body>${wordState.html}</body></html>`], { type: 'application/msword' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(docBlob);
+            a.download = fname;
+            a.click();
+            showToast(`File "${fname}" disimpan & diunduh.`);
+        }
+
+        /* --- 3. MICROSOFT EXCEL (New, Edit, Save, Open File) --- */
+        function renderExcelApp(container) {
+            const cols = excelState.rows[0]?.length || 6;
+            container.innerHTML = `
+                <div class="h-full flex flex-col text-xs">
+                    <div class="p-2 border-b flex flex-wrap items-center gap-1.5" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                        <button onclick="excelNewFile()" class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">📄 New File</button>
+                        <label class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">
+                            📂 Open File <input type="file" accept=".csv,.txt" class="hidden" onchange="excelOpenFile(event)">
+                        </label>
+                        <button onclick="excelSaveFile()" class="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold cursor-pointer">💾 Save CSV</button>
+                        <button onclick="excelAddRow()" class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">+ Baris</button>
+                        <input type="text" id="excel-filename-input" value="${escapeHtml(excelState.filename)}" onchange="excelState.filename=this.value" class="ml-auto mica-card px-2.5 py-1 rounded w-44 font-semibold">
+                    </div>
+                    <div class="flex-1 overflow-auto">
+                        <table class="w-full border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-emerald-700 text-white">
+                                    <th class="w-10 border border-emerald-600 py-1 text-center">#</th>
+                                    ${Array.from({ length: cols }, (_, c) => `<th class="border border-emerald-600 py-1 px-2 text-center">${String.fromCharCode(65 + c)}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${excelState.rows.map((row, rIdx) => `
+                                    <tr>
+                                        <td class="border px-2 py-1 text-center font-semibold opacity-65" style="border-color: var(--mica-border);">${rIdx + 1}</td>
+                                        ${row.map((cell, cIdx) => `
+                                            <td class="border p-0" style="border-color: var(--mica-border);">
+                                                <input type="text" value="${escapeHtml(cell)}" oninput="excelState.rows[${rIdx}][${cIdx}]=this.value" class="w-full px-2 py-1.5 bg-transparent focus:outline-none focus:bg-emerald-500/10 ${rIdx === 0 ? 'font-bold' : ''}">
+                                            </td>
+                                        `).join('')}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function excelNewFile() {
+            excelState = { filename: 'Spreadsheet_Baru.csv', rows: Array.from({ length: 12 }, (_, r) => Array.from({ length: 6 }, (_, c) => r === 0 ? `Kolom ${String.fromCharCode(65 + c)}` : '')) };
+            renderAppBody('excel');
+            showToast('Spreadsheet Excel baru dibuat.');
+        }
+
+        function excelAddRow() {
+            const cols = excelState.rows[0]?.length || 6;
+            excelState.rows.push(Array(cols).fill(''));
+            renderAppBody('excel');
+        }
+
+        function excelOpenFile(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const lines = ev.target.result.split(/\r?\n/).filter(l => l.trim() !== '');
+                excelState.filename = file.name;
+                excelState.rows = lines.map(line => line.split(','));
+                renderAppBody('excel');
+                showToast(`File "${file.name}" dibuka di Excel.`);
+            };
+            reader.readAsText(file);
+        }
+
+        function excelSaveFile() {
+            const fname = document.getElementById('excel-filename-input')?.value.trim() || 'Spreadsheet.csv';
+            excelState.filename = fname;
+            const csvText = excelState.rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+
+            const idx = virtualFiles.findIndex(x => x.name === fname && x.app === 'excel');
+            if (idx >= 0) virtualFiles[idx] = { ...virtualFiles[idx], rows: excelState.rows, updated: 'Baru saja' };
+            else virtualFiles.unshift({ id: 'vf-' + Date.now(), name: fname, app: 'excel', rows: excelState.rows, updated: 'Baru saja' });
+            saveVirtualFilesLocal();
+
+            const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8;' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fname;
+            a.click();
+            showToast(`File "${fname}" disimpan & diunduh.`);
+        }
+
+        /* --- 4. MICROSOFT POWERPOINT (New, Edit, Save, Open File) --- */
+        function renderPowerPointApp(container) {
+            const slide = pptState.slides[pptState.activeSlide] || pptState.slides[0];
+            container.innerHTML = `
+                <div class="h-full flex flex-col text-xs">
+                    <div class="p-2 border-b flex flex-wrap items-center gap-1.5" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                        <button onclick="pptNewFile()" class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">📄 New File</button>
+                        <label class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">
+                            📂 Open File <input type="file" accept=".json,.ppt" class="hidden" onchange="pptOpenFile(event)">
+                        </label>
+                        <button onclick="pptSaveFile()" class="px-2.5 py-1 rounded bg-orange-600 hover:bg-orange-500 text-white font-semibold cursor-pointer">💾 Save File</button>
+                        <button onclick="pptAddSlide()" class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">+ Slide Baru</button>
+                        <input type="color" value="${slide.bg || '#1e3a8a'}" onchange="pptState.slides[${pptState.activeSlide}].bg=this.value; renderAppBody('powerpoint');" title="Warna Slide" class="w-7 h-7 rounded cursor-pointer border-0">
+                        <input type="text" id="ppt-filename-input" value="${escapeHtml(pptState.filename)}" onchange="pptState.filename=this.value" class="ml-auto mica-card px-2.5 py-1 rounded w-44 font-semibold">
+                    </div>
+                    <div class="flex-1 flex overflow-hidden">
+                        <div class="w-40 border-r p-2 space-y-2 overflow-y-auto shrink-0" style="border-color: var(--mica-border);">
+                            ${pptState.slides.map((s, idx) => `
+                                <div onclick="pptState.activeSlide=${idx}; renderAppBody('powerpoint');" class="p-2 rounded-lg border cursor-pointer ${idx === pptState.activeSlide ? 'ring-2 ring-orange-500' : ''}" style="background:${s.bg || '#1e3a8a'}; color:#fff;">
+                                    <div class="text-[9px] opacity-75">Slide ${idx + 1}</div>
+                                    <div class="text-[10px] font-bold truncate">${escapeHtml(s.title)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="flex-1 p-5 flex items-center justify-center bg-slate-200/60 dark:bg-slate-900/60 overflow-auto">
+                            <div class="w-full max-w-[620px] aspect-video rounded-xl shadow-2xl p-8 flex flex-col justify-center text-white space-y-4" style="background:${slide.bg || '#1e3a8a'};">
+                                <input type="text" value="${escapeHtml(slide.title)}" oninput="pptState.slides[${pptState.activeSlide}].title=this.value" class="bg-transparent border-b border-white/25 text-2xl font-bold focus:outline-none">
+                                <input type="text" value="${escapeHtml(slide.subtitle)}" oninput="pptState.slides[${pptState.activeSlide}].subtitle=this.value" class="bg-transparent border-b border-white/20 text-sm text-sky-200 focus:outline-none">
+                                <textarea rows="4" oninput="pptState.slides[${pptState.activeSlide}].body=this.value" class="bg-black/20 rounded-lg p-3 text-xs leading-relaxed focus:outline-none resize-none">${escapeHtml(slide.body)}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function pptNewFile() {
+            pptState = { filename: 'Presentasi_Baru.ppt', activeSlide: 0, slides: [{ title: 'Judul Slide Baru', subtitle: 'Subjudul Presentasi', body: 'Isi materi presentasi...', bg: '#1e3a8a' }] };
+            renderAppBody('powerpoint');
+            showToast('Presentasi PowerPoint baru dibuat.');
+        }
+
+        function pptAddSlide() {
+            pptState.slides.push({ title: `Slide ${pptState.slides.length + 1}`, subtitle: 'Subjudul Slide', body: 'Tulis poin presentasi Anda di sini...', bg: '#0f172a' });
+            pptState.activeSlide = pptState.slides.length - 1;
+            renderAppBody('powerpoint');
+        }
+
+        function pptOpenFile(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                try {
+                    const parsed = JSON.parse(ev.target.result);
+                    if (Array.isArray(parsed)) {
+                        pptState.filename = file.name;
+                        pptState.slides = parsed;
+                        pptState.activeSlide = 0;
+                        renderAppBody('powerpoint');
+                        showToast(`Presentasi "${file.name}" dibuka.`);
+                    }
+                } catch (err) { showToast('Format file presentasi tidak valid.'); }
+            };
+            reader.readAsText(file);
+        }
+
+        function pptSaveFile() {
+            const fname = document.getElementById('ppt-filename-input')?.value.trim() || 'Presentasi.ppt';
+            pptState.filename = fname;
+
+            const idx = virtualFiles.findIndex(x => x.name === fname && x.app === 'powerpoint');
+            if (idx >= 0) virtualFiles[idx] = { ...virtualFiles[idx], slides: pptState.slides, updated: 'Baru saja' };
+            else virtualFiles.unshift({ id: 'vf-' + Date.now(), name: fname, app: 'powerpoint', slides: pptState.slides, updated: 'Baru saja' });
+            saveVirtualFilesLocal();
+
+            const blob = new Blob([JSON.stringify(pptState.slides, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fname;
+            a.click();
+            showToast(`Presentasi "${fname}" disimpan & diunduh.`);
+        }
+
+        /* --- 5. PDF READER (New, Edit, Save, Open File PDF Asli) --- */
+        function renderPdfReaderApp(container) {
+            container.innerHTML = `
+                <div class="h-full flex flex-col text-xs">
+                    <div class="p-2 border-b flex flex-wrap items-center gap-1.5" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                        <button onclick="pdfNewFile()" class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">📄 New PDF</button>
+                        <label class="px-2.5 py-1 rounded mica-card font-semibold cursor-pointer">
+                            📂 Open PDF / Teks <input type="file" accept=".pdf,.txt" class="hidden" onchange="pdfOpenFile(event)">
+                        </label>
+                        <button onclick="pdfSaveFile()" class="px-2.5 py-1 rounded bg-red-600 hover:bg-red-500 text-white font-semibold cursor-pointer">💾 Save / Cetak PDF</button>
+                        <input type="text" id="pdf-filename-input" value="${escapeHtml(pdfState.filename)}" onchange="pdfState.filename=this.value" class="ml-auto mica-card px-2.5 py-1 rounded w-44 font-semibold">
+                    </div>
+                    <div class="flex-1 overflow-auto bg-slate-200/70 dark:bg-slate-900/70 p-4 flex justify-center">
+                        ${pdfState.mode === 'viewer' && pdfState.blobUrl
+                            ? `<iframe src="${pdfState.blobUrl}" class="w-full h-full rounded-lg shadow bg-white border-0"></iframe>`
+                            : `<div class="w-full max-w-[660px] bg-white text-slate-900 p-8 rounded shadow-lg flex flex-col gap-3">
+                                <div class="flex items-center justify-between border-b pb-2">
+                                    <span class="px-2 py-0.5 rounded bg-red-600 text-white text-[10px] font-bold">PDF STUDIO</span>
+                                    <span class="text-[10px] text-slate-500">Mode Edit &amp; Baca PDF</span>
+                                </div>
+                                <input type="text" value="${escapeHtml(pdfState.docTitle)}" oninput="pdfState.docTitle=this.value" class="text-lg font-bold border-b pb-1 focus:outline-none">
+                                <textarea rows="14" oninput="pdfState.docBody=this.value" class="flex-1 text-xs leading-relaxed focus:outline-none resize-none">${escapeHtml(pdfState.docBody)}</textarea>
+                               </div>`
+                        }
+                    </div>
+                </div>
+            `;
+        }
+
+        function pdfNewFile() {
+            pdfState = { filename: 'Dokumen_PDF_Baru.pdf', mode: 'editor', blobUrl: '', docTitle: 'Judul Dokumen PDF Baru', docBody: 'Ketik isi dokumen PDF Anda di sini...' };
+            renderAppBody('pdfreader');
+            showToast('Dokumen PDF baru dibuat.');
+        }
+
+        function pdfOpenFile(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            pdfState.filename = file.name;
+            if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+                pdfState.mode = 'viewer';
+                pdfState.blobUrl = URL.createObjectURL(file);
+                renderAppBody('pdfreader');
+                showToast(`Membuka file PDF "${file.name}".`);
+            } else {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    pdfState.mode = 'editor';
+                    pdfState.docTitle = file.name;
+                    pdfState.docBody = ev.target.result;
+                    renderAppBody('pdfreader');
+                    showToast(`File "${file.name}" dibuka di PDF Reader.`);
+                };
+                reader.readAsText(file);
             }
         }
 
+        function pdfSaveFile() {
+            const fname = document.getElementById('pdf-filename-input')?.value.trim() || 'Dokumen.pdf';
+            pdfState.filename = fname;
+
+            const idx = virtualFiles.findIndex(x => x.name === fname && x.app === 'pdfreader');
+            if (idx >= 0) virtualFiles[idx] = { ...virtualFiles[idx], docTitle: pdfState.docTitle, docBody: pdfState.docBody, updated: 'Baru saja' };
+            else virtualFiles.unshift({ id: 'vf-' + Date.now(), name: fname, app: 'pdfreader', docTitle: pdfState.docTitle, docBody: pdfState.docBody, updated: 'Baru saja' });
+            saveVirtualFilesLocal();
+
+            // Buat file PDF 1.4 valid secara langsung dari teks dokumen agar bisa diunduh & dibuka di semua PDF Reader!
+            const cleanText = `${pdfState.docTitle}\n\n${pdfState.docBody}`.replace(/[^\x20-\x7E\n]/g, ' ');
+            const lines = cleanText.split('\n').slice(0, 42);
+            let streamOps = 'BT /F1 12 Tf 50 760 Td 16 TL ';
+            lines.forEach((line, i) => {
+                const esc = line.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+                streamOps += i === 0 ? `(${esc}) Tj ` : `T* (${esc}) Tj `;
+            });
+            streamOps += 'ET';
+
+            const pdfRaw = `%PDF-1.4\n1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj\n2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj\n3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >> endobj\n4 0 obj << /Length ${streamOps.length} >> stream\n${streamOps}\nendstream endobj\n5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj\nxref\n0 6\n0000000000 65535 f \n0000000009 00000 n \n0000000058 00000 n \n0000000115 00000 n \n0000000241 00000 n \n0000000350 00000 n \ntrailer << /Size 6 /Root 1 0 R >>\nstartxref\n420\n%%EOF`;
+            const blob = new Blob([pdfRaw], { type: 'application/pdf' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = fname.endsWith('.pdf') ? fname : fname + '.pdf';
+            a.click();
+            showToast(`File PDF "${a.download}" berhasil disimpan & diunduh.`);
+        }
+
+        /* --- 6. CAMERA (Webcam Nyata + Ambil Snapshot) --- */
+        function renderCameraApp(container) {
+            container.innerHTML = `
+                <div class="h-full flex flex-col bg-slate-950 text-white text-xs">
+                    <div class="flex-1 relative flex items-center justify-center overflow-hidden bg-black">
+                        <video id="webcam-video" autoplay playsinline class="w-full h-full object-cover"></video>
+                        <div id="webcam-fallback" class="hidden absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-slate-900/95 space-y-3">
+                            <span class="text-4xl">📷</span>
+                            <div class="font-semibold text-sm">Kamera Tidak Terdeteksi atau Izin Ditolak</div>
+                            <p class="text-white/70 max-w-xs">Pastikan perangkat memiliki webcam dan izin kamera pada browser diaktifkan.</p>
+                            <button onclick="startWebcam()" class="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 font-semibold cursor-pointer">Coba Aktifkan Lagi</button>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-900 border-t border-white/10 flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-2 overflow-x-auto">
+                            ${capturedPhotos.map((src, idx) => `<a href="${src}" download="Foto_DukunComCell_${idx+1}.png" title="Klik untuk unduh foto"><img src="${src}" class="w-10 h-10 rounded object-cover border border-white/30"></a>`).join('') || '<span class="text-[11px] text-white/50">Belum ada jepretan</span>'}
+                        </div>
+                        <button onclick="captureCameraPhoto()" class="w-12 h-12 rounded-full bg-white hover:bg-sky-100 border-4 border-sky-500 flex items-center justify-center shadow-lg cursor-pointer shrink-0" title="Ambil Foto">📸</button>
+                        <div class="text-[11px] text-white/70 hidden sm:block">Klik foto untuk unduh</div>
+                    </div>
+                </div>
+            `;
+            startWebcam();
+        }
+
+        async function startWebcam() {
+            const vid = document.getElementById('webcam-video');
+            const fb = document.getElementById('webcam-fallback');
+            if (!vid) return;
+            try {
+                cameraStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                vid.srcObject = cameraStream;
+                fb?.classList.add('hidden');
+            } catch (e) {
+                fb?.classList.remove('hidden');
+            }
+        }
+
+        function captureCameraPhoto() {
+            const vid = document.getElementById('webcam-video');
+            if (!vid || !vid.videoWidth) { showToast('Kamera belum siap.'); return; }
+            const canvas = document.createElement('canvas');
+            canvas.width = vid.videoWidth;
+            canvas.height = vid.videoHeight;
+            canvas.getContext('2d').drawImage(vid, 0, 0);
+            capturedPhotos.unshift(canvas.toDataURL('image/png'));
+            renderAppBody('camera');
+            showToast('Foto berhasil diambil!');
+        }
+
+        /* --- 7. CALCULATOR (Standar Windows 11) --- */
+        function renderCalculatorApp(container) {
+            container.innerHTML = `
+                <div class="h-full flex flex-col bg-slate-900 text-white p-3 select-none">
+                    <div class="bg-black/60 rounded-xl p-3 text-right mb-3 flex flex-col justify-end h-20">
+                        <div id="calc-expr" class="text-[11px] text-sky-400 font-mono h-4 truncate">${escapeHtml(calcPrevious ? `${calcPrevious} ${calcOperator || ''}` : '')}</div>
+                        <div id="calc-display" class="text-2xl font-mono font-bold tracking-wider overflow-x-auto">${escapeHtml(calcCurrent)}</div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2 flex-1 text-sm">
+                        <button onclick="calcClear()" class="bg-rose-600/85 hover:bg-rose-600 rounded-xl font-bold cursor-pointer">C</button>
+                        <button onclick="calcBackspace()" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold cursor-pointer">&#9003;</button>
+                        <button onclick="calcPercent()" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold cursor-pointer">%</button>
+                        <button onclick="calcSetOp('/')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold cursor-pointer">&divide;</button>
+
+                        <button onclick="calcDigit('7')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">7</button>
+                        <button onclick="calcDigit('8')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">8</button>
+                        <button onclick="calcDigit('9')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">9</button>
+                        <button onclick="calcSetOp('*')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold cursor-pointer">&times;</button>
+
+                        <button onclick="calcDigit('4')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">4</button>
+                        <button onclick="calcDigit('5')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">5</button>
+                        <button onclick="calcDigit('6')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">6</button>
+                        <button onclick="calcSetOp('-')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold cursor-pointer">&minus;</button>
+
+                        <button onclick="calcDigit('1')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">1</button>
+                        <button onclick="calcDigit('2')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">2</button>
+                        <button onclick="calcDigit('3')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">3</button>
+                        <button onclick="calcSetOp('+')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold cursor-pointer">+</button>
+
+                        <button onclick="calcToggleSign()" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">&plusmn;</button>
+                        <button onclick="calcDigit('0')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">0</button>
+                        <button onclick="calcDigit('.')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold cursor-pointer">.</button>
+                        <button onclick="calcCompute()" class="bg-sky-500 hover:bg-sky-400 text-slate-950 rounded-xl font-bold cursor-pointer">=</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateCalcUI() {
+            const disp = document.getElementById('calc-display');
+            const expr = document.getElementById('calc-expr');
+            if (disp) disp.innerText = calcCurrent;
+            if (expr) expr.innerText = calcPrevious ? `${calcPrevious} ${calcOperator || ''}` : '';
+        }
+
+        function calcDigit(d) {
+            if (calcResetNext) { calcCurrent = d === '.' ? '0.' : d; calcResetNext = false; }
+            else if (d === '.' && calcCurrent.includes('.')) return;
+            else if (calcCurrent === '0' && d !== '.') calcCurrent = d;
+            else calcCurrent += d;
+            updateCalcUI();
+        }
+
+        function calcClear() { calcCurrent = '0'; calcPrevious = ''; calcOperator = null; calcResetNext = false; updateCalcUI(); }
+        function calcBackspace() { calcCurrent = calcCurrent.length > 1 ? calcCurrent.slice(0, -1) : '0'; updateCalcUI(); }
+        function calcToggleSign() { if (calcCurrent !== '0') { calcCurrent = calcCurrent.startsWith('-') ? calcCurrent.slice(1) : '-' + calcCurrent; updateCalcUI(); } }
+        function calcPercent() { calcCurrent = String(parseFloat(calcCurrent || '0') / 100); updateCalcUI(); }
+
+        function calcSetOp(op) {
+            if (calcOperator && !calcResetNext) calcCompute();
+            calcPrevious = calcCurrent;
+            calcOperator = op;
+            calcResetNext = true;
+            updateCalcUI();
+        }
+
+        function calcCompute() {
+            if (!calcOperator || !calcPrevious) return;
+            const a = parseFloat(calcPrevious), b = parseFloat(calcCurrent);
+            let res = 0;
+            if (calcOperator === '+') res = a + b;
+            else if (calcOperator === '-') res = a - b;
+            else if (calcOperator === '*') res = a * b;
+            else if (calcOperator === '/') res = b === 0 ? 'Error' : a / b;
+            calcCurrent = typeof res === 'number' ? String(Number(res.toFixed(8))) : res;
+            calcPrevious = '';
+            calcOperator = null;
+            calcResetNext = true;
+            updateCalcUI();
+        }
+
+        /* --- 8. ARTIKEL & BLOG VIEWER --- */
         function renderBlogApp(container) {
             const p = posts.find(x => x.id == activeBlogPostId) || posts[0];
             activeBlogPostId = p?.id;
             container.innerHTML = `
-                <div class="h-full flex text-xs">
-                    <div class="w-64 border-r p-3 space-y-2 overflow-y-auto" style="border-color: var(--mica-border);">
-                        ${posts.map(x => `
-                            <div onclick="activeBlogPostId=${x.id}; renderAppBody('blog');" class="p-2 rounded mica-card cursor-pointer flex items-center gap-2">
-                                <span class="font-semibold truncate">${escapeHtml(x.title)}</span>
-                            </div>
-                        `).join('')}
+                <div class="h-full flex flex-col sm:flex-row text-xs">
+                    <div class="w-full sm:w-72 border-b sm:border-b-0 sm:border-r p-3 space-y-2 overflow-y-auto max-h-44 sm:max-h-full shrink-0" style="border-color: var(--mica-border);">
+                        <div class="flex items-center justify-between px-1 pb-1">
+                            <span class="font-bold">Daftar Posting (${posts.length})</span>
+                            ${userRole === 'admin' ? `<button onclick="openPostEditor(null)" class="px-2 py-0.5 rounded bg-sky-600 text-white text-[10px] font-semibold cursor-pointer">+ Baru</button>` : ''}
+                        </div>
+                        ${posts.map(x => {
+                            const media = extractPostThumbnail(x.content);
+                            const selected = x.id == activeBlogPostId;
+                            return `
+                                <div onclick="activeBlogPostId=${x.id}; renderAppBody('blog');" class="p-2 rounded-xl mica-card cursor-pointer flex items-center gap-2.5 ${selected ? 'ring-2 ring-sky-500' : ''}">
+                                    <div class="w-11 h-11 rounded-lg bg-sky-500/20 shrink-0 overflow-hidden flex items-center justify-center">
+                                        ${media?.type === 'image' ? `<img src="${media.url}" class="w-full h-full object-cover">` : media?.type === 'video' ? `<span class="text-base">🎬</span>` : `<span class="text-base">📰</span>`}
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="font-semibold truncate">${escapeHtml(x.title)}</div>
+                                        <div class="text-[10px] opacity-65 mt-0.5">${formatIndoDateShort(x.date)}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                     <div class="flex-1 p-6 overflow-y-auto space-y-4">
-                        <h2 class="text-xl font-bold">${escapeHtml(p?.title || '')}</h2>
-                        <div class="text-xs opacity-70">${formatIndoDateShort(p?.date)}</div>
-                        <div class="leading-relaxed whitespace-pre-wrap space-y-3">${formatPostContentHtml(p?.content || '')}</div>
+                        ${p ? `
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b pb-3" style="border-color: var(--mica-border);">
+                                <div>
+                                    <span class="px-2.5 py-0.5 rounded-full bg-sky-500/15 text-sky-600 dark:text-sky-300 text-[10px] font-bold">${escapeHtml(p.category || 'Artikel')}</span>
+                                    <h2 class="text-xl font-bold mt-1.5">${escapeHtml(p.title)}</h2>
+                                    <div class="text-[11px] opacity-70 mt-1">Dipublikasikan pada ${formatIndoDateShort(p.date)} &bull; ${escapeHtml(p.author || 'Admin Dukun ComCell')}</div>
+                                </div>
+                                ${userRole === 'admin' ? `
+                                    <div class="flex gap-1.5">
+                                        <button onclick="openPostEditor(${p.id})" class="px-3 py-1.5 rounded-lg mica-card font-semibold cursor-pointer">📝 Edit</button>
+                                        <button onclick="confirmDeletePost(${p.id})" class="px-3 py-1.5 rounded-lg bg-rose-500/15 text-rose-600 dark:text-rose-300 font-semibold cursor-pointer">🗑️ Hapus</button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="text-sm leading-relaxed space-y-3">${formatPostContentHtml(p.content || '')}</div>
+                        ` : `<div class="text-center opacity-60 py-16">Belum ada postingan.</div>`}
                     </div>
                 </div>
             `;
@@ -906,53 +1660,113 @@
 
         function formatPostContentHtml(text) {
             let escaped = escapeHtml(text);
-            // Convert markdown images ![alt](url)
-            escaped = escaped.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" class="max-w-full rounded-xl my-2 shadow">');
-            // Convert video tags
-            escaped = escaped.replace(/&lt;video src="(.*?)" controls(.*?)&gt;&lt;\/video&gt;/g, '<video src="$1" controls class="max-w-full rounded-xl my-2 shadow"></video>');
+            // Render Markdown Image ![alt](url)
+            escaped = escaped.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" class="max-w-full rounded-xl my-3 shadow-md border border-black/10">');
+            // Render HTML Video tag yang disisipkan editor
+            escaped = escaped.replace(/&lt;video src="(.*?)" controls(.*?)&gt;&lt;\/video&gt;/g, '<video src="$1" controls class="w-full max-h-[420px] rounded-xl my-3 shadow-md bg-black"></video>');
+            // Bold **text**
+            escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             return escaped.replace(/\n/g, '<br>');
         }
 
-        function openSinglePost(id) { activeBlogPostId = id; openApp('blog'); }
-        function openPostEditor() { openApp('posteditor'); }
-        function openPostManager() { openApp('postmanager'); }
+        function openSinglePost(id) { activeBlogPostId = id; openApp('blog'); renderAppBody('blog'); }
+
+        /* --- 9. EDITOR POSTING (BUAT & EDIT + UPLOAD FOTO/VIDEO KE GITHUB REPO) --- */
+        function openPostEditor(postId = null) {
+            editingPostId = postId;
+            openApp('posteditor');
+            renderAppBody('posteditor');
+        }
+
+        function openPostManager(mode = 'all') {
+            openApp('postmanager');
+            renderAppBody('postmanager');
+        }
 
         function renderPostEditorApp(container) {
+            const existing = editingPostId ? posts.find(p => p.id == editingPostId) : null;
             container.innerHTML = `
-                <form onsubmit="savePost(event)" class="p-5 space-y-3 text-xs">
-                    <div>
-                        <label class="font-semibold">Judul Posting</label>
-                        <input type="text" id="ep-title" required class="w-full mica-card p-2.5 rounded-lg mt-1">
+                <form onsubmit="savePost(event)" class="p-5 space-y-3.5 text-xs">
+                    <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--mica-border);">
+                        <div>
+                            <div class="text-sm font-bold">${existing ? 'Edit Posting' : 'Buat Posting Baru'}</div>
+                            <div class="text-[11px] opacity-70">Otomatis tersimpan ke repository <strong>${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}</strong></div>
+                        </div>
+                        <span id="upload-status-pill" class="hidden px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-300 text-[10px] font-semibold">Mengunggah ke GitHub...</span>
                     </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="sm:col-span-2">
+                            <label class="font-semibold">Judul Posting</label>
+                            <input type="text" id="ep-title" required value="${escapeHtml(existing?.title || '')}" placeholder="Masukkan judul posting..." class="w-full mica-card p-2.5 rounded-lg mt-1 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="font-semibold">Kategori</label>
+                            <input type="text" id="ep-category" value="${escapeHtml(existing?.category || 'Berita')}" placeholder="Contoh: Tutorial, Promo" class="w-full mica-card p-2.5 rounded-lg mt-1 focus:outline-none">
+                        </div>
+                    </div>
+
                     <div>
-                        <div class="flex items-center justify-between mb-1">
-                            <label class="font-semibold">Konten / Artikel</label>
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                            <label class="font-semibold">Konten Artikel &amp; Media</label>
                             <div class="flex gap-2">
-                                <label class="px-2.5 py-1 rounded-md bg-sky-500/15 text-sky-600 dark:text-sky-300 font-semibold cursor-pointer hover:bg-sky-500/25">
-                                    📷 Upload Foto <input type="file" accept="image/*" class="hidden" onchange="uploadMediaToGitHub(event, 'image')">
+                                <label class="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold cursor-pointer flex items-center gap-1.5 shadow-sm">
+                                    📷 Upload Foto ke Repo <input type="file" accept="image/*" class="hidden" onchange="uploadMediaToGitHub(event, 'image')">
                                 </label>
-                                <label class="px-2.5 py-1 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 font-semibold cursor-pointer hover:bg-emerald-500/25">
-                                    🎥 Upload Video <input type="file" accept="video/*" class="hidden" onchange="uploadMediaToGitHub(event, 'video')">
+                                <label class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold cursor-pointer flex items-center gap-1.5 shadow-sm">
+                                    🎥 Upload Video ke Repo <input type="file" accept="video/*" class="hidden" onchange="uploadMediaToGitHub(event, 'video')">
                                 </label>
                             </div>
                         </div>
-                        <textarea id="ep-content" required rows="9" class="w-full mica-card p-2.5 rounded-lg mt-1" placeholder="Tulis artikel atau sisipkan foto/video..."></textarea>
+                        <textarea id="ep-content" required rows="10" oninput="updateEditorMediaPreview()" placeholder="Tulis isi artikel di sini. Gunakan tombol Upload Foto / Upload Video di atas untuk mengunggah media langsung ke repository GitHub Anda..." class="w-full mica-card p-3 rounded-lg focus:outline-none leading-relaxed">${escapeHtml(existing?.content || '')}</textarea>
                     </div>
-                    <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold cursor-pointer shadow">Simpan &amp; Terbitkan ke GitHub</button>
+
+                    <div id="ep-media-preview" class="p-3 rounded-xl border space-y-2 hidden" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                        <div class="text-[11px] font-bold opacity-75">Pratinjau Foto / Video dalam Posting:</div>
+                        <div id="ep-media-preview-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
+                    </div>
+
+                    <div class="flex gap-2 pt-1">
+                        <button type="submit" id="btn-save-post" class="flex-1 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold cursor-pointer shadow">
+                            ${existing ? '💾 Simpan Perubahan & Sync GitHub' : '🚀 Terbitkan Posting & Sync GitHub'}
+                        </button>
+                        <button type="button" onclick="closeWindow('posteditor')" class="px-4 py-2.5 mica-card rounded-lg font-semibold cursor-pointer">Batal</button>
+                    </div>
                 </form>
             `;
+            updateEditorMediaPreview();
+        }
+
+        function updateEditorMediaPreview() {
+            const text = document.getElementById('ep-content')?.value || '';
+            const box = document.getElementById('ep-media-preview');
+            const grid = document.getElementById('ep-media-preview-grid');
+            if (!box || !grid) return;
+
+            const imgs = [...text.matchAll(/!\[.*?\]\((.*?)\)/g)].map(m => ({ type: 'img', url: m[1] }));
+            const vids = [...text.matchAll(/<video[^>]+src="([^">]+)"/g)].map(m => ({ type: 'vid', url: m[1] }));
+            const all = [...imgs, ...vids];
+
+            if (!all.length) { box.classList.add('hidden'); return; }
+            box.classList.remove('hidden');
+            grid.innerHTML = all.map(m => m.type === 'img'
+                ? `<img src="${m.url}" class="w-full h-24 object-cover rounded-lg border border-black/10">`
+                : `<video src="${m.url}" controls class="w-full h-24 object-cover rounded-lg bg-black"></video>`
+            ).join('');
         }
 
         async function uploadMediaToGitHub(event, type) {
             const file = event.target.files[0];
             if (!file) return;
-            showToast(`Mengunggah ${type === 'image' ? 'foto' : 'video'} ke GitHub...`);
+            const pill = document.getElementById('upload-status-pill');
+            if (pill) { pill.classList.remove('hidden'); pill.innerText = `Mengunggah ${file.name}...`; }
+            showToast(`Mengunggah ${type === 'image' ? 'foto' : 'video'} ke repository GitHub...`);
 
             const reader = new FileReader();
             reader.onload = async function(e) {
                 const base64Content = e.target.result.split(',')[1];
-                const ext = file.name.split('.').pop();
-                const filename = `media/upload_${Date.now()}.${ext}`;
+                const safeExt = (file.name.split('.').pop() || (type === 'image' ? 'png' : 'mp4')).replace(/[^a-zA-Z0-9]/g, '');
+                const filename = `media/${type}_${Date.now()}.${safeExt}`;
                 const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${filename}`;
 
                 try {
@@ -963,10 +1777,11 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            message: `Upload ${type} via Dukun ComCell WebOS`,
+                            message: `Upload ${type} (${filename}) via Dukun ComCell WebOS`,
                             content: base64Content
                         })
                     });
+
                     if (putRes.ok) {
                         const rawUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/main/${filename}`;
                         const textArea = document.getElementById('ep-content');
@@ -975,12 +1790,16 @@
                         } else {
                             textArea.value += `\n<video src="${rawUrl}" controls class="w-full rounded-xl my-2"></video>\n`;
                         }
-                        showToast('Media berhasil diunggah dan disisipkan ke editor!');
+                        updateEditorMediaPreview();
+                        showToast('Sukses! Media tersimpan di repository GitHub.');
                     } else {
-                        showToast('Gagal mengunggah media ke GitHub.');
+                        const errData = await putRes.json().catch(() => ({}));
+                        showToast(`Gagal upload media: ${errData.message || 'Periksa izin Contents pada Token GitHub'}`);
                     }
-                } catch(err) {
-                    showToast('Error koneksi saat mengunggah media.');
+                } catch (err) {
+                    showToast('Error jaringan saat mengunggah media ke GitHub.');
+                } finally {
+                    if (pill) pill.classList.add('hidden');
                 }
             };
             reader.readAsDataURL(file);
@@ -989,50 +1808,88 @@
         async function savePost(e) {
             e.preventDefault();
             const title = document.getElementById('ep-title').value.trim();
+            const category = document.getElementById('ep-category').value.trim() || 'Berita';
             const content = document.getElementById('ep-content').value.trim();
             if (!title || !content) return;
 
-            posts.unshift({
-                id: Date.now(),
-                title,
-                content,
-                date: new Date().toISOString()
-            });
+            if (editingPostId) {
+                const idx = posts.findIndex(p => p.id == editingPostId);
+                if (idx >= 0) {
+                    posts[idx] = { ...posts[idx], title, category, content, updatedAt: new Date().toISOString() };
+                }
+            } else {
+                posts.unshift({
+                    id: Date.now(),
+                    title,
+                    category,
+                    content,
+                    date: new Date().toISOString(),
+                    author: 'Admin Dukun ComCell'
+                });
+            }
 
+            editingPostId = null;
             savePostsToLocal();
             closeWindow('posteditor');
-            showToast('Menyimpan posting ke repository GitHub...');
+            showToast('Menyimpan postingan ke repository GitHub...');
             await savePostsToGitHubAPI();
         }
 
+        /* --- 10. KELOLA POSTING (EDIT & HAPUS POSTING) --- */
         function renderPostManagerApp(container) {
             container.innerHTML = `
-                <div class="p-5 space-y-2.5 text-xs">
-                    <div class="font-semibold mb-2">Daftar Posting (Klik Hapus untuk menghapus permanen dari GitHub)</div>
-                    ${posts.map(p => `
-                        <div class="p-2.5 mica-card rounded-xl flex justify-between items-center">
-                            <span class="font-medium truncate pr-2">${escapeHtml(p.title)}</span>
-                            <button onclick="deletePost(${p.id})" class="px-3 py-1 bg-rose-500/15 hover:bg-rose-500 text-rose-600 dark:text-rose-300 hover:text-white rounded-md font-semibold cursor-pointer shrink-0">Hapus</button>
+                <div class="p-5 space-y-3 text-xs">
+                    <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--mica-border);">
+                        <div>
+                            <div class="text-sm font-bold">Kelola Semua Posting (${posts.length})</div>
+                            <div class="text-[11px] opacity-70">Pilih Edit untuk mengubah isi/media posting, atau Hapus untuk menghapus permanen dari GitHub</div>
                         </div>
-                    `).join('')}
+                        <button onclick="openPostEditor(null)" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold cursor-pointer">+ Buat Baru</button>
+                    </div>
+                    <div class="space-y-2">
+                        ${posts.map(p => {
+                            const media = extractPostThumbnail(p.content);
+                            return `
+                                <div class="p-2.5 mica-card rounded-xl flex items-center justify-between gap-3">
+                                    <div class="flex items-center gap-3 min-w-0 flex-1">
+                                        <div class="w-12 h-12 rounded-lg bg-sky-500/20 shrink-0 overflow-hidden flex items-center justify-center">
+                                            ${media?.type === 'image' ? `<img src="${media.url}" class="w-full h-full object-cover">` : media?.type === 'video' ? `<span class="text-base">🎬</span>` : `<span class="text-base">📰</span>`}
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="font-bold truncate">${escapeHtml(p.title)}</div>
+                                            <div class="text-[10px] opacity-65 mt-0.5">${escapeHtml(p.category || 'Artikel')} &bull; ${formatIndoDateShort(p.date)}</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 shrink-0">
+                                        <button onclick="openPostEditor(${p.id})" class="px-3 py-1.5 bg-sky-500/15 hover:bg-sky-600 text-sky-700 dark:text-sky-300 hover:text-white rounded-lg font-semibold cursor-pointer">📝 Edit</button>
+                                        <button onclick="confirmDeletePost(${p.id})" class="px-3 py-1.5 bg-rose-500/15 hover:bg-rose-600 text-rose-600 dark:text-rose-300 hover:text-white rounded-lg font-semibold cursor-pointer">🗑️ Hapus</button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('') || `<div class="text-center opacity-60 py-8">Belum ada postingan.</div>`}
+                    </div>
                 </div>
             `;
         }
 
-        async function deletePost(id) {
-            posts = posts.filter(p => p.id != id);
-            savePostsToLocal();
-            renderAppBody('postmanager');
-            showToast('Menghapus dari GitHub...');
-            await savePostsToGitHubAPI();
+        function confirmDeletePost(id) {
+            const target = posts.find(p => p.id == id);
+            if (!target) return;
+            openConfirmModal('Hapus Posting', `Yakin ingin menghapus posting "${target.title}" secara permanen dari GitHub?`, async () => {
+                posts = posts.filter(p => p.id != id);
+                savePostsToLocal();
+                showToast('Menghapus posting dari repository GitHub...');
+                await savePostsToGitHubAPI();
+            });
         }
 
         async function savePostsToGitHubAPI() {
             const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/posts.json`;
             try {
                 let sha = '';
-                const getRes = await fetch(url, {
-                    headers: { 'Authorization': `token ${ghToken}` }
+                const getRes = await fetch(url + '?t=' + Date.now(), {
+                    headers: { 'Authorization': `token ${ghToken}` },
+                    cache: 'no-store'
                 });
                 if (getRes.ok) {
                     const fileData = await getRes.json();
@@ -1056,46 +1913,155 @@
                 });
 
                 if (putRes.ok) {
-                    showToast('Sukses! Tersimpan otomatis di GitHub repositories.');
+                    showToast('Sukses! Data posting permanen tersimpan di GitHub.');
                 } else {
-                    showToast('Gagal sync GitHub (periksa token). Tersimpan di lokal.');
+                    const err = await putRes.json().catch(() => ({}));
+                    showToast(`Gagal sync GitHub: ${err.message || 'Periksa token'}`);
                 }
             } catch (err) {
-                console.error(err);
-                showToast('Error koneksi GitHub. Tersimpan di browser lokal.');
+                showToast('Error koneksi ke GitHub API.');
             }
         }
 
         function downloadPostsJson() {
             const blob = new Blob([JSON.stringify(posts, null, 2)], { type: 'application/json' });
-            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'posts.json'; a.click();
-            showToast('posts.json diunduh.');
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'posts.json';
+            a.click();
+            showToast('File posts.json berhasil diunduh.');
         }
 
-        function updateSystemVolume(val) { systemVolume = val; document.getElementById('tray-vol-text').innerText = val + '%'; }
-        function toggleMuteVolume() { isMuted = !isMuted; document.getElementById('tray-vol-icon').innerText = isMuted ? '🔇' : '🔊'; }
+        /* ======================================================================
+           VOLUME, KECEPATAN INTERNET REALTIME NYATA & JAM KALENDER INDONESIA
+           ====================================================================== */
+        function updateSystemVolume(val) {
+            systemVolume = Number(val);
+            document.getElementById('tray-vol-text').innerText = val + '%';
+            document.getElementById('volume-percent-label').innerText = val + '%';
+            document.getElementById('tray-vol-icon').innerText = (isMuted || systemVolume === 0) ? '🔇' : systemVolume < 50 ? '🔉' : '🔊';
+        }
+
+        function toggleMuteVolume() {
+            isMuted = !isMuted;
+            document.getElementById('btn-mute-vol').innerText = isMuted ? '🔇' : '🔊';
+            updateSystemVolume(systemVolume);
+        }
 
         function startRealtimeSpeedMonitor() {
-            setInterval(() => {
-                document.getElementById('net-down-speed').innerText = `↓ ${(Math.random() * 80 + 10).toFixed(1)} KB/s`;
-                document.getElementById('net-ping-speed').innerText = `${Math.floor(Math.random() * 25 + 12)} ms`;
-            }, 2000);
+            // 1. Pantau transfer resource jaringan nyata via PerformanceObserver
+            try {
+                if ('PerformanceObserver' in window) {
+                    const obs = new PerformanceObserver((list) => {
+                        for (const entry of list.getEntries()) {
+                            if (entry.transferSize > 0 && entry.duration > 0) {
+                                const kbs = (entry.transferSize / 1024) / (entry.duration / 1000);
+                                realtimeRateKBs = kbs;
+                                updateNetworkUI();
+                            }
+                        }
+                    });
+                    obs.observe({ entryTypes: ['resource'] });
+                }
+            } catch (e) {}
+
+            // 2. Pengukuran Ping Latency HTTP nyata setiap 4 detik
+            async function measureRealPing() {
+                if (!navigator.onLine) {
+                    realtimePingMs = null;
+                    updateNetworkUI();
+                    return;
+                }
+                const t0 = performance.now();
+                try {
+                    const res = await fetch(`https://api.github.com/zen?t=${Date.now()}`, { cache: 'no-store' });
+                    const t1 = performance.now();
+                    if (res.ok) {
+                        realtimePingMs = Math.max(1, Math.round(t1 - t0));
+                        const text = await res.text();
+                        const bytes = new Blob([text]).size + 320;
+                        realtimeRateKBs = (bytes / 1024) / ((t1 - t0) / 1000);
+                    }
+                } catch (e) {
+                    realtimePingMs = null;
+                }
+                if (navigator.connection) {
+                    realtimeDownlinkMbps = navigator.connection.downlink || null;
+                    realtimeConnType = navigator.connection.effectiveType || 'wifi';
+                }
+                updateNetworkUI();
+            }
+
+            measureRealPing();
+            setInterval(measureRealPing, 4000);
+        }
+
+        function updateNetworkUI() {
+            const rateStr = realtimeRateKBs >= 1024
+                ? `${(realtimeRateKBs / 1024).toFixed(2)} MB/s`
+                : `${realtimeRateKBs.toFixed(1)} KB/s`;
+            const pingStr = realtimePingMs !== null ? `${realtimePingMs} ms` : 'Offline';
+
+            const trayDown = document.getElementById('net-down-speed');
+            const trayPing = document.getElementById('net-ping-speed');
+            if (trayDown) trayDown.innerText = `↓ ${rateStr}`;
+            if (trayPing) trayPing.innerText = pingStr;
+
+            const detRate = document.getElementById('net-detail-rate');
+            const detPing = document.getElementById('net-detail-ping');
+            const detDl = document.getElementById('net-detail-downlink');
+            const detType = document.getElementById('net-detail-type');
+            const badge = document.getElementById('net-status-badge');
+
+            if (detRate) detRate.innerText = rateStr;
+            if (detPing) detPing.innerText = pingStr;
+            if (detDl) detDl.innerText = realtimeDownlinkMbps ? `${realtimeDownlinkMbps} Mbps` : 'Terukur via Transfer';
+            if (detType) detType.innerText = realtimeConnType;
+            if (badge) {
+                badge.innerText = navigator.onLine ? 'Online' : 'Offline';
+                badge.className = navigator.onLine
+                    ? 'px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-semibold'
+                    : 'px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-600 text-[10px] font-semibold';
+            }
+        }
+
+        async function runRealSpeedTest() {
+            const btn = document.getElementById('btn-run-speedtest');
+            if (btn) { btn.disabled = true; btn.innerText = '⏳ Mengukur kecepatan unduh nyata...'; }
+            try {
+                const t0 = performance.now();
+                const res = await fetch(`https://api.github.com/repos/DustinBrett/daedalOS?t=${Date.now()}`, { cache: 'no-store' });
+                const blob = await res.blob();
+                const t1 = performance.now();
+                const sec = Math.max(0.001, (t1 - t0) / 1000);
+                const totalBytes = blob.size + 512;
+                realtimeRateKBs = (totalBytes / 1024) / sec;
+                realtimePingMs = Math.round(t1 - t0);
+                updateNetworkUI();
+                showToast(`Hasil uji nyata: ${realtimeRateKBs.toFixed(1)} KB/s (${realtimePingMs} ms)`);
+            } catch (e) {
+                showToast('Gagal menguji koneksi internet.');
+            } finally {
+                if (btn) { btn.disabled = false; btn.innerText = '⚡ Uji Kecepatan Unduh Nyata Sekarang'; }
+            }
         }
 
         const BULAN_INDO = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         const HARI_INDO = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         function formatIndoDateFull(d) { return `${HARI_INDO[d.getDay()]}, ${d.getDate()} ${BULAN_INDO[d.getMonth()]} ${d.getFullYear()}`; }
-        function formatIndoDateShort(iso) { try { const d = new Date(iso); return `${d.getDate()} ${BULAN_INDO[d.getMonth()]} ${d.getFullYear()}`; } catch(e) { return ''; } }
+        function formatIndoDateShort(iso) { try { const d = new Date(iso); return `${d.getDate()} ${BULAN_INDO[d.getMonth()]} ${d.getFullYear()}`; } catch (e) { return ''; } }
 
         function startIndonesianClock() {
-            setInterval(() => {
+            function tick() {
                 const now = new Date();
                 const timeStr = now.toTimeString().split(' ')[0];
                 document.getElementById('tray-clock-time').innerText = timeStr;
                 document.getElementById('tray-clock-date').innerText = formatIndoDateFull(now);
                 document.getElementById('welcome-clock').innerText = timeStr.slice(0, 5);
                 document.getElementById('welcome-date').innerText = formatIndoDateFull(now);
-            }, 1000);
+            }
+            tick();
+            setInterval(tick, 1000);
         }
 
         function renderCalendarIndo() {
@@ -1115,6 +2081,9 @@
 
         function changeCalMonth(delta) { calDate.setMonth(calDate.getMonth() + delta); renderCalendarIndo(); }
 
+        /* ======================================================================
+           FLYOUT, CONTEXT MENU, MODAL KONFIRMASI & TOAST
+           ====================================================================== */
         function toggleFlyout(id) {
             const el = document.getElementById(id);
             const hidden = el.classList.contains('hidden');
@@ -1122,6 +2091,7 @@
             if (hidden) {
                 el.classList.remove('hidden');
                 if (id === 'calendar-flyout') renderCalendarIndo();
+                if (id === 'start-menu') renderStartMenuPosts(document.getElementById('start-post-filter')?.value || '');
             }
         }
 
@@ -1135,18 +2105,36 @@
             closeAllFlyouts();
             const m = document.getElementById('desktop-context-menu');
             m.classList.remove('hidden');
-            m.style.left = x + 'px'; m.style.top = y + 'px';
+            m.style.left = Math.min(x, window.innerWidth - 220) + 'px';
+            m.style.top = Math.min(y, window.innerHeight - 180) + 'px';
         }
 
         function toggleDarkMode() { darkMode = !darkMode; document.documentElement.classList.toggle('dark', darkMode); }
-        function refreshDesktop() { closeAllFlyouts(); showToast('Desktop direfresh.'); }
+        function refreshDesktop() { closeAllFlyouts(); syncPostsFromGitHubSources(); showToast('Desktop & postingan direfresh.'); }
 
-        function escapeHtml(str) { return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
+        function openConfirmModal(title, msg, onConfirm) {
+            document.getElementById('win-confirm-title').innerText = title;
+            document.getElementById('win-confirm-msg').innerText = msg;
+            confirmCallback = onConfirm;
+            document.getElementById('win-confirm-modal').classList.remove('hidden');
+        }
+
+        function closeConfirmModal(accepted) {
+            document.getElementById('win-confirm-modal').classList.add('hidden');
+            if (accepted && typeof confirmCallback === 'function') confirmCallback();
+            confirmCallback = null;
+        }
+
+        function escapeHtml(str) {
+            return String(str || '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+        }
+
         function showToast(msg) {
             const t = document.getElementById('win-toast');
             document.getElementById('win-toast-text').innerText = msg;
             t.classList.remove('hidden');
-            setTimeout(() => t.classList.add('hidden'), 3000);
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => t.classList.add('hidden'), 3200);
         }
     </script>
 </body>
