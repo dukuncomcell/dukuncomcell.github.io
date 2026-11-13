@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": 101,
+    "title": "Selamat Datang di Official Website Dukun ComCell",
+    "category": "Pengumuman",
+    "content": "ini cuma website sederhana sebagi sample aja.\nga ada yang menarik disini.",
+    "date": "2026-11-13T08:00:00.000Z",
+    "author": "Admin Dukun ComCell",
+    "updatedAt": "2026-11-13T07:02:55.051Z"
+  }
+]
