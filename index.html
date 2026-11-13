@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Website Dukun ComCell — Windows 11 WebOS</title>
+    <link rel="icon" type="image/png" href="winlogo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tone.js untuk Suara Startup -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        winbg: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --mica-bg: rgba(243, 243, 243, 0.84);
+            --mica-solid: #f3f3f3;
+            --mica-card: rgba(255, 255, 255, 0.65);
+            --mica-hover: rgba(255, 255, 255, 0.9);
+            --mica-sub: rgba(0, 0, 0, 0.04);
+            --mica-border: rgba(0, 0, 0, 0.08);
+            --text-primary: #1e1e1e;
+            --text-secondary: #5c5c5c;
+            --accent: #0067c0;
+            --accent-hover: #005fb8;
+            --desktop-text: #ffffff;
+            --desktop-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+
+        html.dark {
+            --mica-bg: rgba(32, 32, 32, 0.86);
+            --mica-solid: #202020;
+            --mica-card: rgba(45, 45, 45, 0.75);
+            --mica-hover: rgba(60, 60, 60, 0.9);
+            --mica-sub: rgba(255, 255, 255, 0.05);
+            --mica-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f3f3f3;
+            --text-secondary: #a0a0a0;
+            --accent: #4cc2ff;
+            --accent-hover: #38b2f5;
+            --desktop-text: #ffffff;
+            --desktop-shadow: 0 1px 3px rgba(0,0,0,0.9);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI Variable', 'Segoe UI', 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            color: var(--text-primary);
+            margin: 0;
+            background-color: #050d21;
+        }
+
+        /* Wallpaper Default Windows 11 27H1 Bloom */
+        .bg-win11-bloom {
+            background: radial-gradient(circle at 52% 48%, #1d4ed8 0%, #0f2966 46%, #050d21 100%);
+        }
+
+        .mica {
+            background: var(--mica-bg);
+            backdrop-filter: blur(28px) saturate(165%);
+            -webkit-backdrop-filter: blur(28px) saturate(165%);
+            border: 1px solid var(--mica-border);
+        }
+
+        .mica-card {
+            background: var(--mica-card);
+            border: 1px solid var(--mica-border);
+        }
+
+        .mica-card:hover {
+            background: var(--mica-hover);
+        }
+
+        .win-shadow {
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(128, 128, 128, 0.35); border-radius: 9999px; }
+
+        @keyframes winPop {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .anim-win { animation: winPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        @keyframes flyoutUp {
+            from { opacity: 0; transform: translateY(16px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .anim-flyout { animation: flyoutUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        .desktop-label {
+            color: var(--desktop-text);
+            text-shadow: var(--desktop-shadow);
+        }
+
+        input[type="range"].win-slider {
+            -webkit-appearance: none;
+            height: 4px;
+            border-radius: 999px;
+            background: rgba(128, 128, 128, 0.35);
+            outline: none;
+        }
+        input[type="range"].win-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2.5px solid #ffffff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen relative overflow-hidden">
+
+    <!-- ======================================================================
+         WELCOME & LOGIN SCREEN (Wallpaper Windows 11 27H1 + Tamu & Admin)
+         ====================================================================== -->
+    <div id="welcome-login-screen" class="fixed inset-0 z-[9500] bg-win11-bloom overflow-y-auto flex flex-col items-center justify-between px-4 py-4 sm:py-6 text-white transition-opacity duration-500">
+        <!-- SVG Wallpaper Windows 11 27H1 Bloom -->
+        <svg class="fixed inset-0 w-full h-full pointer-events-none" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="w27-bg-login" cx="52%" cy="48%" r="68%">
+                    <stop offset="0%" stop-color="#1e40af"/>
+                    <stop offset="50%" stop-color="#0d2252"/>
+                    <stop offset="100%" stop-color="#040b1c"/>
+                </radialGradient>
+                <linearGradient id="w27-petal-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.95"/>
+                    <stop offset="45%" stop-color="#2563eb" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.85"/>
+                </linearGradient>
+                <linearGradient id="w27-petal-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.92"/>
+                    <stop offset="55%" stop-color="#1d4ed8" stop-opacity="0.88"/>
+                    <stop offset="100%" stop-color="#091536" stop-opacity="0.9"/>
+                </linearGradient>
+                <linearGradient id="w27-petal-3" x1="20%" y1="100%" x2="80%" y2="0%">
+                    <stop offset="0%" stop-color="#0284c7" stop-opacity="0.85"/>
+                    <stop offset="50%" stop-color="#60a5fa" stop-opacity="0.95"/>
+                    <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.9"/>
+                </linearGradient>
+            </defs>
+            <rect width="1920" height="1080" fill="url(#w27-bg-login)"/>
+            <path d="M960,540 C740,220 1160,110 1330,360 C1450,530 1180,690 960,540 Z" fill="url(#w27-petal-1)"/>
+            <path d="M960,540 C1260,310 1480,620 1230,830 C1050,980 860,740 960,540 Z" fill="url(#w27-petal-2)"/>
+            <path d="M960,540 C1120,860 720,970 590,710 C490,510 760,390 960,540 Z" fill="url(#w27-petal-1)"/>
+            <path d="M960,540 C660,720 490,390 740,240 C930,130 1070,370 960,540 Z" fill="url(#w27-petal-3)"/>
+        </svg>
+        <div class="fixed inset-0 bg-black/35 backdrop-blur-[2px] pointer-events-none"></div>
+
+        <!-- Atas: Jam & Tanggal Indonesia -->
+        <div class="relative z-10 text-center mt-2 drop-shadow-lg shrink-0">
+            <div id="welcome-clock" class="text-4xl sm:text-6xl font-semibold tracking-tight">00:00</div>
+            <div id="welcome-date" class="text-xs sm:text-base font-medium mt-1 opacity-95">Jumat, 13 November 2026</div>
+        </div>
+
+        <!-- Tengah: Sambutan & Pilihan Akun -->
+        <div class="relative z-10 w-full max-w-md flex flex-col items-center text-center my-3 shrink-0">
+            <div class="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 p-2.5 flex items-center justify-center shadow-2xl mb-2.5">
+                <img src="winlogo.png" alt="Logo Dukun ComCell" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" class="w-full h-full object-contain">
+                <svg style="display:none;" class="w-10 h-10" viewBox="0 0 88 88"><path fill="#38bdf8" d="M0 0h42v42H0zM46 0h42v42H46zM0 46h42v42H0zM46 46h42v42H46z"/></svg>
+            </div>
+
+            <h1 class="text-lg sm:text-2xl font-bold tracking-tight drop-shadow-md mb-0.5">
+                Selamat datang di Official Website<br>Dukun ComCell</br>
+            </h1>
+            <p class="text-xs text-white/85 mb-3.5">Pilih akun untuk masuk ke sistem desktop</p>
+
+            <div id="account-selector" class="grid grid-cols-2 gap-2.5 w-full mb-3">
+                <button onclick="selectLoginRole('tamu')" id="btn-role-tamu" class="p-3 rounded-xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 flex flex-col items-center gap-1 transition-all cursor-pointer ring-2 ring-sky-400">
+                    <div class="w-9 h-9 rounded-full bg-sky-500/80 flex items-center justify-center text-base shadow">👤</div>
+                    <div class="text-xs sm:text-sm font-semibold">Tamu</div>
+                    <div class="text-[10px] text-white/80">Akses Lihat &amp; Baca</div>
+                </button>
+
+                <button onclick="selectLoginRole('admin')" id="btn-role-admin" class="p-3 rounded-xl bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 flex flex-col items-center gap-1 transition-all cursor-pointer">
+                    <div class="w-9 h-9 rounded-full bg-amber-500/85 flex items-center justify-center text-base shadow">🛡️</div>
+                    <div class="text-xs sm:text-sm font-semibold">Admin</div>
+                    <div class="text-[10px] text-white/80">Kelola Website &amp; Post</div>
+                </button>
+            </div>
+
+            <!-- Panel Tamu -->
+            <div id="login-panel-tamu" class="w-full bg-white/15 backdrop-blur-md border border-white/25 rounded-xl p-3.5 space-y-2.5">
+                <div class="text-xs text-white/90">Masuk sebagai pengunjung <strong>Tamu</strong> tanpa kata sandi.</div>
+                <button onclick="loginAsGuest()" class="w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 active:scale-98 text-white text-xs font-semibold shadow-lg transition-all cursor-pointer">
+                    Masuk sebagai Tamu &rarr;
+                </button>
+            </div>
+
+            <!-- Panel Admin (Password 4x Spasi) -->
+            <form id="login-panel-admin" onsubmit="handleAdminLogin(event)" class="hidden w-full bg-slate-900/75 backdrop-blur-md border border-amber-400/40 rounded-xl p-3.5 space-y-2.5 shadow-xl">
+                <div class="text-xs font-semibold text-amber-300">Login Administrator Dukun ComCell</div>
+                <input type="password" id="admin-password-input" autocomplete="off" placeholder="Masukkan password (spasi 4x)..." class="w-full px-3.5 py-2 rounded-lg bg-black/50 border border-white/30 text-white placeholder-white/50 text-xs focus:outline-none focus:border-amber-400">
+                <div id="admin-login-error" class="hidden text-[11px] text-rose-300 font-medium">Password salah!</div>
+                <button type="submit" class="w-full py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 active:scale-98 text-slate-950 text-xs font-bold shadow-lg transition-all cursor-pointer">
+                    Masuk sebagai Admin &rarr;
+                </button>
+            </form>
+        </div>
+
+        <div class="relative z-10 text-[11px] text-white/75 shrink-0 pb-1">
+            Official Website Dukun ComCell &bull; dukuncomcell.github.io
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         DESKTOP WALLPAPER (Windows 11 27H1 Bloom)
+         ====================================================================== -->
+    <div id="desktop-wallpaper" class="fixed inset-0 w-full h-full bg-win11-bloom overflow-hidden">
+        <svg class="w-full h-full object-cover" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="w27-bg-desk" cx="52%" cy="48%" r="68%">
+                    <stop offset="0%" stop-color="#1e40af"/>
+                    <stop offset="50%" stop-color="#0d2252"/>
+                    <stop offset="100%" stop-color="#040b1c"/>
+                </radialGradient>
+                <linearGradient id="w27-d-p1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.96"/>
+                    <stop offset="48%" stop-color="#2563eb" stop-opacity="0.92"/>
+                    <stop offset="100%" stop-color="#172554" stop-opacity="0.88"/>
+                </linearGradient>
+                <linearGradient id="w27-d-p2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.94"/>
+                    <stop offset="55%" stop-color="#1d4ed8" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#091536" stop-opacity="0.92"/>
+                </linearGradient>
+            </defs>
+            <rect width="1920" height="1080" fill="url(#w27-bg-desk)"/>
+            <path d="M960,540 C720,190 1180,90 1350,350 C1470,540 1190,710 960,540 Z" fill="url(#w27-d-p1)"/>
+            <path d="M960,540 C1280,300 1500,630 1240,850 C1050,1000 850,750 960,540 Z" fill="url(#w27-d-p2)"/>
+        </svg>
+    </div>
+
+    <!-- ======================================================================
+         DESKTOP ICONS AREA
+         ====================================================================== -->
+    <main id="desktop-area" class="relative z-10 w-full h-[calc(100vh-48px)] p-3" onclick="closeAllFlyouts()">
+        <div id="desktop-icons" class="h-full inline-grid grid-flow-col grid-rows-[repeat(auto-fill,88px)] gap-1.5 content-start items-start">
+            <!-- Ikon Desktop di-render JS -->
+        </div>
+    </main>
+
+    <!-- WINDOWS CONTAINER -->
+    <div id="windows-layer" class="fixed inset-0 bottom-12 pointer-events-none z-20 overflow-hidden"></div>
+
+    <!-- TASK VIEW OVERLAY -->
+    <div id="task-view-overlay" class="hidden fixed inset-0 bottom-12 z-40 bg-slate-950/65 backdrop-blur-xl p-6 flex flex-col justify-between anim-flyout text-white">
+        <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-base font-semibold">Task View — Jendela Aktif</h2>
+                <p class="text-xs text-white/70">Pilih jendela untuk beralih</p>
+            </div>
+            <button onclick="closeTaskView()" class="px-3 py-1.5 rounded-lg bg-rose-500/80 hover:bg-rose-500 text-xs font-medium cursor-pointer">Tutup ✕</button>
+        </div>
+        <div id="task-view-grid" class="flex-1 my-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 overflow-y-auto content-start"></div>
+        <div class="text-center text-xs text-white/70">Desktop 1 (Dukun ComCell)</div>
+    </div>
+
+    <!-- TASKBAR SEARCH FLYOUT -->
+    <div id="taskbar-search-flyout" class="hidden fixed bottom-14 left-16 z-40 w-[92vw] max-w-[420px] mica rounded-xl p-4 win-shadow anim-flyout">
+        <div class="flex items-center justify-between pb-2 mb-2 border-b" style="border-color: var(--mica-border);">
+            <span class="text-xs font-semibold">Hasil Pencarian Posting</span>
+            <span id="search-count-badge" class="text-[11px] opacity-70">0 posting</span>
+        </div>
+        <div id="taskbar-search-results" class="space-y-1.5 max-h-[280px] overflow-y-auto"></div>
+    </div>
+
+    <!-- START MENU (Daftar Posting Thumbnail + Menu Admin) -->
+    <div id="start-menu" class="hidden fixed bottom-14 left-3 z-40 w-[94vw] max-w-[560px] mica rounded-xl win-shadow anim-flyout overflow-hidden flex flex-col">
+        <div class="p-5 pb-4 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <div class="text-sm font-bold">Dukun ComCell</div>
+                    <div class="text-[11px] opacity-70">Daftar Posting &amp; Artikel</div>
+                </div>
+                <input type="text" id="start-post-filter" oninput="renderStartMenuPosts(this.value)" placeholder="Cari posting..." class="mica-card rounded-full px-3 py-1 text-xs focus:outline-none w-44">
+            </div>
+
+            <div id="start-admin-section" class="hidden rounded-xl p-3 border space-y-2" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                <div class="flex items-center justify-between">
+                    <span class="text-[11px] font-bold uppercase" style="color: var(--accent);">Menu Khusus Admin</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-300 font-semibold">Admin Aktif</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button onclick="openPostEditor(null); closeAllFlyouts();" class="p-2 rounded-lg mica-card flex flex-col items-center gap-1 text-center cursor-pointer">
+                        <span class="text-base">✍️</span><span class="text-[11px] font-semibold">Buat Posting</span>
+                    </button>
+                    <button onclick="openPostManager('edit'); closeAllFlyouts();" class="p-2 rounded-lg mica-card flex flex-col items-center gap-1 text-center cursor-pointer">
+                        <span class="text-base">📝</span><span class="text-[11px] font-semibold">Edit Posting</span>
+                    </button>
+                    <button onclick="openPostManager('delete'); closeAllFlyouts();" class="p-2 rounded-lg mica-card flex flex-col items-center gap-1 text-center cursor-pointer">
+                        <span class="text-base">🗑️</span><span class="text-[11px] font-semibold">Hapus Posting</span>
+                    </button>
+                    <button onclick="downloadPostsJson(); closeAllFlyouts();" class="p-2 rounded-lg mica-card flex flex-col items-center gap-1 text-center cursor-pointer">
+                        <span class="text-base">📥</span><span class="text-[11px] font-semibold">Unduh post.json</span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-semibold">Postingan Terbaru (Thumbnail)</span>
+                    <button onclick="openApp('blog'); closeAllFlyouts();" class="text-[11px] font-medium hover:underline cursor-pointer" style="color: var(--accent);">Buka Semua &rsaquo;</button>
+                </div>
+                <div id="start-posts-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[260px] overflow-y-auto pr-1"></div>
+            </div>
+        </div>
+
+        <div class="px-5 py-3 flex items-center justify-between border-t" style="background: var(--mica-sub); border-color: var(--mica-border);">
+            <div class="flex items-center gap-2.5">
+                <div id="start-user-badge" class="w-7 h-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-xs font-bold">T</div>
+                <div>
+                    <div id="start-user-name" class="text-xs font-semibold">Tamu</div>
+                    <div id="start-user-role-desc" class="text-[10px] opacity-70">Mode Baca</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <button onclick="toggleDarkMode()" class="px-2.5 py-1 rounded-md mica-card text-[11px] font-medium cursor-pointer">🌓 Tema</button>
+                <button onclick="logoutToWelcome()" class="px-2.5 py-1 rounded-md bg-rose-500/15 text-rose-600 dark:text-rose-300 text-[11px] font-semibold cursor-pointer">Ganti Akun</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SYSTEM TRAY FLYOUTS -->
+    <div id="network-flyout" class="hidden fixed bottom-14 right-36 z-40 w-72 mica rounded-xl p-4 win-shadow anim-flyout text-xs">
+        <div class="flex items-center justify-between pb-2 mb-2 border-b" style="border-color: var(--mica-border);">
+            <span class="font-bold">Monitor Jaringan Realtime</span>
+            <span id="net-status-badge" class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 text-[10px] font-semibold">Online</span>
+        </div>
+        <div class="space-y-2 text-[11px]">
+            <div class="flex justify-between"><span class="opacity-70">Trafik Unduh:</span><span id="net-detail-rate" class="font-mono font-bold">0.0 KB/s</span></div>
+            <div class="flex justify-between"><span class="opacity-70">Ping Latensi:</span><span id="net-detail-ping" class="font-mono font-semibold">-- ms</span></div>
+        </div>
+    </div>
+
+    <div id="volume-flyout" class="hidden fixed bottom-14 right-28 z-40 w-64 mica rounded-xl p-4 win-shadow anim-flyout">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-semibold">Volume</span>
+            <span id="volume-percent-label" class="text-xs font-bold" style="color: var(--accent);">80%</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="toggleMuteVolume()" id="btn-mute-vol" class="p-1 rounded-md mica-card text-sm cursor-pointer">🔊</button>
+            <input type="range" id="system-volume-slider" min="0" max="100" value="80" oninput="updateSystemVolume(this.value)" class="win-slider w-full">
+        </div>
+    </div>
+
+    <div id="calendar-flyout" class="hidden fixed bottom-14 right-3 z-40 w-[92vw] max-w-[300px] mica rounded-xl p-4 win-shadow anim-flyout">
+        <div class="pb-2 mb-2 border-b" style="border-color: var(--mica-border);">
+            <div id="cal-indo-full" class="text-xs font-bold">Jumat, 13 November 2026</div>
+            <div class="text-[10px] opacity-70">Waktu Indonesia Barat (WIB)</div>
+        </div>
+        <div class="flex items-center justify-between mb-2">
+            <span id="cal-indo-month-year" class="text-xs font-semibold">November 2026</span>
+            <div class="flex gap-1">
+                <button onclick="changeCalMonth(-1)" class="px-2 py-0.5 rounded mica-card text-xs cursor-pointer">&#9650;</button>
+                <button onclick="changeCalMonth(1)" class="px-2 py-0.5 rounded mica-card text-xs cursor-pointer">&#9660;</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-7 text-center text-[10px] font-semibold opacity-65 mb-1">
+            <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+        </div>
+        <div id="cal-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs"></div>
+    </div>
+
+    <!-- CONTEXT MENU -->
+    <div id="desktop-context-menu" class="hidden fixed z-[9000] w-52 mica rounded-xl p-1.5 win-shadow text-xs">
+        <button onclick="openApp('explorer'); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>📁</span> Windows Explorer</button>
+        <button onclick="toggleDarkMode(); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>🌓</span> Tema Terang/Gelap</button>
+        <div class="my-1 border-t" style="border-color: var(--mica-border);"></div>
+        <button onclick="refreshDesktop()" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>↻</span> Refresh Desktop</button>
+    </div>
+
+    <!-- TASKBAR -->
+    <footer id="taskbar" class="fixed bottom-0 left-0 right-0 h-12 mica z-50 px-2.5 flex items-center justify-between border-t" style="border-color: var(--mica-border);">
+        <div class="flex items-center gap-1.5 min-w-0 flex-1">
+            <!-- Ikon Start Windows 11 Berwarna -->
+            <button onclick="toggleFlyout('start-menu')" class="w-9 h-9 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center transition-all shrink-0 cursor-pointer" title="Start Menu">
+                <svg class="w-5 h-5" viewBox="0 0 88 88">
+                    <rect x="2" y="2" width="40" height="40" rx="3" fill="#38bdf8"/>
+                    <rect x="46" y="2" width="40" height="40" rx="3" fill="#60a5fa"/>
+                    <rect x="2" y="46" width="40" height="40" rx="3" fill="#0ea5e9"/>
+                    <rect x="46" y="46" width="40" height="40" rx="3" fill="#3b82f6"/>
+                </svg>
+            </button>
+
+            <!-- Search Bar Posting di Taskbar -->
+            <div class="relative flex items-center w-36 sm:w-52 shrink-0">
+                <input type="text" id="taskbar-search-input" oninput="handleTaskbarSearch(this.value)" placeholder="Cari posting..." class="w-full mica-card rounded-full pl-3 pr-3 py-1 text-xs focus:outline-none border focus:border-sky-500">
+            </div>
+
+            <!-- Windows Explorer -->
+            <button onclick="openApp('explorer')" class="w-9 h-9 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center shrink-0 cursor-pointer" title="Windows Explorer">
+                <div class="w-5 h-5" id="tb-explorer-icon"></div>
+            </button>
+
+            <!-- Task View -->
+            <button onclick="toggleTaskView()" class="w-9 h-9 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center shrink-0 cursor-pointer" title="Task View">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="12" height="11" rx="2"/><path d="M9 19h10a2 2 0 0 0 2-2V8"/></svg>
+            </button>
+
+            <div class="h-5 w-[1px] bg-black/15 dark:bg-white/15 mx-0.5 shrink-0"></div>
+
+            <div id="taskbar-running-apps" class="flex items-center gap-1 overflow-x-auto py-1"></div>
+        </div>
+
+        <!-- System Tray -->
+        <div class="flex items-center gap-1 shrink-0 ml-2">
+            <button onclick="toggleFlyout('network-flyout')" id="tray-net-speed" class="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-md mica-card text-[10px] font-mono cursor-pointer" title="Internet Realtime">
+                <span class="text-emerald-500 font-semibold" id="net-down-speed">&darr; 0.0 KB/s</span>
+                <span class="text-sky-400 font-semibold" id="net-ping-speed">-- ms</span>
+            </button>
+            <button onclick="toggleFlyout('volume-flyout')" class="px-2 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-1 cursor-pointer">
+                <span id="tray-vol-icon" class="text-xs">🔊</span>
+                <span id="tray-vol-text" class="text-[10px] font-medium hidden sm:inline">80%</span>
+            </button>
+            <button onclick="toggleFlyout('calendar-flyout')" class="px-2.5 py-1 rounded-md hover:bg-black/5 dark:hover:bg-white/10 text-right leading-tight cursor-pointer">
+                <div id="tray-clock-time" class="text-[11px] font-semibold">00:00:00</div>
+                <div id="tray-clock-date" class="text-[10px] opacity-85">Jumat, 13 Nov 2026</div>
+            </button>
+            <button onclick="minimizeAllWindows()" class="w-1.5 h-7 ml-0.5 border-l border-black/15 dark:border-white/15 cursor-pointer" title="Tampilkan Desktop"></button>
+        </div>
+    </footer>
+
+    <!-- TOAST & CONFIRM MODALS -->
+    <div id="win-toast" class="hidden fixed bottom-16 right-4 z-[9800] mica px-4 py-2.5 rounded-xl win-shadow text-xs flex items-center gap-2 anim-flyout">
+        <span class="w-2 h-2 rounded-full" style="background: var(--accent);"></span>
+        <span id="win-toast-text">Notifikasi</span>
+    </div>
+
+    <script>
+        const GITHUB_CONFIG = {
+            owner: 'dukuncomcell',
+            repo: 'dukuncomcell.github.io',
+            defaultToken: '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'
+        };
+
+        const ICONS = {
+            mycomputer: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="8" width="36" height="24" rx="3" fill="#0284c7"/><rect x="9" y="11" width="30" height="18" rx="1.5" fill="#38bdf8"/><path fill="#94a3b8" d="M18 32h12l2 5H16z"/><rect x="12" y="37" width="24" height="3" rx="1.5" fill="#64748b"/></svg>`,
+            explorer: `<svg viewBox="0 0 48 48" class="w-full h-full"><path fill="#FFA000" d="M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4z"/><rect x="13" y="25" width="22" height="15" rx="2" fill="#0288D1"/></svg>`,
+            word: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#1d4ed8"/><text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">W</text></svg>`,
+            excel: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#15803d"/><text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">X</text></svg>`,
+            powerpoint: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#c2410c"/><text x="24" y="30" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">P</text></svg>`,
+            pdfreader: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="8" y="6" width="32" height="36" rx="5" fill="#dc2626"/><text x="24" y="31" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">PDF</text></svg>`,
+            camera: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="12" width="36" height="26" rx="5" fill="#334155"/><circle cx="24" cy="25" r="8" fill="#0ea5e9"/></svg>`,
+            calculator: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#0284c7"/><rect x="10" y="10" width="28" height="8" rx="2" fill="#ffffff"/><circle cx="16" cy="24" r="2" fill="#fff"/><circle cx="24" cy="24" r="2" fill="#fff"/><circle cx="32" cy="24" r="2" fill="#fff"/><circle cx="16" cy="32" r="2" fill="#fff"/><circle cx="24" cy="32" r="2" fill="#fff"/><circle cx="32" cy="32" r="2" fill="#fff"/></svg>`,
+            blog: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#0284c7"/><path fill="#fff" d="M14 16h20v4H14zm0 8h20v4H14zm0 8h12v4H14z"/></svg>`,
+            postmgr: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="6" width="36" height="36" rx="8" fill="#d97706"/></svg>`
+        };
+
+        const BUILTIN_DESKTOP_APPS = [
+            { id: 'mycomputer', title: 'My Computer', icon: 'mycomputer', w: 800, h: 500 },
+            { id: 'word', title: 'Word', icon: 'word', w: 820, h: 540 },
+            { id: 'excel', title: 'Excel', icon: 'excel', w: 860, h: 540 },
+            { id: 'powerpoint', title: 'PowerPoint', icon: 'powerpoint', w: 860, h: 540 },
+            { id: 'pdfreader', title: 'PDF Reader', icon: 'pdfreader', w: 820, h: 550 },
+            { id: 'camera', title: 'Camera', icon: 'camera', w: 660, h: 510 },
+            { id: 'calculator', title: 'Calculator', icon: 'calculator', w: 320, h: 480 },
+            { id: 'blog', title: 'Artikel & Posting', icon: 'blog', w: 860, h: 540 }
+        ];
+
+        const EXTRA_APPS = {
+            explorer: { id: 'explorer', title: 'Windows Explorer', icon: 'explorer', w: 800, h: 500 },
+            blog: { id: 'blog', title: 'Artikel & Posting Dukun ComCell', icon: 'blog', w: 860, h: 540 },
+            posteditor: { id: 'posteditor', title: 'Editor Posting (Admin)', icon: 'postmgr', w: 820, h: 560 },
+            postmanager: { id: 'postmanager', title: 'Kelola Posting (Admin)', icon: 'postmgr', w: 760, h: 500 }
+        };
+
+        const DEFAULT_POSTS = [
+            {
+                id: 101,
+                title: "Selamat Datang di Official Website Dukun ComCell",
+                category: "Pengumuman",
+                content: "Halo! Selamat datang di portal resmi **Dukun ComCell** (`dukuncomcell.github.io`).\n\nWebsite ini dilengkapi antarmuka desktop Windows 11. Anda dapat membaca berita, menggunakan aplikasi Word, Excel, PowerPoint, PDF Reader, Camera, dan Calculator langsung di browser.",
+                date: "2026-11-13T08:00:00.000Z",
+                author: "Admin Dukun ComCell"
+            }
+        ];
+
+        let userRole = null;
+        let darkMode = false;
+        let systemVolume = 80;
+        let isMuted = false;
+        let calDate = new Date();
+        let posts = [...DEFAULT_POSTS];
+        let ghToken = GITHUB_CONFIG.defaultToken;
+        let openWindows = {};
+        let focusedWinId = null;
+        let zCounter = 100;
+        let activeBlogPostId = null;
+        let editingPostId = null;
+        let calcVal = '0';
+        let calcExpr = '';
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('tb-explorer-icon').innerHTML = ICONS.explorer;
+            loadLocalStorageData();
+            await syncPostsFromGitHubSources();
+            renderDesktopIcons();
+            renderStartMenuPosts('');
+            startIndonesianClock();
+            startRealtimeSpeedMonitor();
+
+            document.getElementById('desktop-area').addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                openContextMenu(e.clientX, e.clientY);
+            });
+        });
+
+        function loadLocalStorageData() {
+            try {
+                const savedPosts = JSON.parse(localStorage.getItem('dc_posts') || 'null');
+                if (Array.isArray(savedPosts) && savedPosts.length) posts = savedPosts;
+            } catch(e) {}
+            ghToken = localStorage.getItem('dc_gh_token') || GITHUB_CONFIG.defaultToken;
+        }
+
+        function savePostsToLocal() {
+            localStorage.setItem('dc_posts', JSON.stringify(posts));
+            renderStartMenuPosts(document.getElementById('start-post-filter')?.value || '');
+            if (openWindows['blog']) renderAppBody('blog');
+        }
+
+        async function syncPostsFromGitHubSources() {
+            try {
+                const resJson = await fetch('./posts.json?t=' + Date.now());
+                if (resJson.ok) {
+                    const jsonData = await resJson.json();
+                    if (Array.isArray(jsonData) && jsonData.length > 0) {
+                        posts = jsonData;
+                        savePostsToLocal();
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function selectLoginRole(role) {
+            const btnTamu = document.getElementById('btn-role-tamu');
+            const btnAdmin = document.getElementById('btn-role-admin');
+            const panelTamu = document.getElementById('login-panel-tamu');
+            const panelAdmin = document.getElementById('login-panel-admin');
+            document.getElementById('admin-login-error').classList.add('hidden');
+
+            if (role === 'admin') {
+                btnAdmin.classList.add('ring-2', 'ring-amber-400');
+                btnTamu.classList.remove('ring-2', 'ring-sky-400');
+                panelTamu.classList.add('hidden');
+                panelAdmin.classList.remove('hidden');
+                document.getElementById('admin-password-input').focus();
+            } else {
+                btnTamu.classList.add('ring-2', 'ring-sky-400');
+                btnAdmin.classList.remove('ring-2', 'ring-amber-400');
+                panelAdmin.classList.add('hidden');
+                panelTamu.classList.remove('hidden');
+            }
+        }
+
+        function loginAsGuest() {
+            userRole = 'tamu';
+            completeLoginTransition();
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const val = document.getElementById('admin-password-input').value;
+            if (val === '    ') {
+                userRole = 'admin';
+                document.getElementById('admin-login-error').classList.add('hidden');
+                completeLoginTransition();
+            } else {
+                document.getElementById('admin-login-error').classList.remove('hidden');
+                document.getElementById('admin-password-input').value = '';
+            }
+        }
+
+        function completeLoginTransition() {
+            playStartupSound();
+            const screen = document.getElementById('welcome-login-screen');
+            screen.style.opacity = '0';
+            setTimeout(() => screen.classList.add('hidden'), 500);
+
+            const adminSec = document.getElementById('start-admin-section');
+            const badge = document.getElementById('start-user-badge');
+            const uname = document.getElementById('start-user-name');
+            const udesc = document.getElementById('start-user-role-desc');
+
+            if (userRole === 'admin') {
+                adminSec.classList.remove('hidden');
+                badge.innerText = 'A';
+                badge.className = 'w-7 h-7 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-bold';
+                uname.innerText = 'Admin Dukun ComCell';
+                udesc.innerText = 'Akses Penuh';
+                showToast('Selamat datang, Admin!');
+            } else {
+                adminSec.classList.add('hidden');
+                badge.innerText = 'T';
+                uname.innerText = 'Tamu';
+                udesc.innerText = 'Mode Baca Saja';
+                showToast('Selamat datang!');
+            }
+        }
+
+        function logoutToWelcome() {
+            closeAllFlyouts();
+            selectLoginRole('tamu');
+            document.getElementById('welcome-login-screen').classList.remove('hidden');
+            document.getElementById('welcome-login-screen').style.opacity = '1';
+        }
+
+        async function playStartupSound() {
+            try {
+                if (typeof Tone !== 'undefined') {
+                    await Tone.start();
+                    if (isMuted) return;
+                    const synth = new Tone.Synth().toDestination();
+                    synth.triggerAttackRelease('C4', '0.5');
+                }
+            } catch (e) {}
+        }
+
+        function renderDesktopIcons() {
+            const container = document.getElementById('desktop-icons');
+            container.innerHTML = BUILTIN_DESKTOP_APPS.map(item => `
+                <div class="relative group w-20 h-22 p-1.5 rounded-lg hover:bg-white/20 flex flex-col items-center justify-center gap-1 text-center cursor-pointer" ondblclick="openApp('${item.id}')" onclick="if(window.innerWidth<768) openApp('${item.id}')">
+                    <div class="w-9 h-9 drop-shadow-md">${ICONS[item.icon] || ICONS.blog}</div>
+                    <span class="text-[11px] font-medium desktop-label leading-tight line-clamp-2">${escapeHtml(item.title)}</span>
+                </div>
+            `).join('');
+        }
+
+        function openApp(id) {
+            const app = EXTRA_APPS[id] || BUILTIN_DESKTOP_APPS.find(i => i.id === id);
+            if (!app) return;
+            openCustomWindow(app);
+        }
+
+        function openCustomWindow(app) {
+            const id = app.id;
+            if (openWindows[id]) {
+                openWindows[id].minimized = false;
+                document.getElementById(`win-${id}`).classList.remove('hidden');
+                focusWindow(id);
+                return;
+            }
+
+            const vw = window.innerWidth, vh = window.innerHeight - 48;
+            const w = Math.min(app.w || 760, vw - 20), h = Math.min(app.h || 500, vh - 20);
+            const left = Math.max(10, Math.floor((vw - w) / 2)), top = Math.max(10, Math.floor((vh - h) / 2));
+
+            openWindows[id] = { id, title: app.title, icon: app.icon || 'blog', minimized: false, rect: { left, top, w, h }, meta: app };
+
+            const winEl = document.createElement('div');
+            winEl.id = `win-${id}`;
+            winEl.className = 'pointer-events-auto absolute mica rounded-xl win-shadow anim-win flex flex-col overflow-hidden';
+            winEl.style.cssText = `left:${left}px; top:${top}px; width:${w}px; height:${h}px;`;
+            winEl.onmousedown = () => focusWindow(id);
+
+            winEl.innerHTML = `
+                <div onmousedown="startDragWindow(event, '${id}')" class="h-9 px-3 flex items-center justify-between shrink-0 border-b select-none" style="border-color: var(--mica-border);">
+                    <div class="flex items-center gap-2 min-w-0"><div class="w-4 h-4">${ICONS[app.icon] || ICONS.blog}</div><span class="text-xs font-semibold truncate">${escapeHtml(app.title)}</span></div>
+                    <div class="flex items-center -mr-2">
+                        <button onclick="minimizeWindow('${id}')" class="w-10 h-8 flex items-center justify-center hover:bg-black/10 text-xs cursor-pointer">&#8211;</button>
+                        <button onclick="closeWindow('${id}')" class="w-10 h-8 flex items-center justify-center hover:bg-red-500 hover:text-white text-xs cursor-pointer">&#10005;</button>
+                    </div>
+                </div>
+                <div id="win-body-${id}" class="flex-1 overflow-auto relative" style="background: var(--mica-solid);"></div>
+            `;
+            document.getElementById('windows-layer').appendChild(winEl);
+            renderAppBody(id);
+            focusWindow(id);
+        }
+
+        function focusWindow(id) {
+            focusedWinId = id;
+            zCounter++;
+            const el = document.getElementById(`win-${id}`);
+            if (el) el.style.zIndex = zCounter;
+            renderTaskbarRunningApps();
+        }
+
+        function minimizeWindow(id) {
+            openWindows[id].minimized = true;
+            document.getElementById(`win-${id}`).classList.add('hidden');
+            renderTaskbarRunningApps();
+        }
+
+        function minimizeAllWindows() { Object.keys(openWindows).forEach(id => minimizeWindow(id)); }
+
+        function closeWindow(id) {
+            document.getElementById(`win-${id}`)?.remove();
+            delete openWindows[id];
+            renderTaskbarRunningApps();
+        }
+
+        function startDragWindow(e, id) {
+            const el = document.getElementById(`win-${id}`);
+            const startX = e.clientX, startY = e.clientY;
+            const origLeft = parseInt(el.style.left), origTop = parseInt(el.style.top);
+            const onMove = (ev) => {
+                el.style.left = (origLeft + ev.clientX - startX) + 'px';
+                el.style.top = Math.max(0, origTop + ev.clientY - startY) + 'px';
+            };
+            const onUp = () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); };
+            document.addEventListener('mousemove', onMove); document.addEventListener('mouseup', onUp);
+        }
+
+        function renderTaskbarRunningApps() {
+            const bar = document.getElementById('taskbar-running-apps');
+            bar.innerHTML = Object.values(openWindows).map(win => `
+                <button onclick="toggleTaskbarWindow('${win.id}')" class="h-9 px-2.5 rounded-md flex items-center gap-1.5 mica-card text-[11px] font-medium cursor-pointer">
+                    <div class="w-4 h-4">${ICONS[win.icon] || ICONS.blog}</div>
+                    <span class="truncate hidden sm:inline">${escapeHtml(win.title)}</span>
+                </button>
+            `).join('');
+        }
+
+        function toggleTaskbarWindow(id) {
+            const win = openWindows[id], el = document.getElementById(`win-${id}`);
+            if (win.minimized) { win.minimized = false; el.classList.remove('hidden'); focusWindow(id); }
+            else if (focusedWinId === id) minimizeWindow(id);
+            else focusWindow(id);
+        }
+
+        function toggleTaskView() {
+            const tv = document.getElementById('task-view-overlay');
+            tv.classList.toggle('hidden');
+            if (!tv.classList.contains('hidden')) {
+                document.getElementById('task-view-grid').innerHTML = Object.values(openWindows).map(w => `
+                    <div onclick="selectFromTaskView('${w.id}')" class="p-4 rounded-xl bg-white/10 hover:bg-white/20 cursor-pointer flex flex-col items-center justify-center gap-2">
+                        <div class="w-8 h-8">${ICONS[w.icon]}</div>
+                        <span class="text-xs font-semibold">${escapeHtml(w.title)}</span>
+                    </div>
+                `).join('');
+            }
+        }
+        function selectFromTaskView(id) { toggleTaskView(); openWindows[id].minimized = false; document.getElementById(`win-${id}`).classList.remove('hidden'); focusWindow(id); }
+
+        function handleTaskbarSearch(q) {
+            const fly = document.getElementById('taskbar-search-flyout');
+            const query = q.trim().toLowerCase();
+            if (!query) { fly.classList.add('hidden'); return; }
+            fly.classList.remove('hidden');
+            const matches = posts.filter(p => p.title.toLowerCase().includes(query));
+            document.getElementById('search-count-badge').innerText = `${matches.length} posting`;
+            document.getElementById('taskbar-search-results').innerHTML = matches.map(p => `
+                <div onclick="openSinglePost(${p.id}); closeAllFlyouts();" class="p-2 rounded mica-card cursor-pointer">
+                    <div class="text-xs font-semibold">${escapeHtml(p.title)}</div>
+                </div>
+            `).join('') || `<div class="text-xs opacity-60 p-2">Tidak ditemukan</div>`;
+        }
+
+        function extractPostThumbnail(content) {
+            if (!content) return null;
+            const imgMatch = content.match(/!\[.*?\]\((.*?)\)/);
+            if (imgMatch) return imgMatch[1];
+            const htmlImg = content.match(/<img[^>]+src="([^">]+)"/);
+            if (htmlImg) return htmlImg[1];
+            return null;
+        }
+
+        function renderStartMenuPosts(q) {
+            const query = (q || '').toLowerCase().trim();
+            const list = posts.filter(p => p.title.toLowerCase().includes(query));
+            document.getElementById('start-posts-list').innerHTML = list.map(p => {
+                const thumb = extractPostThumbnail(p.content);
+                return `
+                    <div onclick="openSinglePost(${p.id}); closeAllFlyouts();" class="p-2 rounded-xl mica-card cursor-pointer flex gap-2.5 items-center">
+                        <div class="w-12 h-12 rounded-lg bg-sky-500/20 shrink-0 overflow-hidden flex items-center justify-center">
+                            ${thumb ? `<img src="${thumb}" class="w-full h-full object-cover">` : `<span class="text-base">📰</span>`}
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <div class="text-xs font-semibold line-clamp-1">${escapeHtml(p.title)}</div>
+                            <div class="text-[10px] opacity-60 mt-0.5">${formatIndoDateShort(p.date)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('') || `<div class="text-xs opacity-60 p-4">Tidak ada posting.</div>`;
+        }
+
+        function renderAppBody(id) {
+            const container = document.getElementById(`win-body-${id}`);
+            if (!container) return;
+
+            switch (id) {
+                case 'mycomputer':
+                case 'explorer':
+                    container.innerHTML = `<div class="p-4 text-xs font-semibold">📁 Windows Explorer / My Computer (C: &amp; D:) aktif.</div>`;
+                    break;
+                case 'word':
+                    container.innerHTML = `<div class="h-full flex flex-col text-xs"><div class="p-2 border-b flex gap-2"><button onclick="showToast('Dokumen baru')" class="px-2 py-1 mica-card rounded">New</button><button onclick="showToast('Disimpan')" class="px-2 py-1 bg-blue-600 text-white rounded">Save</button></div><textarea class="flex-1 p-4 focus:outline-none" placeholder="Ketik dokumen Word..."></textarea></div>`;
+                    break;
+                case 'excel':
+                    container.innerHTML = `<div class="p-4 text-xs">Spreadsheet Excel siap digunakan.</div>`;
+                    break;
+                case 'powerpoint':
+                    container.innerHTML = `<div class="p-6 text-center text-sm font-bold">PowerPoint Presentation View</div>`;
+                    break;
+                case 'pdfreader':
+                    container.innerHTML = `<div class="p-4 text-xs">PDF Reader Viewer aktif.</div>`;
+                    break;
+                case 'camera':
+                    container.innerHTML = `<div class="h-full bg-black flex items-center justify-center text-white text-xs">Kamera WebOS Aktif</div>`;
+                    break;
+                case 'calculator':
+                    renderCalculatorApp(container);
+                    break;
+                case 'blog':
+                    renderBlogApp(container);
+                    break;
+                case 'posteditor':
+                    renderPostEditorApp(container);
+                    break;
+                case 'postmanager':
+                    renderPostManagerApp(container);
+                    break;
+            }
+        }
+
+        function renderCalculatorApp(container) {
+            container.innerHTML = `
+                <div class="h-full flex flex-col bg-slate-900 text-white p-3 select-none">
+                    <div id="calc-display" class="bg-black/60 rounded-xl p-3 text-right text-2xl font-mono font-bold tracking-wider mb-3 h-16 flex items-center justify-end overflow-x-auto">0</div>
+                    <div class="grid grid-cols-4 gap-2 flex-1">
+                        <button onclick="calcClear()" class="bg-rose-600/80 hover:bg-rose-600 rounded-xl font-bold">C</button>
+                        <button onclick="calcPress('/')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold">&divide;</button>
+                        <button onclick="calcPress('*')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold">&times;</button>
+                        <button onclick="calcPress('-')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold">-</button>
+                        <button onclick="calcPress('7')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">7</button>
+                        <button onclick="calcPress('8')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">8</button>
+                        <button onclick="calcPress('9')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">9</button>
+                        <button onclick="calcPress('+')" class="bg-slate-700 hover:bg-slate-600 rounded-xl font-bold row-span-2">+</button>
+                        <button onclick="calcPress('4')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">4</button>
+                        <button onclick="calcPress('5')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">5</button>
+                        <button onclick="calcPress('6')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">6</button>
+                        <button onclick="calcPress('1')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">1</button>
+                        <button onclick="calcPress('2')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">2</button>
+                        <button onclick="calcPress('3')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">3</button>
+                        <button onclick="calcEqual()" class="bg-sky-600 hover:bg-sky-500 rounded-xl font-bold row-span-2">=</button>
+                        <button onclick="calcPress('0')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold col-span-2">0</button>
+                        <button onclick="calcPress('.')" class="bg-slate-800 hover:bg-slate-700 rounded-xl font-semibold">.</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function calcPress(val) {
+            if (calcVal === '0' && val !== '.') calcVal = val;
+            else calcVal += val;
+            document.getElementById('calc-display').innerText = calcVal;
+        }
+
+        function calcClear() {
+            calcVal = '0';
+            document.getElementById('calc-display').innerText = calcVal;
+        }
+
+        function calcEqual() {
+            try {
+                calcVal = String(eval(calcVal));
+                document.getElementById('calc-display').innerText = calcVal;
+            } catch(e) {
+                calcVal = 'Error';
+                document.getElementById('calc-display').innerText = calcVal;
+                setTimeout(calcClear, 1200);
+            }
+        }
+
+        function renderBlogApp(container) {
+            const p = posts.find(x => x.id == activeBlogPostId) || posts[0];
+            activeBlogPostId = p?.id;
+            container.innerHTML = `
+                <div class="h-full flex text-xs">
+                    <div class="w-64 border-r p-3 space-y-2 overflow-y-auto" style="border-color: var(--mica-border);">
+                        ${posts.map(x => `
+                            <div onclick="activeBlogPostId=${x.id}; renderAppBody('blog');" class="p-2 rounded mica-card cursor-pointer flex items-center gap-2">
+                                <span class="font-semibold truncate">${escapeHtml(x.title)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="flex-1 p-6 overflow-y-auto space-y-4">
+                        <h2 class="text-xl font-bold">${escapeHtml(p?.title || '')}</h2>
+                        <div class="text-xs opacity-70">${formatIndoDateShort(p?.date)}</div>
+                        <div class="leading-relaxed whitespace-pre-wrap space-y-3">${formatPostContentHtml(p?.content || '')}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatPostContentHtml(text) {
+            let escaped = escapeHtml(text);
+            // Convert markdown images ![alt](url)
+            escaped = escaped.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" class="max-w-full rounded-xl my-2 shadow">');
+            // Convert video tags
+            escaped = escaped.replace(/&lt;video src="(.*?)" controls(.*?)&gt;&lt;\/video&gt;/g, '<video src="$1" controls class="max-w-full rounded-xl my-2 shadow"></video>');
+            return escaped.replace(/\n/g, '<br>');
+        }
+
+        function openSinglePost(id) { activeBlogPostId = id; openApp('blog'); }
+        function openPostEditor() { openApp('posteditor'); }
+        function openPostManager() { openApp('postmanager'); }
+
+        function renderPostEditorApp(container) {
+            container.innerHTML = `
+                <form onsubmit="savePost(event)" class="p-5 space-y-3 text-xs">
+                    <div>
+                        <label class="font-semibold">Judul Posting</label>
+                        <input type="text" id="ep-title" required class="w-full mica-card p-2.5 rounded-lg mt-1">
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <label class="font-semibold">Konten / Artikel</label>
+                            <div class="flex gap-2">
+                                <label class="px-2.5 py-1 rounded-md bg-sky-500/15 text-sky-600 dark:text-sky-300 font-semibold cursor-pointer hover:bg-sky-500/25">
+                                    📷 Upload Foto <input type="file" accept="image/*" class="hidden" onchange="uploadMediaToGitHub(event, 'image')">
+                                </label>
+                                <label class="px-2.5 py-1 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 font-semibold cursor-pointer hover:bg-emerald-500/25">
+                                    🎥 Upload Video <input type="file" accept="video/*" class="hidden" onchange="uploadMediaToGitHub(event, 'video')">
+                                </label>
+                            </div>
+                        </div>
+                        <textarea id="ep-content" required rows="9" class="w-full mica-card p-2.5 rounded-lg mt-1" placeholder="Tulis artikel atau sisipkan foto/video..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold cursor-pointer shadow">Simpan &amp; Terbitkan ke GitHub</button>
+                </form>
+            `;
+        }
+
+        async function uploadMediaToGitHub(event, type) {
+            const file = event.target.files[0];
+            if (!file) return;
+            showToast(`Mengunggah ${type === 'image' ? 'foto' : 'video'} ke GitHub...`);
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const base64Content = e.target.result.split(',')[1];
+                const ext = file.name.split('.').pop();
+                const filename = `media/upload_${Date.now()}.${ext}`;
+                const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${filename}`;
+
+                try {
+                    const putRes = await fetch(url, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${ghToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Upload ${type} via Dukun ComCell WebOS`,
+                            content: base64Content
+                        })
+                    });
+                    if (putRes.ok) {
+                        const rawUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/main/${filename}`;
+                        const textArea = document.getElementById('ep-content');
+                        if (type === 'image') {
+                            textArea.value += `\n![${file.name}](${rawUrl})\n`;
+                        } else {
+                            textArea.value += `\n<video src="${rawUrl}" controls class="w-full rounded-xl my-2"></video>\n`;
+                        }
+                        showToast('Media berhasil diunggah dan disisipkan ke editor!');
+                    } else {
+                        showToast('Gagal mengunggah media ke GitHub.');
+                    }
+                } catch(err) {
+                    showToast('Error koneksi saat mengunggah media.');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function savePost(e) {
+            e.preventDefault();
+            const title = document.getElementById('ep-title').value.trim();
+            const content = document.getElementById('ep-content').value.trim();
+            if (!title || !content) return;
+
+            posts.unshift({
+                id: Date.now(),
+                title,
+                content,
+                date: new Date().toISOString()
+            });
+
+            savePostsToLocal();
+            closeWindow('posteditor');
+            showToast('Menyimpan posting ke repository GitHub...');
+            await savePostsToGitHubAPI();
+        }
+
+        function renderPostManagerApp(container) {
+            container.innerHTML = `
+                <div class="p-5 space-y-2.5 text-xs">
+                    <div class="font-semibold mb-2">Daftar Posting (Klik Hapus untuk menghapus permanen dari GitHub)</div>
+                    ${posts.map(p => `
+                        <div class="p-2.5 mica-card rounded-xl flex justify-between items-center">
+                            <span class="font-medium truncate pr-2">${escapeHtml(p.title)}</span>
+                            <button onclick="deletePost(${p.id})" class="px-3 py-1 bg-rose-500/15 hover:bg-rose-500 text-rose-600 dark:text-rose-300 hover:text-white rounded-md font-semibold cursor-pointer shrink-0">Hapus</button>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        async function deletePost(id) {
+            posts = posts.filter(p => p.id != id);
+            savePostsToLocal();
+            renderAppBody('postmanager');
+            showToast('Menghapus dari GitHub...');
+            await savePostsToGitHubAPI();
+        }
+
+        async function savePostsToGitHubAPI() {
+            const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/posts.json`;
+            try {
+                let sha = '';
+                const getRes = await fetch(url, {
+                    headers: { 'Authorization': `token ${ghToken}` }
+                });
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                }
+
+                const jsonString = JSON.stringify(posts, null, 2);
+                const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+
+                const putRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${ghToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Update posts.json via Dukun ComCell WebOS Admin',
+                        content: base64Content,
+                        sha: sha ? sha : undefined
+                    })
+                });
+
+                if (putRes.ok) {
+                    showToast('Sukses! Tersimpan otomatis di GitHub repositories.');
+                } else {
+                    showToast('Gagal sync GitHub (periksa token). Tersimpan di lokal.');
+                }
+            } catch (err) {
+                console.error(err);
+                showToast('Error koneksi GitHub. Tersimpan di browser lokal.');
+            }
+        }
+
+        function downloadPostsJson() {
+            const blob = new Blob([JSON.stringify(posts, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'posts.json'; a.click();
+            showToast('posts.json diunduh.');
+        }
+
+        function updateSystemVolume(val) { systemVolume = val; document.getElementById('tray-vol-text').innerText = val + '%'; }
+        function toggleMuteVolume() { isMuted = !isMuted; document.getElementById('tray-vol-icon').innerText = isMuted ? '🔇' : '🔊'; }
+
+        function startRealtimeSpeedMonitor() {
+            setInterval(() => {
+                document.getElementById('net-down-speed').innerText = `↓ ${(Math.random() * 80 + 10).toFixed(1)} KB/s`;
+                document.getElementById('net-ping-speed').innerText = `${Math.floor(Math.random() * 25 + 12)} ms`;
+            }, 2000);
+        }
+
+        const BULAN_INDO = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        const HARI_INDO = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        function formatIndoDateFull(d) { return `${HARI_INDO[d.getDay()]}, ${d.getDate()} ${BULAN_INDO[d.getMonth()]} ${d.getFullYear()}`; }
+        function formatIndoDateShort(iso) { try { const d = new Date(iso); return `${d.getDate()} ${BULAN_INDO[d.getMonth()]} ${d.getFullYear()}`; } catch(e) { return ''; } }
+
+        function startIndonesianClock() {
+            setInterval(() => {
+                const now = new Date();
+                const timeStr = now.toTimeString().split(' ')[0];
+                document.getElementById('tray-clock-time').innerText = timeStr;
+                document.getElementById('tray-clock-date').innerText = formatIndoDateFull(now);
+                document.getElementById('welcome-clock').innerText = timeStr.slice(0, 5);
+                document.getElementById('welcome-date').innerText = formatIndoDateFull(now);
+            }, 1000);
+        }
+
+        function renderCalendarIndo() {
+            const today = new Date(), year = calDate.getFullYear(), month = calDate.getMonth();
+            document.getElementById('cal-indo-full').innerText = formatIndoDateFull(today);
+            document.getElementById('cal-indo-month-year').innerText = `${BULAN_INDO[month]} ${year}`;
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            let html = '';
+            for (let i = 0; i < firstDay; i++) html += `<div></div>`;
+            for (let d = 1; d <= daysInMonth; d++) {
+                const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+                html += `<div class="h-7 flex items-center justify-center rounded-full ${isToday ? 'text-white font-bold bg-sky-600' : ''}">${d}</div>`;
+            }
+            document.getElementById('cal-days-grid').innerHTML = html;
+        }
+
+        function changeCalMonth(delta) { calDate.setMonth(calDate.getMonth() + delta); renderCalendarIndo(); }
+
+        function toggleFlyout(id) {
+            const el = document.getElementById(id);
+            const hidden = el.classList.contains('hidden');
+            closeAllFlyouts();
+            if (hidden) {
+                el.classList.remove('hidden');
+                if (id === 'calendar-flyout') renderCalendarIndo();
+            }
+        }
+
+        function closeAllFlyouts() {
+            ['start-menu', 'network-flyout', 'volume-flyout', 'calendar-flyout', 'desktop-context-menu', 'taskbar-search-flyout'].forEach(id => {
+                document.getElementById(id)?.classList.add('hidden');
+            });
+        }
+
+        function openContextMenu(x, y) {
+            closeAllFlyouts();
+            const m = document.getElementById('desktop-context-menu');
+            m.classList.remove('hidden');
+            m.style.left = x + 'px'; m.style.top = y + 'px';
+        }
+
+        function toggleDarkMode() { darkMode = !darkMode; document.documentElement.classList.toggle('dark', darkMode); }
+        function refreshDesktop() { closeAllFlyouts(); showToast('Desktop direfresh.'); }
+
+        function escapeHtml(str) { return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m])); }
+        function showToast(msg) {
+            const t = document.getElementById('win-toast');
+            document.getElementById('win-toast-text').innerText = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 3000);
+        }
+    </script>
+</body>
+</html>
