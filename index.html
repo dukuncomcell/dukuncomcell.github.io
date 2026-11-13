@@ -393,8 +393,12 @@
         <div id="cal-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs"></div>
     </div>
 
-    <!-- CONTEXT MENU -->
-    <div id="desktop-context-menu" class="hidden fixed z-[9000] w-52 mica rounded-xl p-1.5 win-shadow text-xs">
+    <!-- CONTEXT MENU (Klik Kanan WebOS: New Post, New Txt, New Folder + Menu Utama) -->
+    <div id="desktop-context-menu" class="hidden fixed z-[9000] w-56 mica rounded-xl p-1.5 win-shadow text-xs">
+        <button onclick="handleContextNewPost()" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer font-medium"><span>✍️</span> New Post</button>
+        <button onclick="handleContextNewTxt()" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer font-medium"><span>📄</span> New Txt</button>
+        <button onclick="handleContextNewFolder()" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer font-medium"><span>📂</span> New Folder</button>
+        <div class="my-1 border-t" style="border-color: var(--mica-border);"></div>
         <button onclick="openApp('explorer'); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>📁</span> Windows Explorer</button>
         <button onclick="openApp('blog'); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>📰</span> Buka Artikel &amp; Posting</button>
         <button onclick="toggleDarkMode(); closeAllFlyouts();" class="w-full text-left px-3 py-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer"><span>🌓</span> Tema Terang / Gelap</button>
@@ -454,7 +458,7 @@
         </div>
     </footer>
 
-    <!-- TOAST & CUSTOM CONFIRM DIALOG -->
+    <!-- TOAST, CUSTOM CONFIRM & PROMPT DIALOG -->
     <div id="win-toast" class="hidden fixed bottom-16 right-4 z-[9800] mica px-4 py-2.5 rounded-xl win-shadow text-xs flex items-center gap-2 anim-flyout">
         <span class="w-2 h-2 rounded-full" style="background: var(--accent);"></span>
         <span id="win-toast-text">Notifikasi</span>
@@ -471,14 +475,31 @@
         </div>
     </div>
 
+    <div id="win-prompt-modal" class="hidden fixed inset-0 z-[9900] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <form onsubmit="submitPromptModal(event)" class="mica rounded-xl p-5 max-w-sm w-full win-shadow space-y-3.5">
+            <div class="text-sm font-bold" id="win-prompt-title">Buat Baru</div>
+            <div class="text-xs opacity-80" id="win-prompt-label">Masukkan nama:</div>
+            <input type="text" id="win-prompt-input" required class="w-full mica-card px-3 py-2 rounded-lg text-xs focus:outline-none border focus:border-sky-500">
+            <div class="flex justify-end gap-2 pt-1">
+                <button type="button" onclick="closePromptModal()" class="px-3.5 py-1.5 rounded-lg mica-card text-xs font-semibold cursor-pointer">Batal</button>
+                <button type="submit" class="px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold cursor-pointer">Buat</button>
+            </div>
+        </form>
+    </div>
+
     <script>
         /* ======================================================================
-           KONFIGURASI REPOSITORY GITHUB DUKUN COMCELL (Token Terenkripsi)
+           KONFIGURASI REPOSITORY GITHUB & GOOGLE DRIVE DUKUN COMCELL
            ====================================================================== */
         const GITHUB_CONFIG = {
             owner: 'dukuncomcell',
             repo: 'dukuncomcell.github.io',
             tokenVault: [71,72,86,75,81,71,121,80,64,86,124,21,20,101,100,120,20,123,114,100,22,21,111,78,109,65,74,83,83,86,65,89,118,122,66,107,76,21,105,65,96,85,109,19,105,85,86,83,21,101,91,19,77,75,18,112,120,73,20,119,94,112,68,103,72,115,89,99,17,99,99,102,20,20,83,127,84,21,22,99,106,124,119,113,97,100,83,82,106,75,75,24,64]
+        };
+
+        const GDRIVE_CONFIG = {
+            folderId: '1fslGS82_pwKv_EUk7ItZ2obAHf8zYaWe',
+            shareUrl: 'https://drive.google.com/drive/folders/1fslGS82_pwKv_EUk7ItZ2obAHf8zYaWe?usp=sharing'
         };
 
         function unlockAdminToken(passStr) {
@@ -492,6 +513,8 @@
         const ICONS = {
             mycomputer: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="6" y="7" width="36" height="25" rx="3" fill="#0284c7"/><rect x="9" y="10" width="30" height="19" rx="1.5" fill="#38bdf8"/><path fill="#94a3b8" d="M18 32h12l2 6H16z"/><rect x="12" y="38" width="24" height="3" rx="1.5" fill="#64748b"/></svg>`,
             explorer: `<svg viewBox="0 0 48 48" class="w-full h-full"><path fill="#FFA000" d="M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4z"/><path fill="#FFCA28" d="M40 12H8c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4z"/><rect x="13" y="25" width="22" height="15" rx="2" fill="#0288D1"/><rect x="18" y="23" width="12" height="3" rx="1" fill="#01579B"/></svg>`,
+            folder: `<svg viewBox="0 0 48 48" class="w-full h-full"><path fill="#FFA000" d="M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v24c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16c0-2.2-1.8-4-4-4z"/><path fill="#FFCA28" d="M40 14H8c-2.2 0-4 1.8-4 4v18c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V18c0-2.2-1.8-4-4-4z"/></svg>`,
+            txtfile: `<svg viewBox="0 0 48 48" class="w-full h-full"><path d="M12 6h18l8 8v28a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" fill="#e2e8f0"/><path d="M30 6v8h8" fill="#94a3b8"/><rect x="15" y="19" width="18" height="2.5" rx="1" fill="#475569"/><rect x="15" y="25" width="18" height="2.5" rx="1" fill="#475569"/><rect x="15" y="31" width="12" height="2.5" rx="1" fill="#475569"/></svg>`,
             word: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="10" y="6" width="30" height="36" rx="4" fill="#2563eb"/><rect x="18" y="13" width="16" height="2.5" rx="1" fill="#93c5fd"/><rect x="18" y="19" width="16" height="2.5" rx="1" fill="#93c5fd"/><rect x="18" y="25" width="16" height="2.5" rx="1" fill="#93c5fd"/><rect x="18" y="31" width="12" height="2.5" rx="1" fill="#93c5fd"/><rect x="5" y="13" width="20" height="22" rx="4" fill="#1d4ed8"/><text x="15" y="29" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">W</text></svg>`,
             excel: `<svg viewBox="0 0 48 48" class="w-full h-full"><rect x="10" y="6" width="30" height="36" rx="4" fill="#16a34a"/><rect x="19" y="12" width="7" height="5" rx="1" fill="#86efac"/><rect x="28" y="12" width="7" height="5" rx="1" fill="#86efac"/><rect x="19" y="19" width="7" height="5" rx="1" fill="#86efac"/><rect x="28" y="19" width="7" height="5" rx="1" fill="#86efac"/><rect x="19" y="26" width="7" height="5" rx="1" fill="#86efac"/><rect x="28" y="26" width="7" height="5" rx="1" fill="#86efac"/><rect x="5" y="13" width="20" height="22" rx="4" fill="#15803d"/><text x="15" y="29" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">X</text></svg>`,
             powerpoint: `<svg viewBox="0 0 48 48" class="w-full h-full"><circle cx="26" cy="24" r="16" fill="#ea580c"/><path d="M26 8a16 16 0 0 1 16 16H26V8z" fill="#fdba74"/><rect x="5" y="13" width="20" height="22" rx="4" fill="#c2410c"/><text x="15" y="29" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">P</text></svg>`,
@@ -503,7 +526,7 @@
         };
 
         /* ======================================================================
-           DAFTAR APLIKASI DESKTOP (Tanpa YouTube, FB, IG, TikTok & Custom Link)
+           DAFTAR APLIKASI DESKTOP
            ====================================================================== */
         const BUILTIN_DESKTOP_APPS = [
             { id: 'mycomputer', title: 'My Computer', icon: 'mycomputer', w: 820, h: 520 },
@@ -523,16 +546,7 @@
             postmanager: { id: 'postmanager', title: 'Kelola Posting (Admin)', icon: 'postmgr', w: 780, h: 520 }
         };
 
-        const DEFAULT_POSTS = [
-            {
-                id: 101,
-                title: "Selamat Datang di Official Website Dukun ComCell",
-                category: "Pengumuman",
-                content: "Halo! Selamat datang di portal resmi **Dukun ComCell** (`dukuncomcell.github.io`).\n\nWebsite ini dilengkapi antarmuka desktop Windows 11. Anda dapat membaca informasi terbaru, menggunakan aplikasi Word, Excel, PowerPoint, PDF Reader, Camera, dan Calculator langsung di browser.",
-                date: "2026-11-13T08:00:00.000Z",
-                author: "Admin Dukun ComCell"
-            }
-        ];
+        const DEFAULT_POSTS = [];
 
         /* ======================================================================
            STATE GLOBAL SISTEM
@@ -550,6 +564,8 @@
         let activeBlogPostId = null;
         let editingPostId = null;
         let confirmCallback = null;
+        let promptCallback = null;
+        let desktopCustomItems = [];
 
         // Virtual File System untuk Word, Excel, PowerPoint, PDF Reader & My Computer
         let virtualFiles = [
@@ -558,6 +574,17 @@
             { id: 'vf-3', name: 'Presentasi_Dukun_ComCell.ppt', app: 'powerpoint', slides: [{ title: 'Official Website Dukun ComCell', subtitle: 'Solusi Teknologi & Servis Terpercaya', body: 'Melayani perbaikan perangkat keras, perangkat lunak, dan pengembangan web.', bg: '#1e3a8a' }], updated: '13 Nov 2026' },
             { id: 'vf-4', name: 'Panduan_Penggunaan_WebOS.pdf', app: 'pdfreader', docTitle: 'Panduan Penggunaan WebOS Dukun ComCell', docBody: 'Gunakan ikon desktop untuk membuka Word, Excel, PowerPoint, PDF Reader, Camera, dan Calculator. Login sebagai Admin untuk mengelola postingan.', updated: '13 Nov 2026' }
         ];
+
+        // State Explorer Drive C (GitHub Repo - Admin) & Drive D (Google Drive - Tamu & Admin)
+        let explorerState = {
+            view: 'thispc',
+            ghPath: '',
+            ghItems: [],
+            ghLoading: false,
+            ghRepoSizeKB: null,
+            gdriveLayout: 'grid',
+            activeDesktopFolder: null
+        };
 
         // State Aplikasi Produktivitas
         let wordState = { filename: 'Dokumen_Baru.doc', html: '<p>Mulai mengetik dokumen Anda di sini...</p>' };
@@ -600,11 +627,18 @@
         function loadLocalStorageData() {
             try {
                 const savedPosts = JSON.parse(localStorage.getItem('dc_posts') || 'null');
-                if (Array.isArray(savedPosts) && savedPosts.length) posts = savedPosts;
+                if (Array.isArray(savedPosts)) posts = savedPosts;
                 const savedVf = JSON.parse(localStorage.getItem('dc_virtual_files') || 'null');
                 if (Array.isArray(savedVf) && savedVf.length) virtualFiles = savedVf;
+                const savedDesktopItems = JSON.parse(localStorage.getItem('dc_desktop_items') || 'null');
+                if (Array.isArray(savedDesktopItems)) desktopCustomItems = savedDesktopItems;
             } catch (e) {}
             ghToken = sessionStorage.getItem('dc_gh_token') || '';
+        }
+
+        function saveDesktopCustomItemsLocal() {
+            try { localStorage.setItem('dc_desktop_items', JSON.stringify(desktopCustomItems)); } catch (e) {}
+            renderDesktopIcons();
         }
 
         function saveVirtualFilesLocal() {
@@ -634,7 +668,7 @@
                     if (fileObj && fileObj.content) {
                         const decodedStr = decodeURIComponent(escape(atob(fileObj.content.replace(/\n/g, ''))));
                         const parsed = JSON.parse(decodedStr);
-                        if (Array.isArray(parsed) && parsed.length > 0) {
+                        if (Array.isArray(parsed)) {
                             posts = parsed;
                             savePostsToLocal();
                             return;
@@ -648,7 +682,7 @@
                 const resJson = await fetch('./posts.json?t=' + Date.now(), { cache: 'no-store' });
                 if (resJson.ok) {
                     const jsonData = await resJson.json();
-                    if (Array.isArray(jsonData) && jsonData.length > 0) {
+                    if (Array.isArray(jsonData)) {
                         posts = jsonData;
                         savePostsToLocal();
                     }
@@ -719,6 +753,7 @@
                 badge.className = 'w-7 h-7 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center text-xs font-bold';
                 uname.innerText = 'Admin Dukun ComCell';
                 udesc.innerText = 'Akses Penuh (Buat, Edit, Hapus)';
+                fetchGitHubRepoStats();
                 showToast('Selamat datang, Admin Dukun ComCell!');
             } else {
                 adminSec.classList.add('hidden');
@@ -728,6 +763,10 @@
                 udesc.innerText = 'Mode Baca Saja';
                 showToast('Selamat datang di Official Website Dukun ComCell!');
             }
+
+            explorerState.view = 'thispc';
+            explorerState.activeDesktopFolder = null;
+            refreshExplorerWindows();
         }
 
         function logoutToWelcome() {
@@ -758,11 +797,11 @@
         }
 
         /* ======================================================================
-           RENDER IKON DESKTOP & MANAJEMEN JENDELA (Minimize, Maximize, Close, Drag)
+           RENDER IKON DESKTOP, MENU KLIK KANAN (New Post, New Txt, New Folder) & MANAJEMEN JENDELA
            ====================================================================== */
         function renderDesktopIcons() {
             const container = document.getElementById('desktop-icons');
-            container.innerHTML = BUILTIN_DESKTOP_APPS.map(item => `
+            const builtinHtml = BUILTIN_DESKTOP_APPS.map(item => `
                 <div class="relative group w-20 h-22 p-1.5 rounded-lg hover:bg-white/20 flex flex-col items-center justify-center gap-1 text-center cursor-pointer select-none transition-colors"
                      ondblclick="openApp('${item.id}')"
                      onclick="if(window.innerWidth < 768) openApp('${item.id}')">
@@ -770,6 +809,85 @@
                     <span class="text-[11px] font-medium desktop-label leading-tight line-clamp-2">${escapeHtml(item.title)}</span>
                 </div>
             `).join('');
+
+            const customHtml = desktopCustomItems.map(item => `
+                <div class="relative group w-20 h-22 p-1.5 rounded-lg hover:bg-white/20 flex flex-col items-center justify-center gap-1 text-center cursor-pointer select-none transition-colors"
+                     ondblclick="openDesktopCustomItem('${item.id}')"
+                     onclick="if(window.innerWidth < 768) openDesktopCustomItem('${item.id}')">
+                    <button onclick="event.stopPropagation(); deleteDesktopCustomItem('${item.id}')" title="Hapus" class="hidden group-hover:flex absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-rose-600 text-white text-[9px] items-center justify-center shadow">✕</button>
+                    <div class="w-9 h-9 drop-shadow-md">${item.type === 'folder' ? ICONS.folder : ICONS.txtfile}</div>
+                    <span class="text-[11px] font-medium desktop-label leading-tight line-clamp-2">${escapeHtml(item.name)}</span>
+                </div>
+            `).join('');
+
+            container.innerHTML = builtinHtml + customHtml;
+        }
+
+        function handleContextNewPost() {
+            closeAllFlyouts();
+            if (userRole !== 'admin') {
+                showToast('Fitur New Post khusus untuk akun Admin.');
+                return;
+            }
+            openPostEditor(null);
+        }
+
+        function handleContextNewTxt() {
+            closeAllFlyouts();
+            openPromptModal('New Txt Document', 'Nama file teks (.txt):', 'Dokumen_Teks_Baru.txt', (rawName) => {
+                let name = rawName.trim();
+                if (!name) return;
+                if (!name.toLowerCase().endsWith('.txt')) name += '.txt';
+                const newId = 'dt-' + Date.now();
+                const vfId = 'vf-' + Date.now();
+                desktopCustomItems.push({ id: newId, vfId, type: 'txt', name, created: 'Baru saja' });
+                virtualFiles.unshift({ id: vfId, name, app: 'word', content: '<p>Tulis catatan teks Anda di sini...</p>', updated: 'Baru saja' });
+                saveDesktopCustomItemsLocal();
+                saveVirtualFilesLocal();
+                openVirtualFile(vfId);
+                showToast(`File "${name}" berhasil dibuat.`);
+            });
+        }
+
+        function handleContextNewFolder() {
+            closeAllFlyouts();
+            openPromptModal('New Folder', 'Nama folder baru:', 'New Folder', (rawName) => {
+                const name = rawName.trim();
+                if (!name) return;
+                const newId = 'df-' + Date.now();
+                desktopCustomItems.push({ id: newId, type: 'folder', name, created: 'Baru saja' });
+                saveDesktopCustomItemsLocal();
+                showToast(`Folder "${name}" berhasil dibuat di Desktop.`);
+            });
+        }
+
+        function openDesktopCustomItem(id) {
+            const item = desktopCustomItems.find(x => x.id === id);
+            if (!item) return;
+            if (item.type === 'txt') {
+                if (item.vfId && virtualFiles.some(v => v.id === item.vfId)) {
+                    openVirtualFile(item.vfId);
+                } else {
+                    wordState = { filename: item.name, html: '<p>Tulis catatan teks Anda di sini...</p>' };
+                    openApp('word');
+                    renderAppBody('word');
+                }
+            } else if (item.type === 'folder') {
+                explorerState.view = 'desktopFolder';
+                explorerState.activeDesktopFolder = item;
+                openApp('explorer');
+                refreshExplorerWindows();
+            }
+        }
+
+        function deleteDesktopCustomItem(id) {
+            const item = desktopCustomItems.find(x => x.id === id);
+            if (!item) return;
+            openConfirmModal('Hapus Item Desktop', `Hapus "${item.name}" dari Desktop?`, () => {
+                desktopCustomItems = desktopCustomItems.filter(x => x.id !== id);
+                saveDesktopCustomItemsLocal();
+                showToast(`"${item.name}" dihapus.`);
+            });
         }
 
         function openApp(id) {
@@ -1033,7 +1151,7 @@
                         </div>
                     </div>
                 `;
-            }).join('') || `<div class="col-span-full text-xs opacity-60 p-4 text-center">Tidak ada posting ditemukan.</div>`;
+            }).join('') || `<div class="col-span-full text-xs opacity-60 p-4 text-center">Belum ada posting ditemukan.</div>`;
         }
 
         /* ======================================================================
@@ -1078,64 +1196,362 @@
             }
         }
 
-        /* --- 1. MY COMPUTER & WINDOWS EXPLORER --- */
+        /* --- 1. MY COMPUTER & WINDOWS EXPLORER (Drive C = GitHub [Admin], Drive D = Google Drive [Tamu & Admin]) --- */
+        function refreshExplorerWindows() {
+            if (openWindows['mycomputer']) renderAppBody('mycomputer');
+            if (openWindows['explorer']) renderAppBody('explorer');
+        }
+
+        function formatBytesSize(bytes) {
+            if (!bytes || bytes <= 0) return '0 B';
+            const units = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.min(units.length - 1, Math.floor(Math.log(bytes) / Math.log(1024)));
+            return `${(bytes / Math.pow(1024, i)).toFixed(i === 0 ? 0 : 2)} ${units[i]}`;
+        }
+
+        async function fetchGitHubRepoStats() {
+            if (userRole !== 'admin') return;
+            try {
+                const headers = ghToken ? { 'Authorization': `Bearer ${ghToken}` } : {};
+                const res = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}?t=${Date.now()}`, {
+                    headers,
+                    cache: 'no-store'
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    explorerState.ghRepoSizeKB = data.size || 0;
+                    refreshExplorerWindows();
+                }
+            } catch (e) {}
+        }
+
+        function openExplorerThisPC() {
+            explorerState.view = 'thispc';
+            explorerState.activeDesktopFolder = null;
+            refreshExplorerWindows();
+        }
+
+        async function openExplorerDriveC(path = '') {
+            if (userRole !== 'admin') {
+                showToast('Akses Drive C khusus untuk Admin.');
+                return;
+            }
+            explorerState.view = 'driveC';
+            explorerState.ghPath = path;
+            explorerState.ghLoading = true;
+            refreshExplorerWindows();
+
+            try {
+                const cleanPath = path ? `/${path}` : '';
+                const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents${cleanPath}?t=${Date.now()}`;
+                const headers = ghToken ? { 'Authorization': `Bearer ${ghToken}` } : {};
+                const res = await fetch(url, { headers, cache: 'no-store' });
+                if (res.ok) {
+                    const items = await res.json();
+                    explorerState.ghItems = Array.isArray(items)
+                        ? items.sort((a, b) => (a.type === b.type ? a.name.localeCompare(b.name) : a.type === 'dir' ? -1 : 1))
+                        : [];
+                } else {
+                    explorerState.ghItems = [];
+                    showToast('Gagal memuat isi repository GitHub.');
+                }
+            } catch (e) {
+                explorerState.ghItems = [];
+                showToast('Koneksi ke GitHub API gagal.');
+            } finally {
+                explorerState.ghLoading = false;
+                refreshExplorerWindows();
+            }
+        }
+
+        function openExplorerDriveD() {
+            explorerState.view = 'driveD';
+            refreshExplorerWindows();
+        }
+
+        async function uploadFileToDriveC(event) {
+            if (userRole !== 'admin') return;
+            const file = event.target.files[0];
+            if (!file) return;
+            showToast(`Mengunggah "${file.name}" ke Drive C (GitHub)...`);
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const base64Content = e.target.result.split(',')[1];
+                const targetPath = explorerState.ghPath ? `${explorerState.ghPath}/${file.name}` : file.name;
+                const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${targetPath}`;
+                try {
+                    let sha = '';
+                    const checkRes = await fetch(`${url}?t=${Date.now()}`, {
+                        headers: { 'Authorization': `Bearer ${ghToken}` },
+                        cache: 'no-store'
+                    });
+                    if (checkRes.ok) {
+                        const existing = await checkRes.json();
+                        sha = existing.sha || '';
+                    }
+
+                    const putRes = await fetch(url, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${ghToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Upload ${targetPath} via Drive C WebOS Admin`,
+                            content: base64Content,
+                            sha: sha || undefined
+                        })
+                    });
+
+                    if (putRes.ok) {
+                        showToast(`File "${file.name}" tersimpan di Drive C!`);
+                        fetchGitHubRepoStats();
+                        openExplorerDriveC(explorerState.ghPath);
+                    } else {
+                        const err = await putRes.json().catch(() => ({}));
+                        showToast(`Gagal upload ke Drive C: ${err.message || 'Periksa izin token'}`);
+                    }
+                } catch (err) {
+                    showToast('Error jaringan saat upload ke GitHub.');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function confirmDeleteDriveCFile(filePath, sha, fileName) {
+            if (userRole !== 'admin') return;
+            openConfirmModal('Hapus File dari Drive C (GitHub)', `Yakin ingin menghapus "${fileName}" secara permanen dari repository GitHub?`, async () => {
+                try {
+                    const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${filePath}`;
+                    const delRes = await fetch(url, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${ghToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Delete ${filePath} via Drive C WebOS Admin`,
+                            sha: sha
+                        })
+                    });
+                    if (delRes.ok) {
+                        showToast(`File "${fileName}" berhasil dihapus dari Drive C.`);
+                        fetchGitHubRepoStats();
+                        openExplorerDriveC(explorerState.ghPath);
+                    } else {
+                        const err = await delRes.json().catch(() => ({}));
+                        showToast(`Gagal menghapus: ${err.message || 'Error'}`);
+                    }
+                } catch (e) {
+                    showToast('Gagal menghubungi GitHub API.');
+                }
+            });
+        }
+
         function renderExplorerApp(container, appId) {
+            const isAdmin = userRole === 'admin';
+            if (!isAdmin && explorerState.view === 'driveC') {
+                explorerState.view = 'thispc';
+            }
+
+            const usedBytes = (explorerState.ghRepoSizeKB || 0) * 1024;
+            const maxGitHubPagesBytes = 1024 * 1024 * 1024; // 1 GB kuota GitHub Pages
+            const usedPercent = Math.min(100, Math.max(2, (usedBytes / maxGitHubPagesBytes) * 100));
+
+            let breadcrumbHtml = `<button onclick="openExplorerThisPC()" class="font-bold hover:underline cursor-pointer">💻 This PC (Dukun ComCell)</button>`;
+            if (explorerState.view === 'driveC') {
+                breadcrumbHtml += ` <span class="opacity-50">&rsaquo;</span> <button onclick="openExplorerDriveC('')" class="font-semibold hover:underline cursor-pointer">GitHub Storage (C:)</button>`;
+                if (explorerState.ghPath) {
+                    const parts = explorerState.ghPath.split('/');
+                    let acc = '';
+                    parts.forEach(part => {
+                        acc = acc ? `${acc}/${part}` : part;
+                        const snap = acc;
+                        breadcrumbHtml += ` <span class="opacity-50">&rsaquo;</span> <button onclick="openExplorerDriveC('${snap}')" class="hover:underline cursor-pointer">${escapeHtml(part)}</button>`;
+                    });
+                }
+            } else if (explorerState.view === 'driveD') {
+                breadcrumbHtml += ` <span class="opacity-50">&rsaquo;</span> <span class="font-semibold">Google Drive (D:)</span>`;
+            } else if (explorerState.view === 'desktopFolder' && explorerState.activeDesktopFolder) {
+                breadcrumbHtml += ` <span class="opacity-50">&rsaquo;</span> <span class="font-semibold">Desktop &rsaquo; ${escapeHtml(explorerState.activeDesktopFolder.name)}</span>`;
+            } else {
+                breadcrumbHtml += ` <span class="opacity-50">&rsaquo;</span> <span class="opacity-80">Penyimpanan &amp; Dokumen</span>`;
+            }
+
+            let mainContentHtml = '';
+            if (explorerState.view === 'driveC' && isAdmin) {
+                const parentPath = explorerState.ghPath.includes('/') ? explorerState.ghPath.split('/').slice(0, -1).join('/') : '';
+                mainContentHtml = `
+                    <div class="flex-1 flex flex-col overflow-hidden">
+                        <div class="px-4 py-2.5 border-b flex flex-wrap items-center justify-between gap-2" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="${explorerState.ghPath ? `openExplorerDriveC('${parentPath}')` : 'openExplorerThisPC()'}" class="px-2.5 py-1 rounded-lg mica-card font-semibold cursor-pointer">&larr; Kembali</button>
+                                <button onclick="openExplorerDriveC('${explorerState.ghPath}')" class="px-2.5 py-1 rounded-lg mica-card font-semibold cursor-pointer">↻ Refresh</button>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <label class="px-3 py-1 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold cursor-pointer">
+                                    ⬆ Upload File ke C: <input type="file" class="hidden" onchange="uploadFileToDriveC(event)">
+                                </label>
+                                <a href="https://github.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg mica-card font-semibold">GitHub ↗</a>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-4 overflow-y-auto">
+                            ${explorerState.ghLoading
+                                ? `<div class="text-center py-12 opacity-70">⏳ Memuat isi repository ${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}...</div>`
+                                : explorerState.ghItems.length === 0
+                                ? `<div class="text-center py-12 opacity-65">Folder repository kosong.</div>`
+                                : `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                                    ${explorerState.ghItems.map(item => {
+                                        const isDir = item.type === 'dir';
+                                        const isImg = /\.(png|jpe?g|gif|webp|svg)$/i.test(item.name);
+                                        const isVid = /\.(mp4|webm|mov)$/i.test(item.name);
+                                        const fileIcon = isDir ? '📁' : isImg ? '🖼️' : isVid ? '🎬' : '📄';
+                                        return `
+                                            <div class="p-2.5 rounded-xl mica-card flex items-center justify-between gap-2">
+                                                <div onclick="${isDir ? `openExplorerDriveC('${item.path}')` : `window.open('${item.download_url || item.html_url}', '_blank')`}" class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer">
+                                                    <span class="text-xl shrink-0">${fileIcon}</span>
+                                                    <div class="min-w-0 flex-1">
+                                                        <div class="font-semibold truncate">${escapeHtml(item.name)}</div>
+                                                        <div class="text-[10px] opacity-65">${isDir ? 'Folder Repository' : formatBytesSize(item.size)}</div>
+                                                    </div>
+                                                </div>
+                                                ${!isDir ? `
+                                                    <button onclick="confirmDeleteDriveCFile('${item.path}', '${item.sha}', '${escapeHtml(item.name)}')" class="px-2 py-1 rounded bg-rose-500/15 hover:bg-rose-600 text-rose-600 dark:text-rose-300 hover:text-white text-[10px] font-semibold cursor-pointer shrink-0" title="Hapus file">🗑️</button>
+                                                ` : ''}
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                   </div>`
+                            }
+                        </div>
+                    </div>
+                `;
+            } else if (explorerState.view === 'driveD') {
+                const embedUrl = `https://drive.google.com/embeddedfolderview?id=${GDRIVE_CONFIG.folderId}#${explorerState.gdriveLayout}`;
+                mainContentHtml = `
+                    <div class="flex-1 flex flex-col overflow-hidden">
+                        <div class="px-4 py-2.5 border-b flex flex-wrap items-center justify-between gap-2" style="background: var(--mica-sub); border-color: var(--mica-border);">
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="openExplorerThisPC()" class="px-2.5 py-1 rounded-lg mica-card font-semibold cursor-pointer">&larr; This PC</button>
+                                <button onclick="explorerState.gdriveLayout = explorerState.gdriveLayout === 'grid' ? 'list' : 'grid'; refreshExplorerWindows();" class="px-2.5 py-1 rounded-lg mica-card font-semibold cursor-pointer">
+                                    ${explorerState.gdriveLayout === 'grid' ? '☰ Tampilan List' : '⊞ Tampilan Grid'}
+                                </button>
+                                <button onclick="refreshExplorerWindows()" class="px-2.5 py-1 rounded-lg mica-card font-semibold cursor-pointer">↻ Refresh</button>
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                ${isAdmin ? `
+                                    <a href="${GDRIVE_CONFIG.shareUrl}" target="_blank" rel="noopener" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold shadow-sm">
+                                        ☁️ Kelola / Upload di Google Drive ↗
+                                    </a>
+                                ` : `
+                                    <a href="${GDRIVE_CONFIG.shareUrl}" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg mica-card font-semibold">
+                                        Buka Folder Google Drive ↗
+                                    </a>
+                                `}
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-white overflow-hidden">
+                            <iframe src="${embedUrl}" class="w-full h-full border-0" title="Google Drive Dukun ComCell"></iframe>
+                        </div>
+                    </div>
+                `;
+            } else if (explorerState.view === 'desktopFolder' && explorerState.activeDesktopFolder) {
+                mainContentHtml = `
+                    <div class="flex-1 p-4 overflow-y-auto space-y-4">
+                        <div class="flex items-center justify-between">
+                            <button onclick="openExplorerThisPC()" class="px-2.5 py-1 rounded-lg mica-card font-semibold cursor-pointer">&larr; Kembali ke This PC</button>
+                            <button onclick="handleContextNewTxt()" class="px-3 py-1 rounded-lg bg-sky-600 text-white font-semibold cursor-pointer">+ New Txt</button>
+                        </div>
+                        <div class="p-8 rounded-xl mica-card text-center space-y-2">
+                            <div class="w-12 h-12 mx-auto">${ICONS.folder}</div>
+                            <div class="font-bold text-sm">${escapeHtml(explorerState.activeDesktopFolder.name)}</div>
+                            <div class="text-[11px] opacity-70">Folder Desktop kosong. Gunakan klik kanan di desktop untuk membuat file teks atau folder baru.</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                mainContentHtml = `
+                    <div class="flex-1 p-4 overflow-y-auto space-y-5">
+                        <div>
+                            <div class="text-xs font-bold mb-2">Devices and drives (${isAdmin ? '2' : '1'})</div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                ${isAdmin ? `
+                                    <div ondblclick="openExplorerDriveC('')" onclick="if(window.innerWidth<768) openExplorerDriveC('')" class="p-3 rounded-xl mica-card cursor-pointer flex items-center gap-3 transition-all hover:ring-2 hover:ring-sky-500">
+                                        <span class="text-2xl">💽</span>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between">
+                                                <span class="font-semibold">GitHub Storage (C:)</span>
+                                                <span class="text-[10px] px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-300 font-semibold">Admin</span>
+                                            </div>
+                                            <div class="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full my-1.5 overflow-hidden">
+                                                <div class="h-full bg-sky-500" style="width:${usedPercent}%"></div>
+                                            </div>
+                                            <div class="text-[10px] opacity-75">
+                                                ${explorerState.ghRepoSizeKB !== null ? `${formatBytesSize(usedBytes)} terpakai dari 1.00 GB (dukuncomcell.github.io)` : 'Klik 2x untuk buka repository GitHub'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+
+                                <div ondblclick="openExplorerDriveD()" onclick="if(window.innerWidth<768) openExplorerDriveD()" class="p-3 rounded-xl mica-card cursor-pointer flex items-center gap-3 transition-all hover:ring-2 hover:ring-emerald-500">
+                                    <span class="text-2xl">☁️</span>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <span class="font-semibold">Google Drive (D:)</span>
+                                            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 font-semibold">${isAdmin ? 'Kelola & Baca' : 'Publik'}</span>
+                                        </div>
+                                        <div class="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full my-1.5 overflow-hidden">
+                                            <div class="h-full bg-emerald-500 w-[35%]"></div>
+                                        </div>
+                                        <div class="text-[10px] opacity-75">Cloud Storage Dukun ComCell &bull; Klik 2x untuk membuka</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs font-bold mb-2">File Tersimpan di WebOS (Klik 2x untuk Membuka di Aplikasi)</div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                                ${virtualFiles.map(f => `
+                                    <div ondblclick="openVirtualFile('${f.id}')" onclick="if(window.innerWidth<768) openVirtualFile('${f.id}')" class="p-2.5 rounded-xl mica-card cursor-pointer flex items-center gap-2.5">
+                                        <div class="w-7 h-7 shrink-0">${ICONS[f.app] || ICONS.word}</div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="font-semibold truncate">${escapeHtml(f.name)}</div>
+                                            <div class="text-[10px] opacity-65">${escapeHtml(f.updated)}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             container.innerHTML = `
                 <div class="h-full flex flex-col text-xs">
                     <div class="px-3 py-2 border-b flex items-center justify-between gap-2" style="background: var(--mica-sub); border-color: var(--mica-border);">
-                        <div class="flex items-center gap-2">
-                            <span class="font-bold">💻 This PC (Dukun ComCell)</span>
-                            <span class="opacity-50">&rsaquo;</span>
-                            <span class="opacity-80">Penyimpanan &amp; Dokumen</span>
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            ${breadcrumbHtml}
                         </div>
-                        <span class="text-[11px] opacity-70">${virtualFiles.length} file tersimpan</span>
+                        <span class="text-[11px] opacity-70 shrink-0">${isAdmin ? 'Mode Admin' : 'Mode Tamu'}</span>
                     </div>
                     <div class="flex-1 flex overflow-hidden">
                         <div class="w-44 border-r p-2.5 space-y-1 shrink-0 hidden sm:block" style="border-color: var(--mica-border);">
-                            <div class="text-[10px] font-bold uppercase opacity-60 px-2 py-1">Quick Access</div>
+                            <div class="text-[10px] font-bold uppercase opacity-60 px-2 py-1">This PC &amp; Drives</div>
+                            <button onclick="openExplorerThisPC()" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer ${explorerState.view === 'thispc' ? 'font-bold bg-black/5 dark:bg-white/10' : ''}">💻 This PC</button>
+                            ${isAdmin ? `
+                                <button onclick="openExplorerDriveC('')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer ${explorerState.view === 'driveC' ? 'font-bold bg-black/5 dark:bg-white/10' : ''}">💽 GitHub Repo (C:)</button>
+                            ` : ''}
+                            <button onclick="openExplorerDriveD()" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer ${explorerState.view === 'driveD' ? 'font-bold bg-black/5 dark:bg-white/10' : ''}">☁️ Google Drive (D:)</button>
+                            <div class="my-1.5 border-t" style="border-color: var(--mica-border);"></div>
+                            <div class="text-[10px] font-bold uppercase opacity-60 px-2 py-1">Aplikasi Dokumen</div>
                             <button onclick="openApp('word')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📘 Dokumen Word</button>
                             <button onclick="openApp('excel')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📗 Data Excel</button>
                             <button onclick="openApp('powerpoint')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📙 Slide PowerPoint</button>
                             <button onclick="openApp('pdfreader')" class="w-full text-left px-2 py-1.5 rounded hover:bg-black/5 dark:hover:bg-white/10 flex items-center gap-2 cursor-pointer">📕 File PDF</button>
                         </div>
-                        <div class="flex-1 p-4 overflow-y-auto space-y-5">
-                            <div>
-                                <div class="text-xs font-bold mb-2">Devices and drives (2)</div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <div class="p-3 rounded-xl mica-card flex items-center gap-3">
-                                        <span class="text-2xl">💽</span>
-                                        <div class="flex-1">
-                                            <div class="font-semibold">Local Disk (C:)</div>
-                                            <div class="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full my-1 overflow-hidden"><div class="h-full bg-sky-500 w-[45%]"></div></div>
-                                            <div class="text-[10px] opacity-70">138 GB free of 250 GB</div>
-                                        </div>
-                                    </div>
-                                    <div class="p-3 rounded-xl mica-card flex items-center gap-3">
-                                        <span class="text-2xl">💾</span>
-                                        <div class="flex-1">
-                                            <div class="font-semibold">PROJECT Data (D:)</div>
-                                            <div class="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full my-1 overflow-hidden"><div class="h-full bg-emerald-500 w-[28%]"></div></div>
-                                            <div class="text-[10px] opacity-70">360 GB free of 500 GB</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="text-xs font-bold mb-2">File Tersimpan di WebOS (Klik 2x untuk Membuka di Aplikasi)</div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
-                                    ${virtualFiles.map(f => `
-                                        <div ondblclick="openVirtualFile('${f.id}')" onclick="if(window.innerWidth<768) openVirtualFile('${f.id}')" class="p-2.5 rounded-xl mica-card cursor-pointer flex items-center gap-2.5">
-                                            <div class="w-7 h-7 shrink-0">${ICONS[f.app] || ICONS.word}</div>
-                                            <div class="min-w-0 flex-1">
-                                                <div class="font-semibold truncate">${escapeHtml(f.name)}</div>
-                                                <div class="text-[10px] opacity-65">${escapeHtml(f.updated)}</div>
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        </div>
+                        ${mainContentHtml}
                     </div>
                 </div>
             `;
@@ -1224,7 +1640,9 @@
             saveVirtualFilesLocal();
 
             // Unduh file ke komputer pengguna
-            const docBlob = new Blob([`<html><head><meta charset="utf-8"></head><body>${wordState.html}</body></html>`], { type: 'application/msword' });
+            const isTxt = fname.toLowerCase().endsWith('.txt');
+            const blobContent = isTxt ? (el ? el.innerText : wordState.html.replace(/<[^>]+>/g, '')) : `<html><head><meta charset="utf-8"></head><body>${wordState.html}</body></html>`;
+            const docBlob = new Blob([blobContent], { type: isTxt ? 'text/plain;charset=utf-8' : 'application/msword' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(docBlob);
             a.download = fname;
@@ -1780,7 +2198,7 @@
                     const putRes = await fetch(url, {
                         method: 'PUT',
                         headers: {
-                            'Authorization': `token ${ghToken}`,
+                            'Authorization': `Bearer ${ghToken}`,
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
@@ -1798,6 +2216,7 @@
                             textArea.value += `\n<video src="${rawUrl}" controls class="w-full rounded-xl my-2"></video>\n`;
                         }
                         updateEditorMediaPreview();
+                        fetchGitHubRepoStats();
                         showToast('Sukses! Media tersimpan di repository GitHub.');
                     } else {
                         const errData = await putRes.json().catch(() => ({}));
@@ -1895,7 +2314,7 @@
             try {
                 let sha = '';
                 const getRes = await fetch(url + '?t=' + Date.now(), {
-                    headers: { 'Authorization': `token ${ghToken}` },
+                    headers: { 'Authorization': `Bearer ${ghToken}` },
                     cache: 'no-store'
                 });
                 if (getRes.ok) {
@@ -1909,7 +2328,7 @@
                 const putRes = await fetch(url, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${ghToken}`,
+                        'Authorization': `Bearer ${ghToken}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -1920,6 +2339,7 @@
                 });
 
                 if (putRes.ok) {
+                    fetchGitHubRepoStats();
                     showToast('Sukses! Data posting permanen tersimpan di GitHub.');
                 } else {
                     const err = await putRes.json().catch(() => ({}));
@@ -2089,7 +2509,7 @@
         function changeCalMonth(delta) { calDate.setMonth(calDate.getMonth() + delta); renderCalendarIndo(); }
 
         /* ======================================================================
-           FLYOUT, CONTEXT MENU, MODAL KONFIRMASI & TOAST
+           FLYOUT, CONTEXT MENU, MODAL KONFIRMASI, PROMPT & TOAST
            ====================================================================== */
         function toggleFlyout(id) {
             const el = document.getElementById(id);
@@ -2112,12 +2532,12 @@
             closeAllFlyouts();
             const m = document.getElementById('desktop-context-menu');
             m.classList.remove('hidden');
-            m.style.left = Math.min(x, window.innerWidth - 220) + 'px';
-            m.style.top = Math.min(y, window.innerHeight - 180) + 'px';
+            m.style.left = Math.min(x, window.innerWidth - 235) + 'px';
+            m.style.top = Math.min(y, window.innerHeight - 250) + 'px';
         }
 
         function toggleDarkMode() { darkMode = !darkMode; document.documentElement.classList.toggle('dark', darkMode); }
-        function refreshDesktop() { closeAllFlyouts(); syncPostsFromGitHubSources(); showToast('Desktop & postingan direfresh.'); }
+        function refreshDesktop() { closeAllFlyouts(); syncPostsFromGitHubSources(); if (userRole === 'admin') fetchGitHubRepoStats(); showToast('Desktop & postingan direfresh.'); }
 
         function openConfirmModal(title, msg, onConfirm) {
             document.getElementById('win-confirm-title').innerText = title;
@@ -2130,6 +2550,29 @@
             document.getElementById('win-confirm-modal').classList.add('hidden');
             if (accepted && typeof confirmCallback === 'function') confirmCallback();
             confirmCallback = null;
+        }
+
+        function openPromptModal(title, label, defaultValue, onSubmit) {
+            document.getElementById('win-prompt-title').innerText = title;
+            document.getElementById('win-prompt-label').innerText = label;
+            const inp = document.getElementById('win-prompt-input');
+            inp.value = defaultValue || '';
+            promptCallback = onSubmit;
+            document.getElementById('win-prompt-modal').classList.remove('hidden');
+            setTimeout(() => { inp.focus(); inp.select(); }, 30);
+        }
+
+        function closePromptModal() {
+            document.getElementById('win-prompt-modal').classList.add('hidden');
+            promptCallback = null;
+        }
+
+        function submitPromptModal(e) {
+            e.preventDefault();
+            const val = document.getElementById('win-prompt-input').value;
+            const cb = promptCallback;
+            closePromptModal();
+            if (typeof cb === 'function') cb(val);
         }
 
         function escapeHtml(str) {
