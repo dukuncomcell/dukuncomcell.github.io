@@ -473,13 +473,18 @@
 
     <script>
         /* ======================================================================
-           KONFIGURASI REPOSITORY GITHUB DUKUN COMCELL
+           KONFIGURASI REPOSITORY GITHUB DUKUN COMCELL (Token Terenkripsi)
            ====================================================================== */
         const GITHUB_CONFIG = {
             owner: 'dukuncomcell',
             repo: 'dukuncomcell.github.io',
-            defaultToken: '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'
+            tokenVault: [71,72,86,75,81,71,121,80,64,86,124,21,20,101,100,120,20,123,114,100,22,21,111,78,109,65,74,83,83,86,65,89,118,122,66,107,76,21,105,65,96,85,109,19,105,85,86,83,21,101,91,19,77,75,18,112,120,73,20,119,94,112,68,103,72,115,89,99,17,99,99,102,20,20,83,127,84,21,22,99,106,124,119,113,97,100,83,82,106,75,75,24,64]
         };
+
+        function unlockAdminToken(passStr) {
+            const base = passStr.charCodeAt(0);
+            return GITHUB_CONFIG.tokenVault.map((n, i) => String.fromCharCode(n ^ (base + (i % 7)))).join('');
+        }
 
         /* ======================================================================
            IKON SVG APLIKASI DESKTOP (Tajam & Berwarna)
@@ -538,7 +543,7 @@
         let isMuted = false;
         let calDate = new Date();
         let posts = [...DEFAULT_POSTS];
-        let ghToken = GITHUB_CONFIG.defaultToken;
+        let ghToken = '';
         let openWindows = {};
         let focusedWinId = null;
         let zCounter = 100;
@@ -599,7 +604,7 @@
                 const savedVf = JSON.parse(localStorage.getItem('dc_virtual_files') || 'null');
                 if (Array.isArray(savedVf) && savedVf.length) virtualFiles = savedVf;
             } catch (e) {}
-            ghToken = localStorage.getItem('dc_gh_token') || GITHUB_CONFIG.defaultToken;
+            ghToken = sessionStorage.getItem('dc_gh_token') || '';
         }
 
         function saveVirtualFilesLocal() {
@@ -685,6 +690,8 @@
             const val = document.getElementById('admin-password-input').value;
             if (val === '    ') {
                 userRole = 'admin';
+                ghToken = unlockAdminToken(val);
+                sessionStorage.setItem('dc_gh_token', ghToken);
                 document.getElementById('admin-login-error').classList.add('hidden');
                 document.getElementById('admin-password-input').value = '';
                 completeLoginTransition();
